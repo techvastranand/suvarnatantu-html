@@ -1,0 +1,22 @@
+# Environment and local configuration
+.env
+.env.*
+!.env.example
+
+# Editor settings
+.vscode/
+.idea/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+
+# Logs, dependencies, and generated files
+*.log
+node_modules/
+dist/
+.cache/
+
+# Archives and local task instructions
+*.zip
+CODEX_TASK.md
