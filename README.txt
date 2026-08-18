@@ -29,7 +29,7 @@ assets/
   js/
     main.js
   images/
-    suvarnatantu-monogram.webp
+    suvarnatantu-logo.jpg
     metallic-zari-spools.webp
     metallic-filaments.webp
     weaving-craftsmanship.webp
