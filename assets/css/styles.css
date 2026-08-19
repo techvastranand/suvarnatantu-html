@@ -208,6 +208,17 @@ nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;background:li
 .contactGrid{display:grid;grid-template-columns:.75fr 1.25fr;gap:65px}
 .contact h2{font-family:Georgia,serif;font-size:64px;color:var(--gold2);font-weight:400;line-height:.95;margin:10px 0 20px}
 .contact p{color:#a89a8b;line-height:1.65}
+.contactAddress{margin-top:28px;padding:20px;border:1px solid rgba(199,154,76,.2);background:linear-gradient(135deg,rgba(199,154,76,.07),transparent 70%)}
+.contactLabel{display:block;margin-bottom:13px;color:#8d785f;font-size:9px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+.contactAddress strong{display:block;color:#d8b46b;font-family:Georgia,serif;font-size:24px;font-weight:400}
+.contactAddress > span:not(.contactLabel){display:block;margin-top:5px;color:#9f9084;font-size:12px;line-height:1.55}
+.contactAddress > a{display:block;margin-top:17px;padding-top:14px;border-top:1px solid rgba(199,154,76,.16);color:#cdb78f;font-size:13px;line-height:1.58;transition:color .25s var(--ease)}
+.contactAddress > a span,.contactLinks a span{display:block;margin-bottom:5px;color:#8d785f;font-size:9px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.contactAddress > a i{color:var(--gold2);font-style:normal}
+.contactAddress > a:hover,.contactLinks a:hover{color:#f0d29b}
+.contactLinks{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+.contactLinks a{min-width:0;padding:13px;border:1px solid rgba(199,154,76,.16);color:#cdb78f;font-size:12px;line-height:1.45;overflow-wrap:anywhere;transition:color .25s var(--ease),border-color .25s var(--ease)}
+.contactLinks a:hover{border-color:rgba(228,189,107,.5)}
 .form{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .form input,.form textarea,.form select{width:100%;background:#0f0b08;border:1px solid rgba(199,154,76,.20);color:#e7d8c5;padding:14px 15px;outline:none}
 .form textarea{grid-column:1/-1;min-height:130px;resize:vertical}
@@ -225,6 +236,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .menu a:not(.navcta){display:none}
   .heroGrid,.storySticky,.labShell,.founderGrid,.contactGrid{grid-template-columns:1fr}
   .heroVisual{height:55vh;margin-top:40px}
+  .contactLinks{grid-template-columns:1fr 1fr}
   .capGrid{grid-template-columns:1fr 1fr}
   .valueGrid{grid-template-columns:1fr 1fr}
   .appGrid{grid-template-columns:1fr 1fr}
@@ -245,6 +257,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .heroStatement{font-size:17px}
   .sectionTitle{display:block}
   .capGrid,.valueGrid,.appGrid,.testimonialGrid,.founderNames,.form,.labVisual{grid-template-columns:1fr}
+  .contactLinks{grid-template-columns:1fr}
   .testimonialCard:last-child{grid-column:auto}
   .form textarea,.form button{grid-column:auto}
   .app{height:330px}
