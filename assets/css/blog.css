@@ -69,6 +69,7 @@
   .blog-page .navin{width:min(100% - 28px,1440px);gap:12px}
   .blog-page .brandname span{display:none}
   .blog-page .brandname strong{font-size:18px}
+  .blog-page .logoReveal--brand{width:40px;height:40px;flex-basis:40px}
   .blog-page .brandmark{width:40px;height:40px;flex-basis:40px}
   .blog-page .navcta{padding:10px 11px!important;font-size:9px}
   .blog-hero{min-height:560px;padding:146px 0 58px}

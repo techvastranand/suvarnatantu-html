@@ -10,6 +10,13 @@ body.loading{overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 button,input,textarea,select{font:inherit}
 .logoImage{display:block;aspect-ratio:1/1;object-fit:contain;border-radius:50%}
+.logoReveal{position:relative;display:inline-block;overflow:hidden;border-radius:50%;isolation:isolate;animation:logoRevealIn 1.35s var(--ease) both;will-change:transform,opacity}
+.logoReveal:after{content:"";position:absolute;z-index:1;inset:-22%;background:linear-gradient(108deg,transparent 40%,rgba(255,235,190,.06) 46%,rgba(255,222,151,.52) 50%,rgba(255,235,190,.06) 54%,transparent 60%);transform:translateX(-145%) skewX(-14deg);pointer-events:none;animation:logoSweep .95s .42s var(--ease) both}
+.logoReveal--brand{width:48px;height:48px;flex:0 0 48px}
+.logoReveal--brand .brandmark{width:100%;height:100%;margin:0}
+@keyframes logoRevealIn{0%{opacity:.28;transform:scale(.97)}58%{opacity:1;transform:scale(1.012);filter:drop-shadow(0 0 9px rgba(228,189,107,.22))}100%{opacity:1;transform:scale(1);filter:none}}
+@keyframes logoSweep{0%{transform:translateX(-145%) skewX(-14deg)}100%{transform:translateX(145%) skewX(-14deg)}}
+@media(hover:hover){.brand .logoReveal{transition:transform .3s var(--ease),filter .3s var(--ease)}.brand:hover .logoReveal{transform:scale(1.018);filter:drop-shadow(0 0 7px rgba(228,189,107,.32))}}
 .serif{font-family:Georgia,"Times New Roman",serif}
 .wrap{width:min(1320px,calc(100% - 52px));margin:auto}
 .eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold2);font-weight:800}
@@ -268,4 +275,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none;transition:none}
+  .logoReveal,.logoReveal:after{animation:none!important}
+  .logoReveal{opacity:1;transform:none;filter:none}
+  .logoReveal:after{display:none}
 }
