@@ -1,0 +1,92 @@
+/* Blog page: extends the existing SuvarnaTantu visual system. */
+.blog-page{background:#0a0806}
+.blog-page .topbar{position:relative;z-index:401;background:#0b0907}
+.blog-page nav{position:absolute}
+.blog-page .rail{position:fixed}
+.blog-hero{min-height:clamp(590px,72svh,680px);padding:154px 0 66px;position:relative;overflow:hidden;background:radial-gradient(circle at 76% 24%,rgba(199,154,76,.14),transparent 22%),radial-gradient(circle at 12% 88%,rgba(74,43,26,.42),transparent 30%),#0a0806}
+.blog-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0a0806 8%,rgba(10,8,6,.58) 51%,rgba(10,8,6,.24)),url("../images/metallic-zari-spools.webp") right center/49% auto no-repeat;opacity:.68;filter:saturate(.72)}
+.blog-hero:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(112deg,transparent 0,transparent 38px,rgba(228,189,107,.045) 39px,transparent 40px);pointer-events:none}
+.blog-hero .wrap{position:relative;z-index:1}
+.blog-hero-copy{max-width:680px}
+.blog-hero h1,.blog-section-heading h2,.blog-feature-content h2,.knowledge-banner h2,.blog-cta h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;color:var(--gold2)}
+.blog-hero h1{font-size:clamp(64px,7.8vw,116px);line-height:.87;letter-spacing:-.05em;margin:18px 0 23px}
+.blog-hero p{max-width:570px;color:#d2c4b5;font-size:17px;line-height:1.72;margin:0}
+.blog-intro{padding:78px 0 20px;background:#0a0806}
+.blog-section-heading{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:40px}
+.blog-section-heading h2{font-size:clamp(42px,5vw,74px);line-height:.98;margin:13px 0 0}
+.blog-section-heading p{max-width:510px;color:#a99889;line-height:1.7;margin:0}
+.featured-article{padding-bottom:104px;background:#0a0806}
+.blog-feature{display:grid;grid-template-columns:1.04fr .96fr;min-height:540px;border:1px solid var(--line);background:#120d09;overflow:hidden}
+.blog-feature-image{min-height:380px;position:relative;background:linear-gradient(0deg,rgba(8,6,4,.35),transparent 60%),url("../images/metallic-filaments.webp") center/cover}
+.blog-feature-image:after{content:"01 / Featured insight";position:absolute;left:24px;bottom:21px;color:#ead29d;font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+.blog-feature-content{display:flex;flex-direction:column;justify-content:flex-end;padding:58px clamp(28px,5vw,76px);background:radial-gradient(circle at 80% 10%,rgba(199,154,76,.08),transparent 27%)}
+.article-category{font-size:9px;font-weight:800;letter-spacing:.17em;text-transform:uppercase;color:var(--gold)}
+.blog-feature-content h2{font-size:clamp(36px,3.7vw,56px);line-height:1.02;margin:17px 0 22px}
+.blog-feature-content p{color:#aea092;line-height:1.75;margin:0;max-width:500px}
+.text-link,.blog-card-link{display:inline-flex;width:max-content;align-items:center;gap:8px;color:#e4bd6b;font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}
+.text-link{margin-top:31px;padding-bottom:7px;border-bottom:1px solid rgba(228,189,107,.55)}
+.blog-grid-section{padding:126px 0 132px;border-top:1px solid rgba(199,154,76,.13);background:#100b08}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:460px;gap:14px}
+.blog-card{display:flex;flex-direction:column;height:100%;border:1px solid rgba(199,154,76,.22);background:linear-gradient(150deg,rgba(199,154,76,.06),rgba(10,8,6,.15) 48%),#110d0a;overflow:hidden;transition:transform .35s var(--ease),border-color .35s,background-color .35s}
+.blog-card:hover{transform:translateY(-4px);border-color:rgba(228,189,107,.52);background-color:#16100b}
+.blog-card-visual{height:145px;position:relative;background:center/cover;filter:saturate(.72)}
+.blog-card-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(12,9,7,.58),transparent)}
+.blog-card:nth-child(1) .blog-card-visual{background-image:url("../images/metallic-filaments.webp")}
+.blog-card:nth-child(2) .blog-card-visual{background-image:url("../images/weaving-craftsmanship.webp")}
+.blog-card:nth-child(3) .blog-card-visual{background-image:url("../images/metallic-zari-spools.webp")}
+.blog-card:nth-child(4) .blog-card-visual{background-image:url("../images/heritage-fabric.webp")}
+.blog-card:nth-child(5) .blog-card-visual{background-image:url("../images/premium-textile-application.webp")}
+.blog-card:nth-child(6) .blog-card-visual{background-image:url("../images/fashion-application.webp")}
+.blog-card-body{display:flex;flex:1;flex-direction:column;padding:24px}
+.blog-card h3{font-family:Georgia,"Times New Roman",serif;font-weight:400;font-size:clamp(25px,2vw,29px);line-height:1.1;color:#dcb972;min-height:3.3em;margin:18px 0 13px}
+.blog-card p{color:#9f9084;font-size:13px;line-height:1.66;margin:0 0 25px}
+.blog-card-link{margin-top:auto;color:#d8b46b}
+.knowledge{padding:112px 0;background:radial-gradient(circle at 78% 50%,rgba(199,154,76,.12),transparent 24%),#080604;border-top:1px solid rgba(199,154,76,.15);border-bottom:1px solid rgba(199,154,76,.15)}
+.knowledge-banner{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:end;border-left:1px solid var(--gold);padding:22px 0 22px 34px}
+.knowledge-banner h2{font-size:clamp(42px,5.4vw,78px);line-height:.95;margin:13px 0 0;max-width:700px}
+.knowledge-banner p{color:#b0a092;line-height:1.75;margin:0 0 25px;max-width:470px}
+.gold-button{display:inline-flex;align-items:center;justify-content:center;width:max-content;padding:14px 18px;background:linear-gradient(135deg,#c79a4c,#936126);color:#120d09;font-size:10px;font-weight:800;letter-spacing:.11em;text-transform:uppercase;transition:transform .25s var(--ease),filter .25s}
+.gold-button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.blog-cta{padding:128px 0;background:#0d0a08}
+.blog-cta-inner{text-align:center;border:1px solid var(--line);padding:72px 30px;background:radial-gradient(circle at center,rgba(199,154,76,.13),transparent 35%),linear-gradient(135deg,#18100b,#0b0907)}
+.blog-cta h2{font-size:clamp(42px,5vw,76px);line-height:.96;margin:14px auto 20px;max-width:800px}
+.blog-cta p{max-width:630px;margin:0 auto 30px;color:#b1a093;line-height:1.72}
+.blog-page footer{position:relative}
+.blog-nav-link[aria-current="page"]{color:var(--gold2)!important}
+.blog-nav-link[aria-current="page"]:after{right:0}
+@media(max-width:1050px){
+  nav .menu .blog-nav-link{display:block}
+  .blog-hero{min-height:620px;padding:148px 0 58px}
+  .blog-hero:before{background-position:120% center;background-size:64% auto}
+  .blog-feature,.knowledge-banner{grid-template-columns:1fr}
+  .blog-feature-content{min-height:400px}
+  .blog-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:440px}
+  .knowledge-banner{gap:28px}
+}
+@media(max-width:640px){
+  .blog-page .topbar .wrap{justify-content:center}
+  .blog-page .topbar span:last-child{display:none}
+  .blog-page .navin{width:min(100% - 28px,1440px);gap:12px}
+  .blog-page .brandname span{display:none}
+  .blog-page .brandname strong{font-size:18px}
+  .blog-page .brandmark{width:40px;height:40px;flex-basis:40px}
+  .blog-page .navcta{padding:10px 11px!important;font-size:9px}
+  .blog-hero{min-height:560px;padding:146px 0 58px}
+  .blog-hero:before{opacity:.34;background-position:145% center;background-size:85% auto}
+  .blog-hero h1{font-size:clamp(52px,15.5vw,62px);line-height:.9}
+  .blog-hero p{font-size:16px}
+  .blog-intro,.featured-article,.blog-grid-section,.blog-cta{padding-top:84px;padding-bottom:84px}
+  .blog-section-heading{display:block;margin-bottom:28px}
+  .blog-section-heading p{margin-top:18px}
+  .blog-feature-image{min-height:280px}
+  .blog-feature-content{padding:36px 26px;min-height:360px}
+  .blog-grid{grid-template-columns:1fr;grid-auto-rows:430px}
+  .knowledge{padding:82px 0}
+  .knowledge-banner{padding-left:21px}
+  .blog-cta-inner{padding:55px 20px}
+  .gold-button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .blog-card,.gold-button{transition:none}
+  .blog-card:hover,.gold-button:hover{transform:none}
+}
