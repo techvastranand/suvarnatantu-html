@@ -170,6 +170,22 @@ nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;background:li
 .appText h3{font-family:Georgia,serif;font-size:24px;font-weight:400;color:#ddbd79;margin:0}
 .appText small{display:block;color:#85776a;margin-top:6px;text-transform:uppercase;letter-spacing:.1em;font-size:8px}
 
+/* TESTIMONIALS */
+.testimonials{padding:130px 0;background:radial-gradient(circle at 50% 0,rgba(199,154,76,.08),transparent 30%),#0d0907;border-top:1px solid rgba(199,154,76,.14);border-bottom:1px solid rgba(199,154,76,.14)}
+.testimonialsHeader{text-align:center;max-width:780px;margin:0 auto 48px}
+.testimonialsHeader h2{font-family:Georgia,serif;font-size:clamp(46px,5.3vw,82px);font-weight:400;line-height:.95;color:var(--gold2);margin:12px 0 18px}
+.testimonialsHeader p{margin:0;color:#a99a8b;line-height:1.65}
+.testimonialNote{display:block;margin-top:13px;color:#77675a;font-size:9px;letter-spacing:.13em;text-transform:uppercase}
+.testimonialGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.testimonialCard{position:relative;min-height:330px;padding:31px 29px 27px;border:1px solid rgba(199,154,76,.24);background:linear-gradient(155deg,rgba(199,154,76,.08),rgba(199,154,76,.012) 42%,rgba(0,0,0,.16));display:flex;flex-direction:column;transition:transform .35s var(--ease),border-color .35s,box-shadow .35s var(--ease)}
+.testimonialCard:before{content:"";position:absolute;left:29px;right:29px;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);opacity:.7}
+.testimonialCard:hover{transform:translateY(-7px);border-color:rgba(228,189,107,.58);box-shadow:0 22px 46px rgba(0,0,0,.22)}
+.testimonialMark{font-family:Georgia,serif;font-size:62px;line-height:.72;color:var(--gold);opacity:.8}
+.testimonialCard blockquote{margin:24px 0 30px;font-family:Georgia,serif;font-size:clamp(22px,1.7vw,28px);font-weight:400;line-height:1.38;color:#e3cfaa}
+.testimonialCard footer{margin-top:auto;padding:16px 0 0;border-top:1px solid rgba(199,154,76,.18);background:none;color:inherit;font-size:inherit;letter-spacing:normal;text-transform:none}
+.testimonialCard footer strong{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#d8b46b}
+.testimonialCard footer span{display:block;margin-top:7px;color:#8e7b6b;font-size:11px}
+
 /* FOUNDERS */
 .founders{padding:130px 0;background:
  radial-gradient(circle at 84% 20%,rgba(199,154,76,.08),transparent 25%),
@@ -212,6 +228,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .capGrid{grid-template-columns:1fr 1fr}
   .valueGrid{grid-template-columns:1fr 1fr}
   .appGrid{grid-template-columns:1fr 1fr}
+  .testimonialGrid{grid-template-columns:1fr 1fr}
+  .testimonialCard:last-child{grid-column:1/-1}
   .story{min-height:auto}
   .storySticky{position:relative;height:auto}
   .storyVisual{height:60vh;border-right:none}
@@ -226,7 +244,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .hero h1{font-size:58px}
   .heroStatement{font-size:17px}
   .sectionTitle{display:block}
-  .capGrid,.valueGrid,.appGrid,.founderNames,.form,.labVisual{grid-template-columns:1fr}
+  .capGrid,.valueGrid,.appGrid,.testimonialGrid,.founderNames,.form,.labVisual{grid-template-columns:1fr}
+  .testimonialCard:last-child{grid-column:auto}
   .form textarea,.form button{grid-column:auto}
   .app{height:330px}
   .jCard{width:86vw}
