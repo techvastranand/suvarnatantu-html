@@ -63,7 +63,7 @@ nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;background:li
 .heroGrid{min-height:100svh;display:grid;grid-template-columns:1.08fr .92fr;align-items:end;padding:150px 0 70px;position:relative;z-index:3}
 .heroCopy{padding-right:40px}
 .heroLogo{width:190px;height:190px;margin-bottom:20px;border:1px solid rgba(199,154,76,.45);box-shadow:0 18px 52px rgba(0,0,0,.32)}
-.hero h1{font-family:Georgia,serif;font-size:clamp(68px,8.4vw,138px);line-height:.82;letter-spacing:-.055em;font-weight:400;margin:0;color:var(--gold2);text-shadow:0 0 30px rgba(199,154,76,.08)}
+.hero h1{font-family:Georgia,serif;font-size:clamp(58px,6vw,96px);line-height:.9;letter-spacing:-.045em;font-weight:400;margin:0;max-width:760px;color:var(--gold2);text-shadow:0 0 30px rgba(199,154,76,.08)}
 .heroSub{margin:18px 0 0;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:#f3e8d9}
 .heroBy{margin-top:6px;color:var(--gold);font-family:Georgia,serif;font-size:18px}
 .heroTagline{margin-top:24px;font-family:Georgia,serif;font-style:italic;color:#d9aa58;font-size:24px}
