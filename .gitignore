@@ -13,9 +13,14 @@ Thumbs.db
 
 # Logs, dependencies, and generated files
 *.log
+firebase-debug.log
 node_modules/
 dist/
 .cache/
+
+# Firebase service-account credentials must never be committed.
+service-account*.json
+firebase-service-account*.json
 
 # Archives and local task instructions
 *.zip
