@@ -1,6 +1,6 @@
-# SuvarnaTantu
+# Suvarnatantu
 
-Official animated B2B website for SuvarnaTantu.
+Official animated B2B website for Suvarnatantu.
 
 By Vastranand Pvt. Ltd.
 
@@ -33,6 +33,6 @@ Then visit `http://localhost:8000`.
 
 ## Notes
 
-The enquiry form is a front-end concept and must be connected to an approved production CRM, API, email workflow, or backend before launch. Public-facing technical, export, certification, capacity, and contact claims should be verified by SuvarnaTantu before production use.
+The enquiry form is a front-end concept and must be connected to an approved production CRM, API, email workflow, or backend before launch. Public-facing technical, export, certification, capacity, and contact claims should be verified by Suvarnatantu before production use.
 
 This repository is private and intended for authorized company development only.

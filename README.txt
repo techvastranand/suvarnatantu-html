@@ -67,4 +67,4 @@ runs as a concept/demo and should be connected to the production CRM/API,
 email workflow or backend before launch.
 
 Public-facing technical, export, certification, capacity and contact claims
-should be verified by SuvarnaTantu before production launch.
+should be verified by Suvarnatantu before production launch.

@@ -1,4 +1,4 @@
-SuvarnaTantu website font setup
+Suvarnatantu website font setup
 ================================
 
 This project does not require any external font files.
