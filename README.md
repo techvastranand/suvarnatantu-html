@@ -2,7 +2,7 @@
 
 Official animated B2B website for Suvarnatantu.
 
-By Vastranand Pvt. Ltd.
+by Vastranand Pvt. Ltd.
 
 ## Technology
 
