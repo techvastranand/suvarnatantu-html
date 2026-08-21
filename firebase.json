@@ -10,6 +10,12 @@
       "README.md",
       "README.txt",
       "deploy.sh"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": true,
+    "rewrites": [
+      { "source": "/", "destination": "/index.html" },
+      { "source": "/404", "destination": "/404.html" }
     ]
   }
 }
