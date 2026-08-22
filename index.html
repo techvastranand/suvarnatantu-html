@@ -42,20 +42,42 @@
 
 <div class="topbar"><div class="wrap"><span>Yarn & Metallic Zari Manufacturing · India</span><span>B2B · Export · Product Development</span></div></div>
 
-<nav>
+<nav class="site-nav" aria-label="Primary navigation">
   <div class="navin">
     <a href="#home" class="brand hoverable">
       <span class="logoReveal logoReveal--brand"><img class="logoImage brandmark" src="/assets/images/suvarnatantu-logo-optimized.jpg" alt="Suvarnatantu by Vastranand Pvt. Ltd." width="512" height="512"></span>
       <div class="brandname"><strong>Suvarnatantu</strong><span>by Vastranand Pvt. Ltd.</span></div>
     </a>
-    <div class="menu">
-      <a class="hoverable" href="/about-us/">About</a>
-      <a class="hoverable" href="/products/">Products</a>
-      <a class="hoverable" href="/manufacturing/">Manufacturing</a>
-      <a class="hoverable" href="/applications/weaving/">Applications</a>
-      <a class="hoverable" href="/exports/">Exports</a>
-      <a class="hoverable" href="/blog/">Blog</a>
-      <a class="navcta hoverable" href="/request-quote/">Request a Quote</a>
+    <button class="nav-toggle hoverable" type="button" aria-expanded="false" aria-controls="site-menu">Menu</button>
+    <div class="menu" id="site-menu">
+      <details class="nav-dropdown nav-dropdown--products">
+        <summary class="hoverable">Products</summary>
+        <div class="dropdown-panel mega-panel">
+          <section><h2>Metallic Yarn</h2><span>M Type</span><span>MX Type</span><span>ST Type</span><span>MH Type</span><span>Custom Metallic Yarn</span></section>
+          <section><h2>Zari Yarn</h2><span>Weaving Zari</span><span>Embroidery Zari</span><span>Imitation Zari</span><span>Polyester Zari</span><span>Coloured Zari</span></section>
+          <section><h2>Colours</h2><span>Gold</span><span>Silver</span><span>Copper</span><span>Rose Gold</span><span>Antique</span><span>Custom</span></section>
+        </div>
+      </details>
+      <details class="nav-dropdown">
+        <summary class="hoverable">Applications</summary>
+        <div class="dropdown-panel"><a href="#applications">Textile applications</a></div>
+      </details>
+      <details class="nav-dropdown">
+        <summary class="hoverable">Zari Lab</summary>
+        <div class="dropdown-panel"><a href="#lab">Explore Zari Lab</a></div>
+      </details>
+      <details class="nav-dropdown">
+        <summary class="hoverable">Manufacturing</summary>
+        <div class="dropdown-panel"><a href="#journey">Manufacturing journey</a></div>
+      </details>
+      <span class="nav-unavailable" aria-disabled="true" title="Industry pages are being prepared">Industries</span>
+      <span class="nav-unavailable" aria-disabled="true" title="Export pages are being prepared">Export</span>
+      <details class="nav-dropdown">
+        <summary class="hoverable">Resources</summary>
+        <div class="dropdown-panel"><span aria-disabled="true">Technical Data — coming soon</span><span aria-disabled="true">Samples — coming soon</span><a href="https://blog.suvarnatantu.com/">Blog / Knowledge Centre</a></div>
+      </details>
+      <a class="hoverable" href="#story">About</a>
+      <a class="navcta hoverable" href="#contact">Request Quote</a>
     </div>
   </div>
 </nav>
@@ -337,6 +359,7 @@
 <footer><div class="wrap"><span>© 2026 Suvarnatantu · by Vastranand Pvt. Ltd.</span><span>suvarnatantu.com · B2B & Export Manufacturing</span></div></footer>
 
 <script src="assets/js/main.js" defer></script>
-
-<script src="/assets/js/site-shell.js" defer></script><script src="/assets/js/site-shell-links.js" defer></script></body>
+<script src="/assets/js/site-shell.js" defer></script>
+<script src="/assets/js/site-shell-links.js" defer></script>
+</body>
 </html>
