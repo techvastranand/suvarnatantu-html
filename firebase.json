@@ -13,6 +13,16 @@
     ],
     "cleanUrls": true,
     "trailingSlash": true,
+    "redirects": [
+      { "regex": "^/exports/?$", "destination": "/export/", "type": 301 },
+      { "regex": "^/request-samples/?$", "destination": "/samples/", "type": 301 },
+      { "regex": "^/applications/saree-weaving/?$", "destination": "/applications/saree/", "type": 301 },
+      { "regex": "^/products/metallic-zari/gold-metallic-zari/?$", "destination": "/colours/gold/", "type": 301 },
+      { "regex": "^/products/metallic-zari/silver-metallic-zari/?$", "destination": "/colours/silver/", "type": 301 },
+      { "regex": "^/products/metallic-zari/copper-metallic-zari/?$", "destination": "/colours/copper/", "type": 301 },
+      { "regex": "^/products/metallic-zari/rose-gold-metallic-zari/?$", "destination": "/colours/rose-gold/", "type": 301 },
+      { "regex": "^/products/metallic-zari/coloured-metallic-zari/?$", "destination": "/zari-yarn/coloured-zari/", "type": 301 }
+    ],
     "rewrites": [
       { "source": "/", "destination": "/index.html" },
       { "source": "/404", "destination": "/404.html" }

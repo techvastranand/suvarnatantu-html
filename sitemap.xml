@@ -5,11 +5,9 @@
   <url><loc>https://suvarnatantu.com/applications/decorative-textiles/</loc></url>
   <url><loc>https://suvarnatantu.com/applications/embroidery/</loc></url>
   <url><loc>https://suvarnatantu.com/applications/jacquard/</loc></url>
-  <url><loc>https://suvarnatantu.com/applications/saree-weaving/</loc></url>
   <url><loc>https://suvarnatantu.com/applications/weaving/</loc></url>
   <url><loc>https://suvarnatantu.com/blog/</loc></url>
   <url><loc>https://suvarnatantu.com/contact/</loc></url>
-  <url><loc>https://suvarnatantu.com/exports/</loc></url>
   <url><loc>https://suvarnatantu.com/exports/export-packaging/</loc></url>
   <url><loc>https://suvarnatantu.com/exports/international-bulk-orders/</loc></url>
   <url><loc>https://suvarnatantu.com/exports/metallic-yarn-exporter-india/</loc></url>
@@ -35,11 +33,6 @@
   <url><loc>https://suvarnatantu.com/products/filament-yarn/polyester-filament-yarn/</loc></url>
   <url><loc>https://suvarnatantu.com/products/filament-yarn/specialty-filament-yarn/</loc></url>
   <url><loc>https://suvarnatantu.com/products/metallic-zari/</loc></url>
-  <url><loc>https://suvarnatantu.com/products/metallic-zari/coloured-metallic-zari/</loc></url>
-  <url><loc>https://suvarnatantu.com/products/metallic-zari/copper-metallic-zari/</loc></url>
-  <url><loc>https://suvarnatantu.com/products/metallic-zari/gold-metallic-zari/</loc></url>
-  <url><loc>https://suvarnatantu.com/products/metallic-zari/rose-gold-metallic-zari/</loc></url>
-  <url><loc>https://suvarnatantu.com/products/metallic-zari/silver-metallic-zari/</loc></url>
   <url><loc>https://suvarnatantu.com/products/metallic-zari/special-finish-metallic-zari/</loc></url>
   <url><loc>https://suvarnatantu.com/products/specialty-yarn/</loc></url>
   <url><loc>https://suvarnatantu.com/products/twisted-yarn/</loc></url>
@@ -47,10 +40,44 @@
   <url><loc>https://suvarnatantu.com/products/twisted-yarn/s-twist-yarn/</loc></url>
   <url><loc>https://suvarnatantu.com/products/twisted-yarn/z-twist-yarn/</loc></url>
   <url><loc>https://suvarnatantu.com/request-quote/</loc></url>
-  <url><loc>https://suvarnatantu.com/request-samples/</loc></url>
   <url><loc>https://suvarnatantu.com/specifications/</loc></url>
   <url><loc>https://suvarnatantu.com/specifications/custom-yarn-specifications/</loc></url>
   <url><loc>https://suvarnatantu.com/specifications/s-twist-vs-z-twist/</loc></url>
   <url><loc>https://suvarnatantu.com/specifications/yarn-denier-guide/</loc></url>
   <url><loc>https://suvarnatantu.com/specifications/yarn-tpm-guide/</loc></url>
+  <url><loc>https://suvarnatantu.com/metallic-yarn/</loc></url>
+  <url><loc>https://suvarnatantu.com/metallic-yarn/m-type/</loc></url>
+  <url><loc>https://suvarnatantu.com/metallic-yarn/mx-type/</loc></url>
+  <url><loc>https://suvarnatantu.com/metallic-yarn/st-type/</loc></url>
+  <url><loc>https://suvarnatantu.com/metallic-yarn/mh-type/</loc></url>
+  <url><loc>https://suvarnatantu.com/metallic-yarn/custom/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-yarn/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-yarn/weaving-zari/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-yarn/embroidery-zari/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-yarn/imitation-zari/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-yarn/polyester-zari/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-yarn/coloured-zari/</loc></url>
+  <url><loc>https://suvarnatantu.com/colours/</loc></url>
+  <url><loc>https://suvarnatantu.com/colours/gold/</loc></url>
+  <url><loc>https://suvarnatantu.com/colours/silver/</loc></url>
+  <url><loc>https://suvarnatantu.com/colours/copper/</loc></url>
+  <url><loc>https://suvarnatantu.com/colours/rose-gold/</loc></url>
+  <url><loc>https://suvarnatantu.com/colours/antique/</loc></url>
+  <url><loc>https://suvarnatantu.com/colours/custom/</loc></url>
+  <url><loc>https://suvarnatantu.com/applications/saree/</loc></url>
+  <url><loc>https://suvarnatantu.com/applications/</loc></url>
+  <url><loc>https://suvarnatantu.com/applications/brocade/</loc></url>
+  <url><loc>https://suvarnatantu.com/applications/knitting/</loc></url>
+  <url><loc>https://suvarnatantu.com/applications/lace/</loc></url>
+  <url><loc>https://suvarnatantu.com/applications/home-furnishing/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-lab/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-lab/tpm/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-lab/denier/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-lab/twist/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-lab/yarn-construction/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-lab/colour-shade/</loc></url>
+  <url><loc>https://suvarnatantu.com/zari-lab/technical-specifications/</loc></url>
+  <url><loc>https://suvarnatantu.com/manufacturing/factory/</loc></url>
+  <url><loc>https://suvarnatantu.com/export/</loc></url>
+  <url><loc>https://suvarnatantu.com/samples/</loc></url>
 </urlset>
