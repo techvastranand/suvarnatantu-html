@@ -77,27 +77,40 @@ function updateStory(){
  storyImage.style.transform=`translateY(${-10+p*18}%) scale(${1.02+p*.03})`;
 }
 
-/* Manufacturing rail follows normal document scroll without controlling it. */
+/* Manufacturing rail is pinned while its measured horizontal distance is scrolled. */
 const journey=document.getElementById('journey'),journeyStage=document.querySelector('.journeyStage'),journeyRail=document.getElementById('journeyRail');
 const journeyMotionQuery=window.matchMedia('(max-width: 640px), (prefers-reduced-motion: reduce)');
-let journeyFrame=0,journeyMotionState='before';
+let journeyFrame=0,journeyTravel=0,journeyStart=0,journeyTranslate=-1;
+function measureJourneyRail(){
+ if(!journey||!journeyStage||!journeyRail)return;
+ if(journeyMotionQuery.matches){
+  journey.classList.remove('journey--scroll-driven');
+  journey.style.removeProperty('--journey-scroll-distance');
+  journeyTravel=0;journeyTranslate=-1;journeyRail.style.transform='';return;
+ }
+ journeyTravel=Math.max(0,journeyRail.scrollWidth-journeyStage.clientWidth);
+ journey.classList.toggle('journey--scroll-driven',journeyTravel>0);
+ journey.style.setProperty('--journey-scroll-distance',`${journeyTravel}px`);
+ journeyStart=journey.getBoundingClientRect().top+window.scrollY;
+ journeyTranslate=-1;
+ updateJourneyRail();
+}
 function updateJourneyRail(){
  journeyFrame=0;
  if(!journey||!journeyStage||!journeyRail)return;
- if(journeyMotionQuery.matches){journeyRail.style.transform='';journeyMotionState='before';return}
- const r=journey.getBoundingClientRect(),vh=window.innerHeight||document.documentElement.clientHeight;
- if(r.top>=vh){if(journeyMotionState!=='before')journeyRail.style.transform='';journeyMotionState='before';return}
- const travel=Math.max(0,journeyRail.scrollWidth-journeyStage.clientWidth);
- if(r.bottom<=0){if(journeyMotionState!=='after')journeyRail.style.transform=`translate3d(${-travel}px,0,0)`;journeyMotionState='after';return}
- journeyMotionState='active';
- const p=Math.max(0,Math.min(1,(vh-r.top)/Math.max(1,r.height+vh)));
- journeyRail.style.transform=`translate3d(${-p*travel}px,0,0)`;
+ if(journeyMotionQuery.matches||!journeyTravel)return;
+ const p=Math.max(0,Math.min(1,(window.scrollY-journeyStart)/journeyTravel));
+ const translate=Math.round(p*journeyTravel);
+ if(translate===journeyTranslate)return;
+ journeyTranslate=translate;
+ journeyRail.style.transform=`translate3d(${-translate}px,0,0)`;
 }
 function queueJourneyRail(){if(!journeyFrame)journeyFrame=requestAnimationFrame(updateJourneyRail)}
 addEventListener('scroll',queueJourneyRail,{passive:true});
-addEventListener('resize',queueJourneyRail,{passive:true});
-if(journeyMotionQuery.addEventListener)journeyMotionQuery.addEventListener('change',queueJourneyRail);else journeyMotionQuery.addListener(queueJourneyRail);
-queueJourneyRail();
+addEventListener('resize',measureJourneyRail,{passive:true});
+addEventListener('load',measureJourneyRail,{once:true});
+if(journeyMotionQuery.addEventListener)journeyMotionQuery.addEventListener('change',measureJourneyRail);else journeyMotionQuery.addListener(measureJourneyRail);
+measureJourneyRail();
 
 /* machine background */
 let machineState;
