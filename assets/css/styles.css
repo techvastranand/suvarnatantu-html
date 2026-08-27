@@ -100,11 +100,12 @@ nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;back
 .liveChip b{display:block;color:var(--gold2);margin-bottom:5px}
 
 /* STORY */
-.story{background:#0d0a08;position:relative}
-.storySticky{min-height:680px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.story{min-height:180vh;background:#0d0a08;position:relative}
+.storySticky{height:100svh;position:sticky;top:0;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
 .storyVisual{position:relative;overflow:hidden;border-right:1px solid rgba(199,154,76,.16)}
-.storyVisual img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.78) sepia(.08)}
+.storyVisual img{width:100%;height:120%;object-fit:cover;display:block;filter:saturate(.78) sepia(.08);transform:translateY(-8%);will-change:transform}
 .storyVisual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(13,10,8,.3)),linear-gradient(0deg,rgba(13,10,8,.35),transparent 45%)}
+.storyPlay{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);width:84px;height:84px;border:1px solid rgba(228,189,107,.55);border-radius:50%;display:grid;place-items:center;color:var(--gold2);backdrop-filter:blur(5px);font-size:22px}
 .storyCopy{display:flex;align-items:center;padding:80px max(40px,8vw)}
 .storyCopy h2{font-family:Georgia,serif;font-size:clamp(48px,5vw,82px);font-weight:400;line-height:.98;margin:16px 0 24px;color:var(--gold2)}
 .storyCopy p{font-size:17px;line-height:1.72;color:#b8aa9d;max-width:590px}
