@@ -77,15 +77,6 @@ function updateStory(){
  storyImage.style.transform=`translateY(${-10+p*18}%) scale(${1.02+p*.03})`;
 }
 
-/* horizontal manufacturing */
-const journey=document.getElementById('journey'), rail=document.getElementById('journeyRail');
-function updateJourney(){
- const r=journey.getBoundingClientRect(), total=journey.offsetHeight-innerHeight;
- const p=Math.max(0,Math.min(1,-r.top/Math.max(1,total)));
- const max=Math.max(0,rail.scrollWidth-innerWidth+60);
- rail.style.transform=`translate3d(${-max*p}px,0,0)`;
-}
-
 /* machine background */
 let machineState;
 function drawMachine(t){
@@ -155,8 +146,8 @@ if(skipExperience){
 /* master animation */
 function animate(t){
  if(motionEnabled){drawHero(t);drawMachine(t);drawFilament(t);drawCone(t)}
- updateHeroParallax();updateStory();updateJourney();
+ updateHeroParallax();updateStory();
  requestAnimationFrame(animate)
 }requestAnimationFrame(animate);
 
-addEventListener('resize',()=>{heroState=machineState=filState=coneState=null;updateJourney()});
+addEventListener('resize',()=>{heroState=machineState=filState=coneState=null});
