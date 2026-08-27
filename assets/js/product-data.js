@@ -11,4 +11,4 @@ window.SuvarnatantuProducts = {
   'polyester-zari': { name: 'Polyester Zari Yarn', type: 'Zari Yarn', image: '/assets/images/metallic-zari-spools.webp', applications: ['Weaving', 'Knitting', 'Embroidery'] },
   'coloured-zari': { name: 'Coloured Zari Yarn', type: 'Zari Yarn', image: '/assets/images/metallic-zari-spools.webp', applications: ['Saree Weaving', 'Embroidery', 'Decorative Textiles'] }
 };
-window.SuvarnatantuCommercialDefaults = { price: 'Request Quote', moq: 'Confirmed based on product specification', sample: 'Available on Request', customisation: 'Available for selected requirements', leadTime: 'Confirmed after specification and quantity review' };
+window.SuvarnatantuCommercialDefaults = { price: 'Available on quotation', priceNote: 'Pricing is confirmed against final specification and quantity.', moq: 'Confirmed after requirement review', sample: 'Available on request', leadTime: 'Confirmed after specification and quantity review' };
