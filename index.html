@@ -21,7 +21,7 @@
 <meta name="twitter:description" content="Suvarnatantu is an Indian manufacturer and exporter of premium metallic zari yarn for weaving, embroidery and textile manufacturing. Explore multiple deniers, TPM, twists, metallic shades and customized yarn solutions.">
 <meta name="twitter:image" content="https://suvarnatantu.com/assets/images/metallic-zari-spools.webp">
 <link rel="icon" type="image/jpeg" href="assets/images/suvarnatantu-logo.jpg">
-<link rel="stylesheet" href="/assets/css/styles.css?v=20260827-8">
+<link rel="stylesheet" href="/assets/css/styles.css?v=20260827-9">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Suvarnatantu","url":"https://suvarnatantu.com/","logo":"https://suvarnatantu.com/assets/images/suvarnatantu-logo-optimized.jpg","parentOrganization":{"@type":"Organization","name":"Vastranand Pvt. Ltd."},"telephone":"+91-81540-00962","email":"suvarnatantu@gmail.com","address":{"@type":"PostalAddress","streetAddress":"Plot No. 998, Road No. 87, Sachin GIDC, Near Sutex Bank","addressRegion":"Gujarat","postalCode":"394230","addressCountry":"IN"}}</script>
 
 </head>
@@ -345,13 +345,26 @@
       </div>
       <div class="contactMeta reveal"><span>B2B</span><span>Export enquiries</span><span>Sample discussion</span><span>Long-term supply</span></div>
     </div>
-    <form class="form reveal" onsubmit="event.preventDefault();alert('Concept form — connect to your CRM/API in production.');">
-      <input placeholder="Full name" required>
-      <input placeholder="Company name" required>
-      <input type="email" placeholder="Business email" required>
-      <select><option>Country / region</option><option>India</option><option>International</option></select>
-      <textarea placeholder="Tell us about your requirement — application, yarn type, colour, twist / TPM, sample requirement, expected quantity..."></textarea>
-      <button class="hoverable" type="submit">Send Business Enquiry →</button>
+    <form class="form reveal" action="https://formsubmit.co/suvarnatantu@gmail.com" method="POST" data-enquiry-form>
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://suvarnatantu.com/enquiry-thank-you/">
+      <input type="hidden" name="_autoresponse" value="Thank you for contacting Suvarnatantu by Vastranand Pvt. Ltd. We have received your enquiry and our team will review your requirement and contact you shortly.">
+      <input type="hidden" name="_subject" value="New Suvarnatantu Business Enquiry">
+      <input type="hidden" name="source_url" value="https://suvarnatantu.com/">
+      <input type="hidden" name="enquiry_type" value="Homepage Business Enquiry">
+      <input type="hidden" name="brand" value="Suvarnatantu">
+      <input type="hidden" name="website" value="https://suvarnatantu.com/">
+      <input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input name="full_name" aria-label="Full name" autocomplete="name" placeholder="Full name" required>
+      <input name="company" aria-label="Company name" autocomplete="organization" placeholder="Company name" required>
+      <input type="email" name="email" aria-label="Business email" autocomplete="email" placeholder="Business email" required>
+      <select name="country_region" aria-label="Country or region"><option value="">Country / region</option><option>India</option><option>International</option></select>
+      <textarea name="requirement" aria-label="Business requirement" placeholder="Tell us about your requirement — application, yarn type, colour, twist / TPM, sample requirement, expected quantity..."></textarea>
+      <label class="consent full"><input type="checkbox" name="consent" value="Agreed" required> I agree that Suvarnatantu may use these details to respond to my business enquiry.</label>
+      <p class="form-note full">Your enquiry will be sent securely to the Suvarnatantu business team.</p>
+      <p class="privacy-note full">Please do not include passwords, payment card details or other highly sensitive information.</p>
+      <p class="form-errors full" aria-live="polite"></p>
+      <button class="hoverable" type="submit" data-submit-label="Send Business Enquiry →">Send Business Enquiry →</button>
     </form>
   </div>
 </section>
@@ -359,8 +372,8 @@
 
 <footer><div class="wrap"><span>© 2026 Suvarnatantu · by Vastranand Pvt. Ltd.</span><span>suvarnatantu.com · B2B & Export Manufacturing</span></div></footer>
 
-<script src="assets/js/main.js" defer></script>
-<script src="/assets/js/site-shell.js" defer></script>
+<script src="assets/js/main.js?v=20260827-9" defer></script>
+<script src="/assets/js/site-shell.js?v=20260827-9" defer></script>
 <script src="/assets/js/site-shell-links.js" defer></script>
 </body>
 </html>
