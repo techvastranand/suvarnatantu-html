@@ -77,6 +77,25 @@ function updateStory(){
  storyImage.style.transform=`translateY(${-10+p*18}%) scale(${1.02+p*.03})`;
 }
 
+/* Manufacturing rail follows normal document scroll without controlling it. */
+const journey=document.getElementById('journey'),journeyStage=document.querySelector('.journeyStage'),journeyRail=document.getElementById('journeyRail');
+const journeyMotionQuery=window.matchMedia('(max-width: 640px), (prefers-reduced-motion: reduce)');
+let journeyFrame=0;
+function updateJourneyRail(){
+ journeyFrame=0;
+ if(!journey||!journeyStage||!journeyRail)return;
+ if(journeyMotionQuery.matches){journeyRail.style.transform='';return}
+ const r=journey.getBoundingClientRect(),vh=window.innerHeight||document.documentElement.clientHeight;
+ const p=Math.max(0,Math.min(1,(vh-r.top)/Math.max(1,r.height+vh)));
+ const travel=Math.max(0,journeyRail.scrollWidth-journeyStage.clientWidth);
+ journeyRail.style.transform=`translate3d(${-p*travel}px,0,0)`;
+}
+function queueJourneyRail(){if(!journeyFrame)journeyFrame=requestAnimationFrame(updateJourneyRail)}
+addEventListener('scroll',queueJourneyRail,{passive:true});
+addEventListener('resize',queueJourneyRail,{passive:true});
+if(journeyMotionQuery.addEventListener)journeyMotionQuery.addEventListener('change',queueJourneyRail);else journeyMotionQuery.addListener(queueJourneyRail);
+queueJourneyRail();
+
 /* machine background */
 let machineState;
 function drawMachine(t){
