@@ -126,10 +126,8 @@ nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;back
 
 /* MANUFACTURING JOURNEY */
 .journey{background:#120d09;position:relative}
-.journeyStage{min-height:100svh;position:relative;overflow:hidden;display:flex;align-items:center}
-.journeyRail{display:flex;gap:18px;padding-left:max(26px,calc((100vw - 1320px)/2));will-change:transform;animation:manufacturingRailMotion 36s linear infinite alternate}
-.journeyRail:hover{animation-play-state:paused}
-@keyframes manufacturingRailMotion{from{transform:translateX(0)}to{transform:translateX(calc(-100% + 100vw))}}
+.journeyStage{min-height:100svh;position:relative;overflow-x:auto;overflow-y:hidden;display:flex;align-items:center;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.journeyRail{display:flex;width:max-content;flex:0 0 auto;gap:18px;padding-left:max(26px,calc((100vw - 1320px)/2))}
 .jCard{width:min(72vw,760px);height:66vh;flex:0 0 auto;border:1px solid rgba(199,154,76,.22);border-radius:24px;overflow:hidden;position:relative;background:#120d09}
 .jCard img{width:100%;height:100%;object-fit:cover;filter:saturate(.78);transition:transform 1.1s var(--ease)}
 .jCard:hover img{transform:scale(1.05)}
@@ -286,14 +284,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .app{height:330px}
   .jCard{width:86vw}
   .journeyIntro{width:84vw}
-  .journeyRail{animation:none}
   .labFoot{display:block}
 }
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none;transition:none}
   .logoReveal,.logoReveal:after{animation:none!important}
-  .journeyRail{animation:none!important}
   .logoReveal{opacity:1;transform:none;filter:none}
   .logoReveal:after{display:none}
   .heroLogoStage:before,.heroLogoStage:after{display:none}
