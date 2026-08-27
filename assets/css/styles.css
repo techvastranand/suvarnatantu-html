@@ -54,9 +54,9 @@ button,input,textarea,select{font:inherit}
 body.is-hover .cursor{width:54px;height:54px;border-color:var(--gold2)}
 
 /* NAV */
-.topbar{height:26px;border-bottom:1px solid rgba(199,154,76,.16);display:flex;align-items:center;font-size:9px;letter-spacing:.09em;color:#bcae9f;text-transform:uppercase}
+.topbar{position:fixed;z-index:401;top:0;left:0;right:0;height:26px;border-bottom:1px solid rgba(199,154,76,.16);display:flex;align-items:center;background:#0b0907;font-size:9px;letter-spacing:.09em;color:#bcae9f;text-transform:uppercase}
 .topbar .wrap{display:flex;justify-content:space-between}
-nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;background:linear-gradient(to bottom,rgba(11,9,7,.92),rgba(11,9,7,.56),transparent);backdrop-filter:blur(8px)}
+nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;background:rgba(11,9,7,.98);border-bottom:1px solid rgba(199,154,76,.22);box-shadow:0 10px 28px rgba(0,0,0,.24);backdrop-filter:blur(8px)}
 .navin{height:100%;width:min(1440px,calc(100% - 40px));margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
 .brand{display:flex;align-items:center;gap:11px}
 .brandmark{width:48px;height:48px;flex:0 0 48px;border:1px solid rgba(199,154,76,.55)}
@@ -308,7 +308,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media(max-width:850px){.inner-page .menu a:not(.navcta){display:none}.content-grid,.footer-grid{grid-template-columns:1fr}.link-grid{grid-template-columns:1fr 1fr}.page-hero{padding:72px 0 52px}.spec-list{grid-template-columns:1fr}.spec-list div:nth-child(odd){border-right:0}.footer-grid{gap:18px}}@media(max-width:560px){.link-grid,.info-grid{grid-template-columns:1fr}.page-hero h1{font-size:47px}.content-section{padding:58px 0}.cta-band h2{font-size:38px}}
 
 /* Stable inner-page header treatment */
-.inner-page .topbar{position:relative;z-index:401;background:#0b0907}
+.inner-page .topbar{z-index:401;background:#0b0907}
 .inner-page .site-nav{background:rgba(11,9,7,.98);backdrop-filter:none;border-bottom:1px solid rgba(199,154,76,.22);box-shadow:0 10px 28px rgba(0,0,0,.24)}
 .inner-page .brandname strong,.inner-page .menu,.inner-page .menu a,.inner-page .site-nav summary{opacity:1;filter:none;text-shadow:none}
 .inner-page .page-hero{padding:86px 0 62px}
