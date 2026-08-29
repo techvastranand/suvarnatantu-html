@@ -291,6 +291,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 }
 .cta-band .button{color:var(--ivory)}
 .inner-page .cta-band .button{color:var(--ivory)!important;-webkit-text-fill-color:var(--ivory)!important}
+.applications-related-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}.applications-related-links a{padding:9px 12px;border:1px solid rgba(199,154,76,.45);color:var(--gold2);font-size:10px;letter-spacing:.1em;text-transform:uppercase;transition:background .25s var(--ease),border-color .25s var(--ease)}.applications-related-links a:hover,.applications-related-links a:focus-visible{background:rgba(199,154,76,.1);border-color:var(--gold2);outline:none}
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none;transition:none}
