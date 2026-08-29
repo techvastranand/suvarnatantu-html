@@ -336,6 +336,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .site-footer a:hover{color:var(--gold2)}
 .site-footer a[href^="mailto:"]{white-space:nowrap}
 .site-footer .legal{margin:38px 0 0;padding-top:18px;border-top:1px solid rgba(199,154,76,.18);color:#8e7d6d;font-size:12px;letter-spacing:.06em;line-height:1.5;text-transform:none}
+.site-footer .legal a{display:inline;margin:0;color:inherit;font-size:inherit;line-height:inherit;letter-spacing:inherit;text-transform:inherit}
 @media(max-width:1050px){.site-footer .footer-grid{grid-template-columns:minmax(240px,1.45fr) repeat(2,minmax(140px,1fr));gap:34px 24px}.site-footer .footer-grid>div:first-child{grid-column:1/-1;max-width:560px}}
 @media(max-width:640px){.site-footer{padding:52px 0 28px}.site-footer .wrap{width:min(100% - 28px,1240px)}.site-footer .footer-grid{grid-template-columns:1fr;gap:28px}.site-footer .footer-grid>div:first-child{grid-column:auto}.site-footer .legal{margin-top:30px;font-size:11px}}
 
