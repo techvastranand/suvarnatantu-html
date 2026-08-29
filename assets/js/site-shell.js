@@ -9,7 +9,7 @@
     const oldFooter = document.querySelector('body > footer');
     if (!document.body.dataset.footerMounted) { if (oldFooter) oldFooter.outerHTML = footer; else document.body.insertAdjacentHTML('beforeend', footer); document.body.dataset.footerMounted = 'true'; }
     if (!document.querySelector('script[data-site-navigation]')) { const script = document.createElement('script'); script.src = '/assets/js/navigation.js'; script.defer = true; script.dataset.siteNavigation = 'true'; document.head.append(script); }
-    if (!document.querySelector('script[data-product-data]')) { const data = document.createElement('script'); data.src = '/assets/js/product-data.js'; data.dataset.productData = 'true'; data.onload = () => { const flow = document.createElement('script'); flow.src = '/assets/js/b2b-flow.js?v=20260827-9'; flow.defer = true; document.head.append(flow); }; document.head.append(data); }
+    if (!document.querySelector('script[data-product-data]')) { const data = document.createElement('script'); data.src = '/assets/js/product-data.js'; data.dataset.productData = 'true'; data.onload = () => { const flow = document.createElement('script'); flow.src = '/assets/js/b2b-flow.js?v=20260829-1'; flow.defer = true; document.head.append(flow); }; document.head.append(data); }
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount, { once: true }); else mount();
 })();

@@ -5,6 +5,48 @@
   const FORM_NEXT = 'https://suvarnatantu.com/enquiry-thank-you/';
   const AUTORESPONSE = 'Thank you for contacting Suvarnatantu by Vastranand Pvt. Ltd. We have received your enquiry and our team will review your requirement and contact you shortly.';
   const formSubmitFields = (source, enquiryType, subject) => `<input type="hidden" name="_template" value="table"><input type="hidden" name="_next" value="${FORM_NEXT}"><input type="hidden" name="_autoresponse" value="${AUTORESPONSE}"><input type="hidden" name="_subject" value="${subject}"><input type="hidden" name="source_url" value="${source}"><input type="hidden" name="enquiry_type" value="${enquiryType}"><input type="hidden" name="brand" value="Suvarnatantu"><input type="hidden" name="website" value="https://suvarnatantu.com/"><input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">`;
+  const INTAKE_API = 'https://vastranand.com/v1/public/suvarnatantu-enquiries';
+  const INTAKE_TIMEOUT_MS = 10000;
+  const newSubmissionUuid = () => {
+    if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+    const bytes = new Uint8Array(16); window.crypto.getRandomValues(bytes); bytes[6] = (bytes[6] & 15) | 64; bytes[8] = (bytes[8] & 63) | 128;
+    const hex = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+    return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+  };
+  const ensureSubmissionUuid = form => {
+    if (!form.dataset.submissionUuid) form.dataset.submissionUuid = newSubmissionUuid();
+    let field = form.elements.submission_uuid;
+    if (!field) { field = document.createElement('input'); field.type = 'hidden'; field.name = 'submission_uuid'; form.append(field); }
+    field.value = form.dataset.submissionUuid;
+    return field.value;
+  };
+  const normalizedEnquiry = form => {
+    ensureSubmissionUuid(form);
+    const fields = Object.fromEntries(Array.from(new FormData(form).entries(), ([key, value]) => [key, String(value)]));
+    const declaredType = fields.enquiry_type || '';
+    const enquiryType = declaredType.includes('Homepage') ? 'business' : (declaredType.includes('Quote') ? 'quote' : 'sample');
+    return {
+      submission_uuid: ensureSubmissionUuid(form), enquiry_type: enquiryType,
+      name: fields.full_name || fields.contact || '', company: fields.company || null,
+      email: fields.email || '', phone: fields.phone || null,
+      message: fields.requirement || fields.additionalNotes || fields.notes || null,
+      product: fields.product || null, category: fields.productType || null,
+      payload: fields, source_page: fields.source_url || location.href,
+      honeypot: fields._honey || ''
+    };
+  };
+  const postIntake = async payload => {
+    const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), INTAKE_TIMEOUT_MS);
+    try {
+      const response = await fetch(INTAKE_API, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal });
+      if (!response.ok) { const body = await response.json().catch(() => ({})); const error = new Error(body.detail || 'The enquiry service could not accept this request.'); error.definite = true; throw error; }
+      return await response.json();
+    } finally { clearTimeout(timeout); }
+  };
+  const submitIntake = async payload => {
+    try { return await postIntake(payload); }
+    catch (error) { if (error?.name !== 'AbortError') throw error; return postIntake(payload); }
+  };
   const setupDeliveryForm = (form) => {
     if (!form || form.dataset.deliveryReady === 'true') return;
     form.dataset.deliveryReady = 'true';
@@ -12,17 +54,31 @@
     const status = form.querySelector('.form-errors');
     const originalLabel = button?.dataset.submitLabel || button?.textContent || '';
     const reset = () => {
+      form.dataset.apiSubmitting = 'false';
       if (button) { button.disabled = false; button.textContent = originalLabel; }
       if (status) status.textContent = '';
     };
-    form.addEventListener('submit', event => {
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (form.dataset.apiSubmitting === 'true') return;
       if (form.elements._honey?.value) {
-        event.preventDefault();
         if (status) status.textContent = 'We could not process this request. Please try again shortly.';
         return;
       }
+      form.dataset.apiSubmitting = 'true';
+      const submissionUuid = ensureSubmissionUuid(form);
       if (button) { button.disabled = true; button.textContent = 'Sending enquiry\u2026'; }
-      if (status) status.textContent = 'Sending enquiry\u2026';
+      if (status) status.textContent = 'Saving your enquiry\u2026';
+      try {
+        const payload = normalizedEnquiry(form); payload.submission_uuid = submissionUuid;
+        await submitIntake(payload);
+        if (status) status.textContent = 'Enquiry saved. Sending the existing email notification\u2026';
+        HTMLFormElement.prototype.submit.call(form);
+      } catch (error) {
+        form.dataset.apiSubmitting = 'false';
+        if (button) { button.disabled = false; button.textContent = originalLabel; }
+        if (status) status.textContent = 'We could not save your enquiry. Please retry; your details are still here. You can also continue on WhatsApp.';
+      }
     });
     window.addEventListener('pageshow', reset);
   };
