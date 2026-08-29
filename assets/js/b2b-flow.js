@@ -1,12 +1,11 @@
 (() => {
   const products = window.SuvarnatantuProducts || {};
   const path = location.pathname.replace(/\/$/, '');
-  const FORM_ACTION = 'https://formsubmit.co/suvarnatantu@gmail.com';
-  const FORM_NEXT = 'https://suvarnatantu.com/enquiry-thank-you/';
-  const AUTORESPONSE = 'Thank you for contacting Suvarnatantu by Vastranand Pvt. Ltd. We have received your enquiry and our team will review your requirement and contact you shortly.';
-  const formSubmitFields = (source, enquiryType, subject) => `<input type="hidden" name="_template" value="table"><input type="hidden" name="_next" value="${FORM_NEXT}"><input type="hidden" name="_autoresponse" value="${AUTORESPONSE}"><input type="hidden" name="_subject" value="${subject}"><input type="hidden" name="source_url" value="${source}"><input type="hidden" name="enquiry_type" value="${enquiryType}"><input type="hidden" name="brand" value="Suvarnatantu"><input type="hidden" name="website" value="https://suvarnatantu.com/"><input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">`;
+  const intakeFields = (source, enquiryType) => `<input type='hidden' name='source_url' value='${source}'><input type='hidden' name='enquiry_type' value='${enquiryType}'><input type='hidden' name='brand' value='Suvarnatantu'><input type='hidden' name='website' value='https://suvarnatantu.com/'><input class='honeypot' type='text' name='honeypot' tabindex='-1' autocomplete='off' aria-hidden='true'>`;
   const INTAKE_API = 'https://vastranand.com/v1/public/suvarnatantu-enquiries';
   const INTAKE_TIMEOUT_MS = 10000;
+  const THANK_YOU_PATH = '/enquiry-thank-you/';
+  const FAILURE_MESSAGE = 'We couldn\u2019t submit your enquiry. Please try again or contact us on WhatsApp.';
   const newSubmissionUuid = () => {
     if (window.crypto?.randomUUID) return window.crypto.randomUUID();
     const bytes = new Uint8Array(16); window.crypto.getRandomValues(bytes); bytes[6] = (bytes[6] & 15) | 64; bytes[8] = (bytes[8] & 63) | 128;
@@ -32,7 +31,7 @@
       message: fields.requirement || fields.additionalNotes || fields.notes || null,
       product: fields.product || null, category: fields.productType || null,
       payload: fields, source_page: fields.source_url || location.href,
-      honeypot: fields._honey || ''
+      honeypot: fields.honeypot || ''
     };
   };
   const postIntake = async payload => {
@@ -58,11 +57,12 @@
       if (button) { button.disabled = false; button.textContent = originalLabel; }
       if (status) status.textContent = '';
     };
+    reset();
     form.addEventListener('submit', async event => {
       event.preventDefault();
       if (form.dataset.apiSubmitting === 'true') return;
-      if (form.elements._honey?.value) {
-        if (status) status.textContent = 'We could not process this request. Please try again shortly.';
+      if (form.elements.honeypot?.value) {
+        if (status) status.textContent = FAILURE_MESSAGE;
         return;
       }
       form.dataset.apiSubmitting = 'true';
@@ -72,12 +72,12 @@
       try {
         const payload = normalizedEnquiry(form); payload.submission_uuid = submissionUuid;
         await submitIntake(payload);
-        if (status) status.textContent = 'Enquiry saved. Sending the existing email notification\u2026';
-        HTMLFormElement.prototype.submit.call(form);
+        if (status) status.textContent = 'Enquiry submitted. Redirecting\u2026';
+        window.location.assign(THANK_YOU_PATH);
       } catch (error) {
         form.dataset.apiSubmitting = 'false';
         if (button) { button.disabled = false; button.textContent = originalLabel; }
-        if (status) status.textContent = 'We could not save your enquiry. Please retry; your details are still here. You can also continue on WhatsApp.';
+        if (status) status.textContent = FAILURE_MESSAGE;
       }
     });
     window.addEventListener('pageshow', reset);
@@ -119,9 +119,8 @@
     host.closest('.page-hero').querySelector('h1').textContent = title; host.closest('.page-hero').querySelector('p').textContent = intro;
     const source = isQuote ? 'https://suvarnatantu.com/request-quote/' : 'https://suvarnatantu.com/samples/';
     const enquiryType = isQuote ? 'Request Quote / RFQ' : 'Request Sample';
-    const subject = isQuote ? 'New Suvarnatantu RFQ / Quotation Request' : 'New Suvarnatantu Sample Request';
     const formSection = document.createElement('section'); formSection.className = 'content-section b2b-request-section';
-    formSection.innerHTML = `<div class="wrap form-page"><form class="form b2b-request-form" action="${FORM_ACTION}" method="POST" data-enquiry-form>${formSubmitFields(source, enquiryType, subject)}<h2 class="full">${isQuote ? 'Company information' : 'Buyer information'}</h2><label>Company Name *<input required name="company" autocomplete="organization"></label><label>Contact Person *<input required name="contact" autocomplete="name"></label><label>Business Email *<input required name="email" type="email" autocomplete="email"></label><label>Mobile / WhatsApp *<input required name="phone" type="tel" autocomplete="tel"></label><label>Country *<input required name="country" autocomplete="country-name"></label><label>State / Region *<input required name="state" autocomplete="address-level1"></label><label>City *<input required name="city" autocomplete="address-level2"></label><label>Website <input name="websiteUrl" type="url" autocomplete="url"></label>${isQuote ? '<label>GST/VAT/Tax ID <input name="taxId"></label>' : ''}<h2 class="full">${isQuote ? 'Product requirement' : 'Sample requirement'}</h2><label>Product *<input required name="product"></label><label>Category *<input required name="productType"></label>${fields()}${isQuote ? `<h2 class="full">Commercial requirement</h2><label>Target Delivery Location<input name="deliveryLocation"></label><label>Expected Requirement Date<input name="expectedDate" type="date"></label><label>Requirement Type<select name="requirementType">${options(['Trial','Regular Purchase','Bulk Purchase','Development Requirement','Export Requirement'], 'Select requirement type')}</select></label><label class="full">Additional Notes<textarea name="additionalNotes"></textarea></label>` : `<h2 class="full">Shipping information</h2><label class="full">Delivery Address *<textarea required name="address" autocomplete="street-address"></textarea></label><label>Postal Code *<input required name="postalCode" autocomplete="postal-code"></label><p class="full form-note">Sample availability, charges and dispatch details will be confirmed after requirement review.</p>`}<label class="full consent"><input required type="checkbox" name="consent" value="Agreed"> I consent to Suvarnatantu using these details to respond to this B2B ${kind} request. *</label><p class="full form-note">Your enquiry will be sent securely to the Suvarnatantu business team.</p><p class="full privacy-note">Please do not include passwords, payment card details or other highly sensitive information.</p><div class="form-errors full" aria-live="polite"></div><div class="b2b-actions full"><button class="button" type="submit" data-submit-label="${isQuote ? 'Send Quote Request' : 'Send Sample Request'}">${isQuote ? 'Send Quote Request' : 'Send Sample Request'}</button><button class="button-outline" type="button" data-whatsapp>Continue on WhatsApp</button></div></form></div>`;
+    formSection.innerHTML = `<div class="wrap form-page"><form class="form b2b-request-form" data-enquiry-form>${intakeFields(source, enquiryType)}<h2 class="full">${isQuote ? 'Company information' : 'Buyer information'}</h2><label>Company Name *<input required name="company" autocomplete="organization"></label><label>Contact Person *<input required name="contact" autocomplete="name"></label><label>Business Email *<input required name="email" type="email" autocomplete="email"></label><label>Mobile / WhatsApp *<input required name="phone" type="tel" autocomplete="tel"></label><label>Country *<input required name="country" autocomplete="country-name"></label><label>State / Region *<input required name="state" autocomplete="address-level1"></label><label>City *<input required name="city" autocomplete="address-level2"></label><label>Website <input name="websiteUrl" type="url" autocomplete="url"></label>${isQuote ? '<label>GST/VAT/Tax ID <input name="taxId"></label>' : ''}<h2 class="full">${isQuote ? 'Product requirement' : 'Sample requirement'}</h2><label>Product *<input required name="product"></label><label>Category *<input required name="productType"></label>${fields()}${isQuote ? `<h2 class="full">Commercial requirement</h2><label>Target Delivery Location<input name="deliveryLocation"></label><label>Expected Requirement Date<input name="expectedDate" type="date"></label><label>Requirement Type<select name="requirementType">${options(['Trial','Regular Purchase','Bulk Purchase','Development Requirement','Export Requirement'], 'Select requirement type')}</select></label><label class="full">Additional Notes<textarea name="additionalNotes"></textarea></label>` : `<h2 class="full">Shipping information</h2><label class="full">Delivery Address *<textarea required name="address" autocomplete="street-address"></textarea></label><label>Postal Code *<input required name="postalCode" autocomplete="postal-code"></label><p class="full form-note">Sample availability, charges and dispatch details will be confirmed after requirement review.</p>`}<label class="full consent"><input required type="checkbox" name="consent" value="Agreed"> I consent to Suvarnatantu using these details to respond to this B2B ${kind} request. *</label><p class="full form-note">Your enquiry will be sent securely to the Suvarnatantu business team.</p><p class="full privacy-note">Please do not include passwords, payment card details or other highly sensitive information.</p><div class="form-errors full" aria-live="polite"></div><div class="b2b-actions full"><button class="button" type="submit" disabled data-submit-label="${isQuote ? 'Send Quote Request' : 'Send Sample Request'}">${isQuote ? 'Send Quote Request' : 'Send Sample Request'}</button><button class="button-outline" type="button" data-whatsapp>Continue on WhatsApp</button></div></form></div>`;
     host.parentElement.insertAdjacentElement('afterend', formSection);
     const form = formSection.querySelector('form'); Object.entries(stored).forEach(([key, value]) => { const control = form.elements[key]; if (control && value) control.value = value; });
     const wa = form.querySelector('[data-whatsapp]'); const refresh = () => { wa.dataset.url = whatsapp(encodeConfig(form), kind); }; wa.addEventListener('click', () => { const popup = window.open(wa.dataset.url, '_blank', 'noopener,noreferrer'); if (popup) popup.opener = null; }); form.addEventListener('input', refresh); form.addEventListener('change', refresh); refresh(); setupDeliveryForm(form);

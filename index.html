@@ -344,16 +344,12 @@
       </div>
       <div class="contactMeta reveal"><span>B2B</span><span>Export enquiries</span><span>Sample discussion</span><span>Long-term supply</span></div>
     </div>
-    <form class="form reveal" action="https://formsubmit.co/suvarnatantu@gmail.com" method="POST" data-enquiry-form>
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://suvarnatantu.com/enquiry-thank-you/">
-      <input type="hidden" name="_autoresponse" value="Thank you for contacting Suvarnatantu by Vastranand Pvt. Ltd. We have received your enquiry and our team will review your requirement and contact you shortly.">
-      <input type="hidden" name="_subject" value="New Suvarnatantu Business Enquiry">
+    <form class="form reveal" data-enquiry-form>
       <input type="hidden" name="source_url" value="https://suvarnatantu.com/">
       <input type="hidden" name="enquiry_type" value="Homepage Business Enquiry">
       <input type="hidden" name="brand" value="Suvarnatantu">
       <input type="hidden" name="website" value="https://suvarnatantu.com/">
-      <input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input class="honeypot" type="text" name="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
       <input name="full_name" aria-label="Full name" autocomplete="name" placeholder="Full name" required>
       <input name="company" aria-label="Company name" autocomplete="organization" placeholder="Company name" required>
       <input type="email" name="email" aria-label="Business email" autocomplete="email" placeholder="Business email" required>
@@ -362,8 +358,9 @@
       <label class="consent full"><input type="checkbox" name="consent" value="Agreed" required> I agree that Suvarnatantu may use these details to respond to my business enquiry.</label>
       <p class="form-note full">Your enquiry will be sent securely to the Suvarnatantu business team.</p>
       <p class="privacy-note full">Please do not include passwords, payment card details or other highly sensitive information.</p>
+      <noscript class="full"><p class="form-note">Please enable JavaScript to submit your enquiry or contact Suvarnatantu through <a href="https://wa.me/918154000962" target="_blank" rel="noopener noreferrer">WhatsApp</a>.</p></noscript>
       <p class="form-errors full" aria-live="polite"></p>
-      <button class="hoverable" type="submit" data-submit-label="Send Business Enquiry →">Send Business Enquiry →</button>
+      <button class="hoverable" type="submit" disabled data-submit-label="Send Business Enquiry →">Send Business Enquiry →</button>
     </form>
   </div>
 </section>
