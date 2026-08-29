@@ -290,6 +290,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .labFoot{display:block}
 }
 .cta-band .button{color:var(--ivory)}
+.inner-page .cta-band .button{color:var(--ivory)!important;-webkit-text-fill-color:var(--ivory)!important}
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none;transition:none}
