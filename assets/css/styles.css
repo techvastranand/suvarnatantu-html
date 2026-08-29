@@ -217,6 +217,7 @@ nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;back
  #130e0a;border-top:1px solid rgba(199,154,76,.14)}
 .founderGrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px}
 .founderGrid h2{font-family:Georgia,serif;font-size:clamp(50px,6vw,92px);font-weight:400;line-height:.92;color:var(--gold2);margin:12px 0 22px}
+.founderHeadingLine{display:block}
 .founderGrid p{color:#a99a8b;line-height:1.72;font-size:17px}
 .founderNames{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
 .person{min-height:0;overflow:hidden;border:1px solid rgba(199,154,76,.22);display:flex;flex-direction:column;background:
@@ -261,6 +262,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media(max-width:1050px){
   .menu a:not(.navcta){display:none}
   .heroGrid,.storySticky,.labShell,.founderGrid,.contactGrid{grid-template-columns:1fr}
+  .founderHeadingLine{display:inline}.founderHeadingLine+.founderHeadingLine:before{content:" "}
   .heroVisual{height:55vh;margin-top:40px}
   .contactLinks{grid-template-columns:1fr 1fr}
   .capGrid{grid-template-columns:1fr 1fr}
