@@ -69,14 +69,6 @@ function updateHeroParallax(){
  heroPhoto.style.transform=`scale(1.06) translate3d(${(mouseX-.5)*-12}px,${-p*26+(mouseY-.5)*-10}px,0)`;
 }
 
-/* story parallax */
-const story=document.getElementById('story'),storyImage=document.getElementById('storyImage');
-function updateStory(){
- const r=story.getBoundingClientRect(), total=story.offsetHeight-innerHeight;
- const p=Math.max(0,Math.min(1,-r.top/Math.max(1,total)));
- storyImage.style.transform=`translateY(${-10+p*18}%) scale(${1.02+p*.03})`;
-}
-
 /* Manufacturing rail is pinned while its measured horizontal distance is scrolled. */
 const journey=document.getElementById('journey'),journeyStage=document.querySelector('.journeyStage'),journeyRail=document.getElementById('journeyRail');
 const journeyMotionQuery=window.matchMedia('(max-width: 640px), (prefers-reduced-motion: reduce)');
@@ -181,7 +173,7 @@ if(skipExperience){
 /* master animation */
 function animate(t){
  if(motionEnabled){drawHero(t);drawMachine(t);drawFilament(t);drawCone(t)}
- updateHeroParallax();updateStory();
+ updateHeroParallax();
  requestAnimationFrame(animate)
 }requestAnimationFrame(animate);
 
