@@ -216,7 +216,7 @@ nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;back
  radial-gradient(circle at 84% 20%,rgba(199,154,76,.08),transparent 25%),
  #130e0a;border-top:1px solid rgba(199,154,76,.14)}
 .founderGrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px}
-.founderGrid h2{font-family:Georgia,serif;font-size:clamp(50px,6vw,92px);font-weight:400;line-height:.92;color:var(--gold2);margin:12px 0 22px}
+.founderGrid h2{font-family:Georgia,serif;font-size:clamp(50px,5.6vw,86px);font-weight:400;line-height:.92;color:var(--gold2);margin:12px 0 22px}
 .founderHeadingLine{display:block;white-space:nowrap}
 .founderGrid p{color:#a99a8b;line-height:1.72;font-size:17px}
 .founderNames{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
