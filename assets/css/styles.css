@@ -131,6 +131,12 @@ nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;back
 .journeyRail{display:flex;width:max-content;flex:0 0 auto;gap:18px;padding-left:max(26px,calc((100vw - 1320px)/2));will-change:transform}
 .jCard{width:min(72vw,760px);height:66vh;flex:0 0 auto;border:1px solid rgba(199,154,76,.22);border-radius:24px;overflow:hidden;position:relative;background:#120d09}
 .jCard img{width:100%;height:100%;object-fit:cover;filter:saturate(.78);transition:transform 1.1s var(--ease)}
+.jCard:nth-of-type(1) img{object-position:48% 58%}
+.jCard:nth-of-type(2) img{object-position:58% 52%}
+.jCard:nth-of-type(3) img{object-position:62% 58%}
+.jCard:nth-of-type(4) img{object-position:68% 24%}
+.jCard:nth-of-type(5) img{object-position:52% 46%}
+.jCard:nth-of-type(6) img{object-position:54% 28%}
 .jCard:hover img{transform:scale(1.05)}
 .jShade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(9,7,5,.88) 0%,rgba(9,7,5,.15) 62%)}
 .jCopy{position:absolute;z-index:3;left:28px;right:28px;bottom:26px}
