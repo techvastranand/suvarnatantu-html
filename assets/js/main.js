@@ -12,9 +12,14 @@ setTimeout(dismissPreloader, 1600);
 
 /* custom cursor */
 const cur=document.querySelector('.cursor'), dot=document.querySelector('.cursor-dot');
-let cx=0,cy=0,tx=0,ty=0;
-addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(dot){dot.style.left=tx+'px';dot.style.top=ty+'px'}});
-function cursorTick(){cx+=(tx-cx)*.16;cy+=(ty-cy)*.16;if(cur){cur.style.left=cx+'px';cur.style.top=cy+'px'}requestAnimationFrame(cursorTick)} cursorTick();
+const finePointer=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+let cx=0,cy=0,tx=0,ty=0,cursorFrame=0;
+function cursorTick(){
+ cursorFrame=0;cx+=(tx-cx)*.16;cy+=(ty-cy)*.16;
+ if(cur){cur.style.left=cx+'px';cur.style.top=cy+'px'}
+ if(Math.abs(tx-cx)>.1||Math.abs(ty-cy)>.1)cursorFrame=requestAnimationFrame(cursorTick);
+}
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;mouseX=e.clientX/innerWidth;mouseY=e.clientY/innerHeight;if(dot){dot.style.left=tx+'px';dot.style.top=ty+'px'}if(finePointer&&!cursorFrame)cursorFrame=requestAnimationFrame(cursorTick);requestRender()},{passive:true});
 document.querySelectorAll('.hoverable').forEach(el=>{el.addEventListener('mouseenter',()=>body.classList.add('is-hover'));el.addEventListener('mouseleave',()=>body.classList.remove('is-hover'))});
 
 /* reveals */
@@ -31,12 +36,14 @@ function updateGlobal(){
   sections.forEach(s=>{const r=s.getBoundingClientRect();if(r.top<innerHeight*.45)current=s.dataset.index});
   railNum.textContent=current;
 }
-addEventListener('scroll',updateGlobal,{passive:true});updateGlobal();
+let globalFrame=0;
+function queueGlobal(){if(!globalFrame)globalFrame=requestAnimationFrame(()=>{globalFrame=0;updateGlobal();queueJourneyRail();requestRender()})}
+addEventListener('scroll',queueGlobal,{passive:true});updateGlobal();
 
 /* canvas util */
 function setup(c){
  if(!c) return null;
- const d=Math.min(window.devicePixelRatio||1,1.7),r=c.getBoundingClientRect();
+ const d=Math.min(window.devicePixelRatio||1,matchMedia('(max-width:640px)').matches?1.25:1.7),r=c.getBoundingClientRect();
  c.width=Math.max(1,r.width*d);c.height=Math.max(1,r.height*d);
  const x=c.getContext('2d'); if(!x) return null;
  x.setTransform(d,0,0,d,0,0);return{x,w:r.width,h:r.height}
@@ -44,7 +51,6 @@ function setup(c){
 
 /* hero responsive filament field */
 let heroState,mouseX=.55,mouseY=.42;
-addEventListener('pointermove',e=>{mouseX=e.clientX/innerWidth;mouseY=e.clientY/innerHeight},{passive:true});
 function drawHero(t){
  const c=document.getElementById('heroThreads'); if(!heroState)heroState=setup(c); if(!heroState)return;
  const{x,w,h}=heroState;x.clearRect(0,0,w,h);
@@ -98,8 +104,6 @@ function updateJourneyRail(){
  journeyRail.style.transform=`translate3d(${-translate}px,0,0)`;
 }
 function queueJourneyRail(){if(!journeyFrame)journeyFrame=requestAnimationFrame(updateJourneyRail)}
-addEventListener('scroll',queueJourneyRail,{passive:true});
-addEventListener('resize',measureJourneyRail,{passive:true});
 addEventListener('load',measureJourneyRail,{once:true});
 if(journeyMotionQuery.addEventListener)journeyMotionQuery.addEventListener('change',measureJourneyRail);else journeyMotionQuery.addListener(measureJourneyRail);
 measureJourneyRail();
@@ -128,10 +132,10 @@ function drawMachine(t){
 const palette={gold:[199,154,76],silver:[210,210,214],rose:[197,130,116],copper:[176,103,71],gunmetal:[108,115,120]};
 let colorKey='gold',dir='S',tpm=3200,denier=85;
 const roColor=document.getElementById('roColor'),roDir=document.getElementById('roDir'),roTPM=document.getElementById('roTPM'),roDenier=document.getElementById('roDenier');
-document.querySelectorAll('#colorBtns button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#colorBtns button').forEach(x=>x.classList.remove('active'));b.classList.add('active');colorKey=b.dataset.color;roColor.textContent=b.textContent});
-document.querySelectorAll('#dirBtns button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#dirBtns button').forEach(x=>x.classList.remove('active'));b.classList.add('active');dir=b.dataset.dir;roDir.textContent=b.textContent});
-document.getElementById('tpmRange').oninput=e=>{tpm=+e.target.value;roTPM.textContent=tpm};
-document.getElementById('denierRange').oninput=e=>{denier=+e.target.value;roDenier.textContent=denier};
+document.querySelectorAll('#colorBtns button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#colorBtns button').forEach(x=>x.classList.remove('active'));b.classList.add('active');colorKey=b.dataset.color;roColor.textContent=b.textContent;requestRender()});
+document.querySelectorAll('#dirBtns button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#dirBtns button').forEach(x=>x.classList.remove('active'));b.classList.add('active');dir=b.dataset.dir;roDir.textContent=b.textContent;requestRender()});
+document.getElementById('tpmRange').oninput=e=>{tpm=+e.target.value;roTPM.textContent=tpm;requestRender()};
+document.getElementById('denierRange').oninput=e=>{denier=+e.target.value;roDenier.textContent=denier;requestRender()};
 let filState,coneState;
 function drawFilament(t){
  const c=document.getElementById('filamentCanvas');if(!filState)filState=setup(c);if(!filState)return;
@@ -167,14 +171,38 @@ if(skipExperience){
     motionEnabled=!motionEnabled;
     skipExperience.textContent=motionEnabled?'Reduce Motion':'Enable Motion';
     document.documentElement.style.scrollBehavior=motionEnabled?'smooth':'auto';
+    requestRender();
   });
 }
 
-/* master animation */
-function animate(t){
- if(motionEnabled){drawHero(t);drawMachine(t);drawFilament(t);drawCone(t)}
- updateHeroParallax();
- requestAnimationFrame(animate)
-}requestAnimationFrame(animate);
-
-addEventListener('resize',()=>{heroState=machineState=filState=coneState=null});
+/* Render canvas effects only while their sections are visible. */
+const home=document.getElementById('home'),lab=document.getElementById('lab');
+let heroVisible=true,machineVisible=false,labVisible=false,renderFrame=0,resizeFrame=0;
+function requestRender(){
+ if(!motionEnabled||document.hidden||(!heroVisible&&!machineVisible&&!labVisible)||renderFrame)return;
+ renderFrame=requestAnimationFrame(render);
+}
+function render(t){
+ renderFrame=0;
+ if(!motionEnabled||document.hidden)return;
+ if(heroVisible){drawHero(t);updateHeroParallax()}
+ if(machineVisible)drawMachine(t);
+ if(labVisible){drawFilament(t);drawCone(t)}
+ requestRender();
+}
+const motionObserver=new IntersectionObserver(entries=>{
+ entries.forEach(entry=>{
+  if(entry.target===home)heroVisible=entry.isIntersecting;
+  else if(entry.target===journey)machineVisible=entry.isIntersecting;
+  else if(entry.target===lab)labVisible=entry.isIntersecting;
+ });
+ requestRender();
+},{rootMargin:'200px 0px'});
+[home,journey,lab].filter(Boolean).forEach(section=>motionObserver.observe(section));
+document.addEventListener('visibilitychange',requestRender);
+function queueResize(){
+ if(resizeFrame)return;
+ resizeFrame=requestAnimationFrame(()=>{resizeFrame=0;heroState=machineState=filState=coneState=null;measureJourneyRail();requestRender()});
+}
+addEventListener('resize',queueResize,{passive:true});
+requestRender();
