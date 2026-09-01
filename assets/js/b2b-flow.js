@@ -86,9 +86,9 @@
   const options = (items, empty) => `<option value="">${empty}</option>${items.map(x => `<option>${x}</option>`).join('')}`;
   const fields = (prefix = '') => `<div class="b2b-fields">
     <label>Colour<select name="${prefix}colour">${options(['Gold','Silver','Copper','Rose Gold','Antique','Custom Colour'], 'Select colour')}</select></label>
-    <label>Denier<select name="${prefix}denier">${options(['Specify Denier','Need Recommendation'], 'Select Denier')}</select></label>
+    <label>Denier<input name="${prefix}denier" placeholder="Enter Denier"></label>
     <label>Twist direction<select name="${prefix}twist">${options(['S Twist','Z Twist','Not Sure / Need Recommendation'], 'Select twist')}</select></label>
-    <label>TPM<select name="${prefix}tpm">${options(['Specify TPM','Need Recommendation'], 'Select TPM')}</select></label>
+    <label>TPM<input name="${prefix}tpm" placeholder="Enter TPM"></label>
     <label>Application<select name="${prefix}application">${options(['Saree Weaving','Jacquard','Brocade','Embroidery','Knitting','Lace','Home Furnishing','Decorative Textiles','Other'], 'Select application')}</select></label>
     <label>Required quantity<input name="${prefix}quantity" inputmode="decimal" type="number" min="0" step="any" placeholder="Quantity"></label>
     <label>Unit<select name="${prefix}unit">${options(['KG','Cone','Roll','Other'], 'Select unit')}</select></label>
