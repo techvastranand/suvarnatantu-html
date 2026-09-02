@@ -6,11 +6,33 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+  repository_dispatch:
+    types: [ghost_content_changed]
+
+concurrency:
+  group: production-hosting-deploy
+  cancel-in-progress: false
+
+permissions:
+  contents: read
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Build Knowledge Centre from Ghost
+        env:
+          GHOST_CONTENT_API_URL: ${{ secrets.GHOST_CONTENT_API_URL }}
+          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
+        run: node scripts/build-blog.mjs
+      - name: Validate generated Knowledge Centre
+        env:
+          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
+        run: node scripts/validate-blog-output.mjs
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
