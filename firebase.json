@@ -13,6 +13,14 @@
     ],
     "cleanUrls": true,
     "trailingSlash": true,
+    "headers": [
+      {
+        "source": "/blog/ghost-state.json",
+        "headers": [
+          { "key": "Cache-Control", "value": "no-store, max-age=0" }
+        ]
+      }
+    ],
     "redirects": [
       { "regex": "^/exports/?$", "destination": "/export/", "type": 301 },
       { "regex": "^/request-samples/?$", "destination": "/samples/", "type": 301 },

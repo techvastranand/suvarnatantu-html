@@ -7,8 +7,14 @@ on:
     branches:
       - main
   workflow_dispatch:
-  repository_dispatch:
-    types: [ghost_content_changed]
+    inputs:
+      force_rebuild:
+        description: Rebuild and deploy even when Ghost content is unchanged
+        required: false
+        default: true
+        type: boolean
+  schedule:
+    - cron: '7,22,37,52 * * * *'
 
 concurrency:
   group: production-hosting-deploy
@@ -24,16 +30,29 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Check Ghost content state
+        id: ghost_state
+        env:
+          GHOST_CONTENT_API_URL: ${{ secrets.GHOST_CONTENT_API_URL }}
+          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
+          GHOST_FORCE_REBUILD: ${{ github.event_name == 'push' || github.event.inputs.force_rebuild == 'true' }}
+        run: node scripts/check-ghost-content.mjs
+      - name: No Ghost changes
+        if: ${{ steps.ghost_state.outputs.changed != 'true' }}
+        run: echo "No Ghost content changes detected."
       - name: Build Knowledge Centre from Ghost
+        if: ${{ steps.ghost_state.outputs.changed == 'true' }}
         env:
           GHOST_CONTENT_API_URL: ${{ secrets.GHOST_CONTENT_API_URL }}
           GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
         run: node scripts/build-blog.mjs
       - name: Validate generated Knowledge Centre
+        if: ${{ steps.ghost_state.outputs.changed == 'true' }}
         env:
           GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
         run: node scripts/validate-blog-output.mjs
       - uses: FirebaseExtended/action-hosting-deploy@v0
+        if: ${{ steps.ghost_state.outputs.changed == 'true' }}
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUVARNATANTU_VASTRANAND }}

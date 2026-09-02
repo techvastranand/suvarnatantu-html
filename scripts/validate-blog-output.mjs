@@ -18,6 +18,10 @@ const requireOneH1 = (html, path) => {
 
 const manifest = JSON.parse(await read(resolve(blogRoot, '.ghost-generated.json')));
 if (manifest.version !== 1 || !Array.isArray(manifest.articles)) throw new Error('Invalid Ghost-generated article manifest.');
+const ghostState = JSON.parse(await read(resolve(blogRoot, 'ghost-state.json')));
+if (ghostState.version !== 1 || ghostState.algorithm !== 'sha256' || !/^[a-f0-9]{64}$/.test(ghostState.fingerprint)) {
+  throw new Error('Invalid deployed Ghost content fingerprint.');
+}
 
 const homepage = await read(resolve(blogRoot, 'index.html'));
 requireText(homepage, 'https://suvarnatantu.com/blog/', 'blog/index.html');
