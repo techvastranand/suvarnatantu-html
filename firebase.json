@@ -15,6 +15,12 @@
     "trailingSlash": true,
     "headers": [
       {
+        "source": "/blog/**",
+        "headers": [
+          { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=300, must-revalidate" }
+        ]
+      },
+      {
         "source": "/blog/ghost-state.json",
         "headers": [
           { "key": "Cache-Control", "value": "no-store, max-age=0" }
