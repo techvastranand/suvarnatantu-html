@@ -25,7 +25,12 @@ if (ghostState.version !== 1 || ghostState.algorithm !== 'sha256' || !/^[a-f0-9]
 
 const homepage = await read(resolve(blogRoot, 'index.html'));
 requireText(homepage, 'https://suvarnatantu.com/blog/', 'blog/index.html');
+requireText(homepage, 'href="/blog/articles/"', 'blog/index.html');
 requireOneH1(homepage, 'blog/index.html');
+
+const articles = await read(resolve(blogRoot, 'articles', 'index.html'));
+requireText(articles, 'https://suvarnatantu.com/blog/articles/', 'blog/articles/index.html');
+requireOneH1(articles, 'blog/articles/index.html');
 
 for (const category of requiredCategories) {
   const path = resolve(blogRoot, 'category', category, 'index.html');
