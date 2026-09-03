@@ -26,6 +26,33 @@ document.querySelectorAll('.hoverable').forEach(el=>{el.addEventListener('mousee
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
+/* Warm lazy images before they enter view without competing with the hero. */
+const warmedImages=new WeakSet();
+const idle=callback=>{
+ if('requestIdleCallback' in window)requestIdleCallback(callback,{timeout:300});
+ else setTimeout(callback,0);
+};
+function warmImage(img){
+ if(!img||warmedImages.has(img))return;
+ warmedImages.add(img);
+ img.loading='eager';
+ const decode=()=>{if(img.decode)img.decode().catch(()=>{});};
+ if(img.complete)decode();else img.addEventListener('load',decode,{once:true});
+}
+function scheduleImageWarm(img){idle(()=>warmImage(img));}
+const imageWarmObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+ if(!entry.isIntersecting)return;
+ scheduleImageWarm(entry.target);
+ imageWarmObserver.unobserve(entry.target);
+}),{rootMargin:'900px 0px'});
+document.querySelectorAll('img[loading="lazy"]').forEach(img=>imageWarmObserver.observe(img));
+const imageWarmGroupObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+ if(!entry.isIntersecting)return;
+ entry.target.querySelectorAll('img[loading="lazy"]').forEach(scheduleImageWarm);
+ imageWarmGroupObserver.unobserve(entry.target);
+}),{rootMargin:'900px 0px'});
+['journey','applications'].map(id=>document.getElementById(id)).filter(Boolean).forEach(section=>imageWarmGroupObserver.observe(section));
+
 /* progress + rail */
 const progress=document.getElementById('progress'), railFill=document.getElementById('railFill'), railNum=document.getElementById('railNum');
 const sections=[...document.querySelectorAll('[data-index]')];
