@@ -14,7 +14,7 @@ on:
         default: true
         type: boolean
   schedule:
-    - cron: '7,22,37,52 * * * *'
+    - cron: '*/5 * * * *'
 
 concurrency:
   group: production-hosting-deploy
