@@ -538,3 +538,36 @@ html:has(link[rel="canonical"][href^="https://suvarnatantu.com/zari-lab/"]) .con
   .site-nav .navcta{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:48px;padding:0 20px!important;font-size:13px}
   .inner-page main{padding-top:112px}
 }
+
+/* Compact shared header dimensions. */
+.topbar{height:22px}
+nav.site-nav{top:22px}
+.inner-page main{padding-top:78px}
+.has-b2b-product .page-hero{scroll-margin-top:72px}
+.b2b-request-section{scroll-margin-top:calc(22px + 56px + 16px)}
+
+@media(min-width:1181px){
+  nav.site-nav{top:22px;height:50px;min-height:50px}
+  .site-nav .navin{height:50px;min-height:50px}
+  .site-nav .brandname strong{font-size:20px;line-height:.95}
+  .site-nav .brandname span{font-size:8px;line-height:1.1}
+  .site-nav .menu>a,.site-nav .menu>.nav-unavailable,.site-nav .nav-dropdown>summary{height:50px}
+  .site-nav .menu>.navcta{height:40px;min-height:40px;padding:0 16px!important;font-size:11px}
+  .inner-page main{padding-top:72px}
+  .has-b2b-product .page-hero{scroll-margin-top:72px}
+  .b2b-request-section{scroll-margin-top:calc(22px + 50px + 16px)}
+}
+
+@media(max-width:1180px){
+  nav.site-nav{height:56px;min-height:56px}
+  .site-nav .navin{height:56px;min-height:56px}
+  .site-nav .brandname strong{font-size:20px;line-height:.95}
+  .site-nav .brandname span{font-size:8px;line-height:1.1}
+  .site-nav .nav-toggle{padding:7px 10px}
+  .site-nav .menu{top:56px;max-height:calc(100vh - 78px)}
+}
+
+@media(max-width:760px){
+  .has-b2b-product .page-hero{scroll-margin-top:78px}
+  .b2b-request-section{scroll-margin-top:calc(22px + 56px + 12px)}
+}
