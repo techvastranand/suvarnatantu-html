@@ -1,0 +1,14 @@
+{
+  "name": "suvarnatantu-webhook-relay",
+  "private": true,
+  "main": "index.js",
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "test": "node --test relay-core.test.mjs"
+  },
+  "dependencies": {
+    "firebase-functions": "^6.0.0"
+  }
+}
