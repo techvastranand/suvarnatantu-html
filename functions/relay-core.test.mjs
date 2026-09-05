@@ -21,3 +21,11 @@ test('rejects changed payloads, stale events and malformed signatures', () => {
 test('extracts only safe log metadata', () => {
   assert.deepEqual(relay.safeEventMetadata({ event: 'post.published', post: { current: { slug: 'test-post' } } }), { event: 'post.published', slug: 'test-post' });
 });
+
+test('suppresses duplicate payloads only inside its time window', () => {
+  const duplicate = relay.createPayloadDeduplicator(1000);
+  const body = Buffer.from('{"post":{}}');
+  assert.equal(duplicate(body, 1000), false);
+  assert.equal(duplicate(body, 1500), true);
+  assert.equal(duplicate(body, 2001), false);
+});

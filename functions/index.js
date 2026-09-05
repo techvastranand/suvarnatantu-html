@@ -3,11 +3,12 @@
 const { onRequest } = require('firebase-functions/v2/https');
 const { defineSecret } = require('firebase-functions/params');
 const { logger } = require('firebase-functions');
-const { isValidGhostSignature, safeEventMetadata } = require('./relay-core');
+const { createPayloadDeduplicator, isValidGhostSignature, safeEventMetadata } = require('./relay-core');
 
 const githubDispatchToken = defineSecret('GITHUB_DISPATCH_TOKEN');
 const ghostWebhookSecret = defineSecret('GHOST_WEBHOOK_SECRET');
 const requestWindows = new Map();
+const isDuplicatePayload = createPayloadDeduplicator();
 const RATE_LIMIT = 30;
 const RATE_WINDOW_MS = 60000;
 
@@ -39,6 +40,10 @@ exports.ghostWebhook = onRequest({
   }
 
   const metadata = safeEventMetadata(req.body);
+  if (isDuplicatePayload(req.rawBody)) {
+    logger.info('Ignored duplicate Ghost webhook', metadata);
+    return res.status(202).json({ accepted: true, duplicate: true });
+  }
   try {
     const response = await fetch('https://api.github.com/repos/techvastranand/suvarnatantu-html/dispatches', {
       method: 'POST',

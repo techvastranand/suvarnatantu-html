@@ -25,4 +25,15 @@ function safeEventMetadata(body) {
   };
 }
 
-module.exports = { isValidGhostSignature, safeEventMetadata };
+function createPayloadDeduplicator(ttlMs = 300000) {
+  const seen = new Map();
+  return (rawBody, now = Date.now()) => {
+    const hash = crypto.createHash('sha256').update(rawBody).digest('hex');
+    for (const [key, timestamp] of seen) if (now - timestamp >= ttlMs) seen.delete(key);
+    if (seen.has(hash)) return true;
+    seen.set(hash, now);
+    return false;
+  };
+}
+
+module.exports = { createPayloadDeduplicator, isValidGhostSignature, safeEventMetadata };
