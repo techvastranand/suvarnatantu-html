@@ -48,6 +48,12 @@ for (const slug of manifest.articles) {
   requireText(html, 'application/ld+json', path);
   requireText(html, 'kc-prose', path);
   requireOneH1(html, path);
+  const relatedSection = html.match(/<div class="eyebrow">Related articles<\/div>[\s\S]*?<\/section>/)?.[0] || '';
+  const relatedUrls = [...relatedSection.matchAll(/<article class="kc-card"><a[^>]+href="(\/blog\/[^"/]+\/)"/g)].map(([, url]) => url);
+  if (new Set(relatedUrls).size !== relatedUrls.length) throw new Error(`${path} contains duplicate related article URLs.`);
+  if (relatedUrls.includes(`/blog/${slug}/`)) throw new Error(`${path} links to itself in related articles.`);
+  if (slug.includes('tpm')) { requireText(html, 'Related technical resources', path); requireText(html, 'href="/zari-lab/tpm/"', path); requireText(html, 'href="/specifications/yarn-tpm-guide/"', path); }
+  if (slug.includes('denier')) { requireText(html, 'Related technical resources', path); requireText(html, 'href="/zari-lab/denier/"', path); requireText(html, 'href="/specifications/yarn-denier-guide/"', path); }
   if (html.includes(contentKey)) throw new Error(`${path} contains the Ghost Content API key.`);
 }
 

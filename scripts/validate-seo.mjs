@@ -6,6 +6,12 @@ const categories=['metallic-yarn','zari-yarn','technical-knowledge','application
 const redirects=JSON.parse(await readFile(resolve(root,'firebase.json'),'utf8')).hosting.redirects.map(rule=>rule.regex);
 const sitemap=await readFile(resolve(root,'sitemap.xml'),'utf8'),robots=await readFile(resolve(root,'robots.txt'),'utf8'),homepage=await readFile(resolve(root,'index.html'),'utf8');
 const manifest=JSON.parse(await readFile(resolve(root,'blog','.ghost-generated.json'),'utf8'));
+const topicPages=[
+  ['zari-lab/tpm/index.html','https://suvarnatantu.com/zari-lab/tpm/'],['specifications/yarn-tpm-guide.html','https://suvarnatantu.com/specifications/yarn-tpm-guide/'],['blog/what-is-tpm-in-zari-yarn/index.html','https://suvarnatantu.com/blog/what-is-tpm-in-zari-yarn/'],
+  ['zari-lab/denier/index.html','https://suvarnatantu.com/zari-lab/denier/'],['specifications/yarn-denier-guide.html','https://suvarnatantu.com/specifications/yarn-denier-guide/'],['blog/what-is-denier-in-metallic-yarn/index.html','https://suvarnatantu.com/blog/what-is-denier-in-metallic-yarn/']
+];
+const topicHtml=await Promise.all(topicPages.map(async([path,canonical])=>{const html=await readFile(resolve(root,path),'utf8');if(html.includes('noindex')||!html.includes(`rel="canonical" href="${canonical}"`))throw Error(`Invalid topic page: ${path}`);if((html.match(/<h1[ >]/g)||[]).length!==1)throw Error(`Invalid H1 count: ${path}`);return html;}));
+for(const group of [topicHtml.slice(0,3),topicHtml.slice(3)]){const titles=group.map(html=>html.match(/<title>([^<]+)/)?.[1]),h1s=group.map(html=>html.match(/<h1[^>]*>([^<]+)/)?.[1]);if(new Set(titles).size!==3||new Set(h1s).size!==3)throw Error('TPM or Denier topic intents are not distinct.');}
 const urls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([,url])=>url);
 if(!sitemap.startsWith('<?xml')||!sitemap.includes('<urlset '))throw Error('Sitemap XML is invalid.');
 if(!robots.includes('Sitemap: https://suvarnatantu.com/sitemap.xml'))throw Error('robots.txt is missing the sitemap declaration.');
