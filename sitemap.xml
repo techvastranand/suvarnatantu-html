@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://suvarnatantu.com/</loc></url>
   <url><loc>https://suvarnatantu.com/about-us/</loc></url>
@@ -6,7 +6,6 @@
   <url><loc>https://suvarnatantu.com/applications/embroidery/</loc></url>
   <url><loc>https://suvarnatantu.com/applications/jacquard/</loc></url>
   <url><loc>https://suvarnatantu.com/applications/weaving/</loc></url>
-  <url><loc>https://suvarnatantu.com/blog/</loc></url>
   <url><loc>https://suvarnatantu.com/contact/</loc></url>
   <url><loc>https://suvarnatantu.com/exports/export-packaging/</loc></url>
   <url><loc>https://suvarnatantu.com/exports/international-bulk-orders/</loc></url>
@@ -80,4 +79,16 @@
   <url><loc>https://suvarnatantu.com/manufacturing/factory/</loc></url>
   <url><loc>https://suvarnatantu.com/export/</loc></url>
   <url><loc>https://suvarnatantu.com/samples/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/articles/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/category/metallic-yarn/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/category/zari-yarn/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/category/technical-knowledge/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/category/applications/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/category/manufacturing/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/category/export-sourcing/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/category/industry-insights/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/what-is-metallic-yarn/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/what-is-tpm-in-zari-yarn/</loc></url>
+  <url><loc>https://suvarnatantu.com/blog/what-is-denier-in-metallic-yarn/</loc></url>
 </urlset>

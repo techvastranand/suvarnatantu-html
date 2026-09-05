@@ -1,1 +1,1 @@
-{"private":true,"scripts":{"build:blog":"node scripts/build-blog.mjs","build:blog:demo":"node scripts/build-blog.mjs --demo","test:ghost-state":"node --test scripts/check-ghost-content.test.mjs"}}
+{"private":true,"scripts":{"build:blog":"node scripts/build-blog.mjs","build:blog:demo":"node scripts/build-blog.mjs --demo","test:ghost-state":"node --test scripts/check-ghost-content.test.mjs","validate:seo":"node scripts/validate-seo.mjs"}}
