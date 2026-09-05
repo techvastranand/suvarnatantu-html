@@ -1,4 +1,6 @@
-# Ghost publishing webhook relay
+# Deprecated Firebase Functions relay
+
+This directory is retained only as a historical reference. It is not deployed, Firebase Hosting no longer declares it, and production Ghost publishing uses `cloudflare-worker/` instead. Do not deploy this Function.
 
 This Firebase Functions v2 endpoint dispatches a `ghost_publish` event to GitHub after it validates Ghost's HMAC signature over the exact raw request body plus the webhook timestamp. It does not expose a GitHub token to the static site.
 
