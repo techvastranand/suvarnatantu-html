@@ -3,18 +3,31 @@ import crypto from 'node:crypto';
 import test from 'node:test';
 import relay from './relay-core.js';
 
+function signatureFor(rawBody, secret, timestamp) {
+  return crypto.createHmac('sha256', secret).update(rawBody).update(String(timestamp)).digest('hex');
+}
+
 test('accepts a valid Ghost HMAC signature', () => {
   const rawBody = Buffer.from('{"post":{"current":{"slug":"test-post"}}}');
   const secret = 'test-secret';
-  const signature = crypto.createHmac('sha256', secret).update(rawBody).digest('hex');
+  const timestamp = 1000000;
+  const signature = signatureFor(rawBody, secret, timestamp);
   assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: `sha256=${signature}, t=1000000`, secret, now: 1000000 }), true);
+  assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: `sha256=${signature}, t=${timestamp}`, secret, now: timestamp }), true);
+  assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: `sha256=${signature},   t=${timestamp}`, secret, now: timestamp }), true);
 });
 
-test('rejects changed payloads, stale events and malformed signatures', () => {
+test('rejects changed payloads, timestamps, secrets and malformed signatures', () => {
   const rawBody = Buffer.from('{"post":{}}');
-  const signature = crypto.createHmac('sha256', 'test-secret').update(rawBody).digest('hex');
-  assert.equal(relay.isValidGhostSignature({ rawBody: Buffer.from('{"post":{"changed":true}}'), signatureHeader: `sha256=${signature}`, secret: 'test-secret' }), false);
+  const timestamp = 1000000;
+  const signature = signatureFor(rawBody, 'test-secret', timestamp);
+  assert.equal(relay.isValidGhostSignature({ rawBody: Buffer.from('{"post":{"changed":true}}'), signatureHeader: `sha256=${signature}, t=${timestamp}`, secret: 'test-secret', now: timestamp }), false);
+  assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: `sha256=${'0'.repeat(64)}, t=${timestamp}`, secret: 'test-secret', now: timestamp }), false);
+  assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: `sha256=${signature}, t=${timestamp + 1}`, secret: 'test-secret', now: timestamp + 1 }), false);
+  assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: `sha256=${signature}, t=${timestamp}`, secret: 'wrong-secret', now: timestamp }), false);
   assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: `sha256=${signature}, t=1`, secret: 'test-secret', now: 1000000 }), false);
+  assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: undefined, secret: 'test-secret', now: timestamp }), false);
+  assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: `sha256=${signature}`, secret: 'test-secret', now: timestamp }), false);
   assert.equal(relay.isValidGhostSignature({ rawBody, signatureHeader: 'not-a-signature', secret: 'test-secret' }), false);
 });
 

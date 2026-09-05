@@ -1,6 +1,6 @@
 # Ghost publishing webhook relay
 
-This Firebase Functions v2 endpoint dispatches a `ghost_publish` event to GitHub after it validates a Ghost webhook signature. It does not expose a GitHub token to the static site.
+This Firebase Functions v2 endpoint dispatches a `ghost_publish` event to GitHub after it validates Ghost's HMAC signature over the exact raw request body plus the webhook timestamp. It does not expose a GitHub token to the static site.
 
 ## Deployment prerequisites
 
@@ -22,7 +22,7 @@ https://asia-south1-suvarnatantu-vastranand.cloudfunctions.net/ghostWebhook
 
 ## Ghost Admin setup
 
-In Ghost Admin, go to **Settings → Advanced → Integrations → Add custom integration**. Add webhooks for `post.published` and the published-post edit event available in the Ghost UI, both targeting the endpoint above. Set the same webhook secret as `GHOST_WEBHOOK_SECRET`; Ghost sends it as `X-Ghost-Signature`.
+In Ghost Admin, go to **Settings → Advanced → Integrations → Add custom integration**. Add webhooks for `post.published`, `post.published.edited`, `post.unpublished`, and `post.deleted`, all targeting the endpoint above. Set the same webhook secret as `GHOST_WEBHOOK_SECRET`; Ghost sends it as `X-Ghost-Signature`. The static generator prunes only its own previously generated article directories, so unpublishing or deleting a Ghost post is safe to rebuild.
 
 ## Manual recovery
 

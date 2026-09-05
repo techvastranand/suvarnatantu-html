@@ -11,9 +11,9 @@ function timingSafeEqual(left, right) {
 function isValidGhostSignature({ rawBody, signatureHeader, secret, now = Date.now(), maxAgeMs = 300000 }) {
   if (!rawBody || !signatureHeader || !secret) return false;
   const match = /^sha256=([a-f0-9]{64})(?:,\s*t=(\d+))?$/i.exec(signatureHeader.trim());
-  if (!match) return false;
-  if (match[2] && Math.abs(now - Number(match[2])) > maxAgeMs) return false;
-  const expected = crypto.createHmac('sha256', secret).update(rawBody).digest('hex');
+  if (!match || !match[2]) return false;
+  if (Math.abs(now - Number(match[2])) > maxAgeMs) return false;
+  const expected = crypto.createHmac('sha256', secret).update(rawBody).update(match[2]).digest('hex');
   return timingSafeEqual(expected, match[1].toLowerCase());
 }
 
