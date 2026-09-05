@@ -13,6 +13,8 @@ on:
         required: false
         default: true
         type: boolean
+  repository_dispatch:
+    types: [ghost_publish]
   schedule:
     - cron: '*/5 * * * *'
 
@@ -35,7 +37,8 @@ jobs:
         env:
           GHOST_CONTENT_API_URL: ${{ secrets.GHOST_CONTENT_API_URL }}
           GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
-          GHOST_FORCE_REBUILD: ${{ github.event_name == 'push' || github.event.inputs.force_rebuild == 'true' }}
+          # repository_dispatch is the immediate Ghost-webhook route; schedule remains a best-effort fallback.
+          GHOST_FORCE_REBUILD: ${{ github.event_name == 'push' || github.event_name == 'repository_dispatch' || github.event.inputs.force_rebuild == 'true' }}
         run: node scripts/check-ghost-content.mjs
       - name: No Ghost changes
         if: ${{ steps.ghost_state.outputs.changed != 'true' }}
