@@ -15,6 +15,13 @@ const requireText = (html, needle, path) => {
 const requireOneH1 = (html, path) => {
   if ((html.match(/<h1[ >]/g) || []).length !== 1) throw new Error(`${path} must contain exactly one H1.`);
 };
+const articleSchema = (html, path) => {
+  const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(([, source]) => JSON.parse(source));
+  const article = schemas.find(schema => schema['@type'] === 'Article');
+  if (!article) throw new Error(`${path} is missing Article schema.`);
+  return article;
+};
+const teamAuthor = name => /^(?:suvarnatantu(?:\s+technical\s+team)?|technical\s+team)$/i.test(String(name || '').trim().replace(/\s+/g, ' '));
 
 const manifest = JSON.parse(await read(resolve(blogRoot, '.ghost-generated.json')));
 if (manifest.version !== 1 || !Array.isArray(manifest.articles)) throw new Error('Invalid Ghost-generated article manifest.');
@@ -48,6 +55,16 @@ for (const slug of manifest.articles) {
   requireText(html, 'application/ld+json', path);
   requireText(html, 'kc-prose', path);
   requireOneH1(html, path);
+  const schema = articleSchema(html, path);
+  if (!schema.author) throw new Error(`${path} is missing an Article author.`);
+  if (!schema.publisher || schema.publisher['@id'] !== 'https://suvarnatantu.com/#organization') throw new Error(`${path} must reference the canonical publisher.`);
+  const byline = html.match(/<div class="kc-meta">By ([\s\S]*?) · /)?.[1];
+  const schemaName = schema.author.name || (schema.author['@id'] === 'https://suvarnatantu.com/#organization' ? byline : '');
+  if (!byline || schemaName !== byline) throw new Error(`${path} has an inconsistent visible byline and schema author.`);
+  if (teamAuthor(byline)) {
+    if (schema.author['@type'] === 'Person') throw new Error(`${path} must not classify a team author as Person.`);
+  } else if (schema.author['@type'] !== 'Person') throw new Error(`${path} must classify a named author as Person.`);
+  if (/"email"\s*:/i.test(JSON.stringify(schema.author))) throw new Error(`${path} exposes private author information.`);
   const relatedSection = html.match(/<div class="eyebrow">Related articles<\/div>[\s\S]*?<\/section>/)?.[0] || '';
   const relatedUrls = [...relatedSection.matchAll(/<article class="kc-card"><a[^>]+href="(\/blog\/[^"/]+\/)"/g)].map(([, url]) => url);
   if (new Set(relatedUrls).size !== relatedUrls.length) throw new Error(`${path} contains duplicate related article URLs.`);
