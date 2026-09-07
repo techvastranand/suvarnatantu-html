@@ -14,10 +14,13 @@ const topicHtml=await Promise.all(topicPages.map(async([path,canonical])=>{const
 const about=await readFile(resolve(root,'about-us.html'),'utf8');
 for(const href of ['/manufacturing/','/zari-lab/','/products/','/applications/','/export/','/samples/','/blog/','/contact/'])if(!about.includes(`href="${href}"`))throw Error(`About page is missing ${href}`);
 for(const group of [topicHtml.slice(0,3),topicHtml.slice(3)]){const titles=group.map(html=>html.match(/<title>([^<]+)/)?.[1]),h1s=group.map(html=>html.match(/<h1[^>]*>([^<]+)/)?.[1]);if(new Set(titles).size!==3||new Set(h1s).size!==3)throw Error('TPM or Denier topic intents are not distinct.');}
-const urls=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(([,url])=>url);
+const entries=[...sitemap.matchAll(/<url>\s*<loc>([^<]+)<\/loc>\s*<lastmod>([^<]+)<\/lastmod>\s*<\/url>/g)].map(([,url,lastmod])=>({url,lastmod}));
+const urls=entries.map(({url})=>url);
 if(!sitemap.startsWith('<?xml')||!sitemap.includes('<urlset '))throw Error('Sitemap XML is invalid.');
 if(!robots.includes('Sitemap: https://suvarnatantu.com/sitemap.xml'))throw Error('robots.txt is missing the sitemap declaration.');
 if(new Set(urls).size!==urls.length)throw Error('Sitemap contains duplicate URLs.');
+if(entries.length!==[...sitemap.matchAll(/<url>/g)].length)throw Error('Every sitemap URL must contain one loc and one lastmod.');
+for(const {url,lastmod} of entries){if(!/^\d{4}-\d{2}-\d{2}$/.test(lastmod)||Number.isNaN(new Date(`${lastmod}T00:00:00Z`).getTime()))throw Error(`Invalid sitemap lastmod for ${url}`);}
 for(const url of urls)if(!url.startsWith(`${site}/`)||!url.endsWith('/'))throw Error(`Non-canonical sitemap URL: ${url}`);
 for(const path of ['/','/blog/','/blog/articles/',...categories.map(slug=>`/blog/category/${slug}/`),...manifest.articles.map(slug=>`/blog/${slug}/`)])if(!urls.includes(site+path))throw Error(`Sitemap is missing ${path}`);
 for(const url of urls)if(url.includes('enquiry-thank-you')||redirects.some(regex=>new RegExp(regex).test(new URL(url).pathname)))throw Error(`Sitemap contains a noindex or redirect-source URL: ${url}`);
