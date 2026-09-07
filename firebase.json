@@ -28,6 +28,10 @@
       }
     ],
     "redirects": [
+      { "regex": "^/exports/metallic-yarn-exporter-india(?:\\.html)?/?$", "destination": "/export/metallic-yarn-exporter-india/", "type": 301 },
+      { "regex": "^/exports/zari-yarn-exporter-india(?:\\.html)?/?$", "destination": "/export/zari-yarn-exporter-india/", "type": 301 },
+      { "regex": "^/exports/international-bulk-orders(?:\\.html)?/?$", "destination": "/export/international-bulk-orders/", "type": 301 },
+      { "regex": "^/exports/export-packaging(?:\\.html)?/?$", "destination": "/export/export-packaging/", "type": 301 },
       { "regex": "^/exports/?$", "destination": "/export/", "type": 301 },
       { "regex": "^/request-samples/?$", "destination": "/samples/", "type": 301 },
       { "regex": "^/applications/saree-weaving/?$", "destination": "/applications/saree/", "type": 301 },

@@ -17,7 +17,7 @@
     ['/products/', 'Products'], ['/products/filament-yarn/', 'Filament Yarn'], ['/products/metallic-zari/', 'Metallic Zari'],
     ['/products/twisted-yarn/', 'Twisted Yarn'], ['/metallic-yarn/', 'Metallic Yarn'], ['/zari-yarn/', 'Zari Yarn'],
     ['/applications/', 'Applications'], ['/colours/', 'Colours'], ['/industries/', 'Industries'], ['/manufacturing/', 'Manufacturing'],
-    ['/zari-lab/', 'Zari Lab'], ['/specifications/', 'Specifications'], ['/exports/', 'Exports']
+    ['/zari-lab/', 'Zari Lab'], ['/specifications/', 'Specifications'], ['/export/', 'Exports']
   ];
   const text = (value) => (value || '').replace(/\s+/g, ' ').trim();
   const absoluteUrl = (value) => {
