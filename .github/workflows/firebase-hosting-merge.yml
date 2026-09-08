@@ -16,7 +16,7 @@ on:
   repository_dispatch:
     types: [ghost_publish]
   schedule:
-    - cron:'0 * * * *'
+    - cron: '0 * * * *'
 
 concurrency:
   group: production-hosting-deploy
