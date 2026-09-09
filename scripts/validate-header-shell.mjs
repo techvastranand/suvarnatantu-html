@@ -20,6 +20,11 @@ async function htmlFiles(directory) {
 const sharedShell = await readFile(resolve(root, 'assets', 'js', 'site-shell.js'), 'utf8');
 const sharedSequence = '<a href="/about-us/">About</a><a href="/contact/">Contact</a><a class="navcta" href="/request-quote/">Request Quote</a>';
 if (!sharedShell.includes(sharedSequence)) throw new Error('The shared header must keep About, Contact, then navcta Request Quote.');
+const headerTemplate = /const header = `([\s\S]*?)`;/m.exec(sharedShell)?.[1];
+if (!headerTemplate) throw new Error('The canonical shared header template is missing.');
+if ((headerTemplate.match(/href="\/contact\/">Contact<\/a>/g) || []).length !== 1) {
+  throw new Error('The canonical shared header must contain Contact exactly once.');
+}
 
 const homepage = await readFile(resolve(root, 'index.html'), 'utf8');
 const homepageSequence = '<a class="hoverable" href="/about-us/">About</a>\n      <a class="hoverable" href="/contact/">Contact</a>\n      <a class="navcta hoverable" href="/request-quote/">Request Quote</a>';
