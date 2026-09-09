@@ -30,6 +30,12 @@ if (!generator.includes(shellReference) || /site-shell\.js\?v=(?!20260909-2)/.te
   throw new Error('The blog generator must use only the current shared-shell version.');
 }
 
+const firebase = JSON.parse(await readFile(resolve(root, 'firebase.json'), 'utf8'));
+const hasRevalidatingHtmlPolicy = firebase.hosting.headers?.some(rule => rule.source === '!/assets/**' && rule.headers?.some(header => header.key === 'Cache-Control' && header.value === 'no-cache, max-age=0, must-revalidate'));
+if (!hasRevalidatingHtmlPolicy) throw new Error('Firebase Hosting must revalidate non-asset page responses.');
+const preservesGhostStatePolicy = firebase.hosting.headers?.some(rule => rule.source === '/blog/ghost-state.json' && rule.headers?.some(header => header.key === 'Cache-Control' && header.value === 'no-store, max-age=0'));
+if (!preservesGhostStatePolicy) throw new Error('Firebase Hosting must preserve the Ghost-state no-store policy.');
+
 const pages = await htmlFiles(root);
 let sharedShellPages = 0;
 for (const path of pages) {
