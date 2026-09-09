@@ -34,6 +34,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Test Ghost state logic
+        run: npm run test:ghost-state
       - name: Check Ghost content state
         id: ghost_state
         env:
@@ -56,8 +58,12 @@ jobs:
         env:
           GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
         run: node scripts/validate-blog-output.mjs
+      - name: Validate shared header
+        run: npm run validate:header-shell
+      - name: Validate SEO
+        run: npm run validate:seo
       - uses: FirebaseExtended/action-hosting-deploy@v0
-        if: ${{ steps.ghost_state.outputs.changed == 'true' }}
+        if: ${{ github.event_name == 'push' || steps.ghost_state.outputs.changed == 'true' }}
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUVARNATANTU_VASTRANAND }}
