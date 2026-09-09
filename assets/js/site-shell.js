@@ -8,6 +8,15 @@
     else { document.querySelector('body > .topbar')?.remove(); const oldNav = document.querySelector('body > nav'); if (oldNav) oldNav.outerHTML = header; else document.body.insertAdjacentHTML('afterbegin', header); }
     const oldFooter = document.querySelector('body > footer');
     if (!document.body.dataset.footerMounted) { if (oldFooter) oldFooter.outerHTML = footer; else document.body.insertAdjacentHTML('beforeend', footer); document.body.dataset.footerMounted = 'true'; }
+    const siteFooter = document.querySelector('.site-footer');
+    if (siteFooter && !siteFooter.dataset.legalMounted) {
+      siteFooter.querySelector('.footer-grid > div:first-child')?.insertAdjacentHTML('beforeend', '<p><strong>Operated by</strong><br>Vastranand Private Limited<br>CIN: U18109GJ2022PTC135289<br>GSTIN: 24AAICV9714F1Z6</p><p><strong>Registered Office</strong><br>Plot No. 998, Road No. 87, Sachin GIDC, Surat – 394230, Gujarat, India</p>');
+      const legalLinks = siteFooter.querySelector('.footer-grid > div:last-child');
+      if (legalLinks) { const heading = legalLinks.querySelector('h3'); if (heading) heading.textContent = 'Contact & Legal'; legalLinks.insertAdjacentHTML('beforeend', '<a href="/about-us/">About</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms & Conditions</a>'); }
+      const copyright = siteFooter.querySelector('.legal');
+      if (copyright) copyright.textContent = '© 2026 Suvarnatantu · Operated by Vastranand Private Limited. All rights reserved.';
+      siteFooter.dataset.legalMounted = 'true';
+    }
     if (!document.querySelector('script[data-site-navigation]')) { const script = document.createElement('script'); script.src = '/assets/js/navigation.js'; script.defer = true; script.dataset.siteNavigation = 'true'; document.head.append(script); }
     if (!document.querySelector('script[data-site-schema]')) { const schema = document.createElement('script'); schema.src = '/assets/js/schema.js?v=20260829-1'; schema.defer = true; schema.dataset.siteSchema = 'true'; document.head.append(schema); }
     if (!document.querySelector('script[data-product-data]')) { const data = document.createElement('script'); data.src = '/assets/js/product-data.js'; data.dataset.productData = 'true'; data.onload = () => { const flow = document.createElement('script'); flow.src = '/assets/js/b2b-flow.js?v=20260831-1'; flow.defer = true; document.head.append(flow); }; document.head.append(data); }

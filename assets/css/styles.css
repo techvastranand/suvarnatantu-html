@@ -513,6 +513,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .contact .form .honeypot,.b2b-request-form .honeypot{position:absolute!important;left:-9999px!important;top:auto!important;width:1px!important;min-width:1px!important;height:1px!important;min-height:1px!important;margin:0!important;padding:0!important;border:0!important;opacity:0!important;overflow:hidden!important;pointer-events:none!important}
 .contact .form .consent{display:flex;grid-column:1/-1;align-items:flex-start;gap:10px;color:#d4c6b6;font-size:12px;letter-spacing:0;line-height:1.5;text-transform:none}
 .contact .form .consent input{width:auto;height:auto;min-height:0;margin:2px 0 0;padding:0;accent-color:var(--gold)}
+.contact .form .consent a,.b2b-request-form .consent a{color:var(--gold2);text-decoration:underline}.contact .form .consent a:hover,.b2b-request-form .consent a:hover{color:var(--ivory)}
 .contact .form .form-note,.contact .form .privacy-note{grid-column:1/-1;margin:0;padding:12px 14px;border-left:2px solid var(--gold);background:rgba(199,154,76,.06);font-size:12px;line-height:1.55}
 .privacy-note{color:#aa9d8f;line-height:1.6}
 .b2b-request-form .privacy-note{margin:0;padding:14px 16px;border-left:2px solid rgba(216,180,107,.45);background:rgba(199,154,76,.04)}
