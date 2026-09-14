@@ -58,10 +58,14 @@ jobs:
         env:
           GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
         run: node scripts/validate-blog-output.mjs
+      - name: Refresh sitemap lastmod dates
+        run: npm run update:sitemap
       - name: Validate shared header
         run: npm run validate:header-shell
       - name: Validate SEO
         run: npm run validate:seo
+      - name: Validate sitemap
+        run: npm run validate:sitemap
       - uses: FirebaseExtended/action-hosting-deploy@v0
         if: ${{ github.event_name == 'push' || steps.ghost_state.outputs.changed == 'true' }}
         with:
