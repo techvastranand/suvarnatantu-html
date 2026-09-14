@@ -156,7 +156,7 @@ function drawMachine(t){
 }
 
 /* Zari Lab */
-const palette={gold:[199,154,76],silver:[210,210,214],rose:[197,130,116],copper:[176,103,71],gunmetal:[108,115,120]};
+const palette={gold:[199,154,76],silver:[210,210,214],rose:[197,130,116],copper:[176,103,71]};
 let colorKey='gold',dir='S',tpm=3200,denier=85;
 const roColor=document.getElementById('roColor'),roDir=document.getElementById('roDir'),roTPM=document.getElementById('roTPM'),roDenier=document.getElementById('roDenier');
 document.querySelectorAll('#colorBtns button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#colorBtns button').forEach(x=>x.classList.remove('active'));b.classList.add('active');colorKey=b.dataset.color;roColor.textContent=b.textContent;requestRender()});
