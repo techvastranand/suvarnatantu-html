@@ -12,7 +12,7 @@
     if (siteFooter && !siteFooter.dataset.legalMounted) {
       siteFooter.querySelector('.footer-grid > div:first-child')?.insertAdjacentHTML('beforeend', '<p><strong>Operated by</strong><br>Vastranand Private Limited<br>CIN: U18109GJ2022PTC135289<br>GSTIN: 24AAICV9714F1Z6</p><p><strong>Registered Office</strong><br>Plot No. 998, Road No. 87, Sachin GIDC, Surat – 394230, Gujarat, India</p>');
       const legalLinks = siteFooter.querySelector('.footer-grid > div:last-child');
-      if (legalLinks) { const heading = legalLinks.querySelector('h3'); if (heading) heading.textContent = 'Contact & Legal'; legalLinks.insertAdjacentHTML('beforeend', '<a href="/about-us/">About</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms & Conditions</a>'); }
+      if (legalLinks) { const heading = legalLinks.querySelector('h3'); if (heading) heading.textContent = 'Contact & Legal'; legalLinks.insertAdjacentHTML('beforeend', '<a href="/about-us/">About Us</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms & Conditions</a>'); }
       const copyright = siteFooter.querySelector('.legal');
       if (copyright) copyright.textContent = '© 2026 Suvarnatantu · Operated by Vastranand Private Limited. All rights reserved.';
       siteFooter.dataset.legalMounted = 'true';
