@@ -40,18 +40,34 @@ function warmImage(img){
  if(img.complete)decode();else img.addEventListener('load',decode,{once:true});
 }
 function scheduleImageWarm(img){idle(()=>warmImage(img));}
+const journeyImageWarmTarget=document.getElementById('journey');
+const journeyImageWarmObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+ if(!entry.isIntersecting)return;
+ entry.target.querySelectorAll('img[loading="lazy"]').forEach(warmImage);
+ journeyImageWarmObserver.unobserve(entry.target);
+}),{rootMargin:'2500px 0px'});
+let journeyImageWarmStarted=false;
+function startJourneyImageWarm(){
+ if(!journeyImageWarmTarget||journeyImageWarmStarted)return;
+ journeyImageWarmStarted=true;
+ journeyImageWarmObserver.observe(journeyImageWarmTarget);
+}
+if(journeyImageWarmTarget){
+ addEventListener('scroll',startJourneyImageWarm,{once:true,passive:true});
+ setTimeout(startJourneyImageWarm,2000);
+}
 const imageWarmObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
  if(!entry.isIntersecting)return;
  scheduleImageWarm(entry.target);
  imageWarmObserver.unobserve(entry.target);
 }),{rootMargin:'900px 0px'});
-document.querySelectorAll('img[loading="lazy"]').forEach(img=>imageWarmObserver.observe(img));
+document.querySelectorAll('img[loading="lazy"]').forEach(img=>{if(!journeyImageWarmTarget?.contains(img))imageWarmObserver.observe(img)});
 const imageWarmGroupObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
  if(!entry.isIntersecting)return;
  entry.target.querySelectorAll('img[loading="lazy"]').forEach(scheduleImageWarm);
  imageWarmGroupObserver.unobserve(entry.target);
 }),{rootMargin:'900px 0px'});
-['journey','applications'].map(id=>document.getElementById(id)).filter(Boolean).forEach(section=>imageWarmGroupObserver.observe(section));
+['applications'].map(id=>document.getElementById(id)).filter(Boolean).forEach(section=>imageWarmGroupObserver.observe(section));
 
 /* progress + rail */
 const progress=document.getElementById('progress'), railFill=document.getElementById('railFill'), railNum=document.getElementById('railNum');
