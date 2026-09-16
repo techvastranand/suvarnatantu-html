@@ -36,6 +36,7 @@ button,input,textarea,select{font:inherit}
 .progress{position:fixed;z-index:500;top:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--gold),#ffd989)}
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .95s var(--ease),transform .95s var(--ease)}
 .reveal.on{opacity:1;transform:none}
+.app.reveal,.person.reveal{transition-duration:.45s}
 .goldBorder{border:1px solid var(--line)}
 
 /* PRELOADER */
