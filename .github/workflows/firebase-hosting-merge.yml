@@ -34,8 +34,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Test Ghost state logic
-        run: npm run test:ghost-state
+          cache: npm
+      - name: Install build dependencies
+        run: npm ci
+      - name: Test Blog build logic
+        run: npm test
       - name: Check Ghost content state
         id: ghost_state
         env:

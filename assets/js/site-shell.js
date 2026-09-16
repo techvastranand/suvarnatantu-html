@@ -3,19 +3,27 @@
   const footer = `<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div><h2>Suvarnatantu</h2><p>Yarn &amp; Metallic Zari Manufacturing<br>by Vastranand Pvt. Ltd.</p><p>Plot No. 998, Road No. 87, Sachin GIDC, Near Sutex Bank, Surat, Gujarat - 394230, India</p><p><a href="tel:+918154000962">+91 81540 00962</a><br><a href="mailto:suvarnatantu@gmail.com">suvarnatantu@gmail.com</a></p></div><div><h3>Products</h3><a href="/metallic-yarn/">Metallic Yarn</a><a href="/zari-yarn/">Zari Yarn</a><a href="/colours/">Colours</a><a href="/products/">All Products</a></div><div><h3>Applications</h3><a href="/applications/">Applications</a><a href="/applications/saree/">Saree</a><a href="/applications/jacquard/">Jacquard</a><a href="/applications/embroidery/">Embroidery</a></div><div><h3>Company</h3><a href="/industries/">Industries</a><a href="/manufacturing/">Manufacturing</a><a href="/specifications/">Specifications</a><a href="/export/">Export</a><a href="/blog/">Blog</a></div><div><h3>Enquiries</h3><a href="/request-quote/">Request Quote</a><a href="/samples/">Request Samples</a><a href="/contact/">Contact</a></div></div><p class="legal">&copy; 2026 Suvarnatantu &middot; THREADS OF TRUST, WOVEN TOGETHER</p></div></footer>`;
   const startLazyImageWarmup = () => {
     if (!('IntersectionObserver' in window)) return;
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const img = entry.target;
-        observer.unobserve(img);
-        img.decoding = 'async';
-        const decode = () => { if (typeof img.decode === 'function') img.decode().catch(() => {}); };
-        if (img.complete) decode();
-        else img.addEventListener('load', decode, { once: true });
-        img.loading = 'eager';
-      });
-    }, { rootMargin: '1200px 0px', threshold: 0.01 });
-    document.querySelectorAll('img[loading="lazy"]').forEach(img => observer.observe(img));
+    const createObserver = rootMargin => {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target;
+          observer.unobserve(img);
+          img.decoding = 'async';
+          const decode = () => { if (typeof img.decode === 'function') img.decode().catch(() => {}); };
+          if (img.complete) decode();
+          else img.addEventListener('load', decode, { once: true });
+          img.loading = 'eager';
+        });
+      }, { rootMargin, threshold: 0.01 });
+      return observer;
+    };
+    const standardObserver = createObserver('1200px 0px');
+    const blogCardObserver = createObserver('2000px 0px');
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+      const observer = img.hasAttribute('data-blog-card-image') ? blogCardObserver : standardObserver;
+      observer.observe(img);
+    });
   };
   const mount = () => {
     const host = document.getElementById('site-header-mount');

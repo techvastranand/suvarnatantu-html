@@ -22,9 +22,45 @@ const articleSchema = (html, path) => {
   return article;
 };
 const teamAuthor = name => /^(?:suvarnatantu(?:\s+technical\s+team)?|technical\s+team)$/i.test(String(name || '').trim().replace(/\s+/g, ' '));
+const requireResponsiveCards = (html, path) => {
+  for (const [tag] of html.matchAll(/<img\b[^>]*data-blog-card-image[^>]*>/g)) {
+    for (const expected of ['/assets/images/blog/generated/', 'srcset=', 'sizes=', 'width=', 'height=', 'loading="lazy"', 'decoding="async"', 'fetchpriority="low"']) {
+      requireText(tag, expected, path);
+    }
+    if (tag.includes('storage.ghost.io')) throw new Error(`${path} contains a remote Ghost feature image.`);
+  }
+};
+const requireResponsiveHero = (html, path) => {
+  const tag = html.match(/<img class="kc-article__image"[^>]*>/)?.[0];
+  if (!tag) throw new Error(`${path} is missing its article hero image.`);
+  for (const expected of ['/assets/images/blog/generated/', 'srcset=', 'sizes=', 'width=', 'height=', 'loading="eager"', 'decoding="async"', 'fetchpriority="high"']) {
+    requireText(tag, expected, path);
+  }
+  if (tag.includes('storage.ghost.io')) throw new Error(`${path} contains a remote Ghost feature image.`);
+};
+const requireGhostHintsForRemoteImages = (html, path) => {
+  const remoteImage = [...html.matchAll(/<img\b[^>]*>/g)].some(([tag]) => tag.includes('storage.ghost.io'));
+  if (!remoteImage) return;
+  requireText(html, '<link rel="preconnect" href="https://storage.ghost.io" crossorigin>', path);
+  requireText(html, '<link rel="dns-prefetch" href="//storage.ghost.io">', path);
+};
 
 const manifest = JSON.parse(await read(resolve(blogRoot, '.ghost-generated.json')));
-if (manifest.version !== 1 || !Array.isArray(manifest.articles)) throw new Error('Invalid Ghost-generated article manifest.');
+if (manifest.version !== 2 || !Array.isArray(manifest.articles) || !Array.isArray(manifest.generatedImages)) throw new Error('Invalid Ghost-generated article manifest.');
+if (manifest.generatedImages.length !== manifest.articles.length) throw new Error('Generated Blog image manifest is incomplete.');
+for (const item of manifest.generatedImages) {
+  if (!manifest.articles.includes(item.slug) || !item.feature?.hash || !Array.isArray(item.feature.candidates) || !item.feature.candidates.length || !Array.isArray(item.body)) {
+    throw new Error(`Invalid generated Blog image entry for ${item.slug || 'unknown slug'}.`);
+  }
+  for (const image of [item.feature, ...item.body]) {
+    for (const candidate of image.candidates) {
+      if (!candidate.url.startsWith(`/assets/images/blog/generated/${item.slug}/`) || !candidate.url.endsWith('.webp') || !candidate.width || !candidate.height || !candidate.bytes) {
+        throw new Error(`Invalid generated image candidate for ${item.slug}.`);
+      }
+      await read(resolve(root, candidate.url.replace(/^\//, '')));
+    }
+  }
+}
 const ghostState = JSON.parse(await read(resolve(blogRoot, 'ghost-state.json')));
 if (ghostState.version !== 1 || ghostState.algorithm !== 'sha256' || !/^[a-f0-9]{64}$/.test(ghostState.fingerprint)) {
   throw new Error('Invalid deployed Ghost content fingerprint.');
@@ -34,16 +70,22 @@ const homepage = await read(resolve(blogRoot, 'index.html'));
 requireText(homepage, 'https://suvarnatantu.com/blog/', 'blog/index.html');
 requireText(homepage, 'href="/blog/articles/"', 'blog/index.html');
 requireOneH1(homepage, 'blog/index.html');
+requireResponsiveCards(homepage, 'blog/index.html');
+requireGhostHintsForRemoteImages(homepage, 'blog/index.html');
 
 const articles = await read(resolve(blogRoot, 'articles', 'index.html'));
 requireText(articles, 'https://suvarnatantu.com/blog/articles/', 'blog/articles/index.html');
 requireOneH1(articles, 'blog/articles/index.html');
+requireResponsiveCards(articles, 'blog/articles/index.html');
+requireGhostHintsForRemoteImages(articles, 'blog/articles/index.html');
 
 for (const category of requiredCategories) {
   const path = resolve(blogRoot, 'category', category, 'index.html');
   const html = await read(path);
   requireText(html, `https://suvarnatantu.com/blog/category/${category}/`, path);
   requireOneH1(html, path);
+  requireResponsiveCards(html, path);
+  requireGhostHintsForRemoteImages(html, path);
 }
 
 for (const slug of manifest.articles) {
@@ -55,6 +97,9 @@ for (const slug of manifest.articles) {
   requireText(html, 'application/ld+json', path);
   requireText(html, 'kc-prose', path);
   requireOneH1(html, path);
+  requireResponsiveHero(html, path);
+  requireResponsiveCards(html, path);
+  requireGhostHintsForRemoteImages(html, path);
   const schema = articleSchema(html, path);
   if (!schema.author) throw new Error(`${path} is missing an Article author.`);
   if (!schema.publisher || schema.publisher['@id'] !== 'https://suvarnatantu.com/#organization') throw new Error(`${path} must reference the canonical publisher.`);

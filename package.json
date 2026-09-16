@@ -1,1 +1,16 @@
-{"private":true,"scripts":{"build:blog":"node scripts/build-blog.mjs","build:blog:demo":"node scripts/build-blog.mjs --demo","test:ghost-state":"node --test scripts/check-ghost-content.test.mjs","update:sitemap":"node scripts/update-sitemap-lastmod.mjs","validate:header-shell":"node scripts/validate-header-shell.mjs","validate:seo":"node scripts/validate-seo.mjs","validate:sitemap":"node scripts/validate-sitemap.mjs"}}
+{
+  "private": true,
+  "scripts": {
+    "build:blog": "node scripts/build-blog.mjs",
+    "build:blog:demo": "node scripts/build-blog.mjs --demo",
+    "test": "node --test scripts/*.test.mjs",
+    "test:ghost-state": "node --test scripts/check-ghost-content.test.mjs",
+    "update:sitemap": "node scripts/update-sitemap-lastmod.mjs",
+    "validate:header-shell": "node scripts/validate-header-shell.mjs",
+    "validate:seo": "node scripts/validate-seo.mjs",
+    "validate:sitemap": "node scripts/validate-sitemap.mjs"
+  },
+  "dependencies": {
+    "sharp": "0.35.4"
+  }
+}
