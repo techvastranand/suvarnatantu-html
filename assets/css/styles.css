@@ -382,7 +382,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .site-footer a,.site-footer p{margin:0 0 9px;color:#b7a99b;font-size:13px;line-height:1.68;letter-spacing:normal;text-transform:none}
 .site-footer a{transition:color .25s var(--ease)}
 .site-footer a:hover{color:var(--gold2)}
-.footerApps{margin-top:20px}
+.footerApps{margin:20px 0}
 .footerAppsLabel{display:block;margin-bottom:9px;color:var(--gold2);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
 .footerAppBadges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;max-width:380px}
 .site-footer .footerAppBadge{display:flex;align-items:center;gap:10px;min-width:0;min-height:56px;margin:0;padding:8px 10px;border:1px solid rgba(199,154,76,.38);border-radius:6px;background:linear-gradient(135deg,rgba(199,154,76,.08),rgba(8,6,4,.64));color:var(--gold2);transition:transform .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease),color .25s var(--ease)}
