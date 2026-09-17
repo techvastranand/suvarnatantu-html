@@ -205,6 +205,16 @@ nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;back
 .appText{position:absolute;z-index:3;left:18px;right:18px;bottom:17px}
 .appText h3{font-family:Georgia,serif;font-size:24px;font-weight:400;color:#ddbd79;margin:0}
 .appText small{display:block;color:#85776a;margin-top:6px;text-transform:uppercase;letter-spacing:.1em;font-size:8px}
+.appsRoutes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:min(680px,100%);margin:32px auto 0}
+.appsRoute{position:relative;display:block;min-width:0;padding:20px 54px 20px 22px;border:1px solid rgba(199,154,76,.32);border-radius:4px;background:linear-gradient(135deg,rgba(199,154,76,.075),rgba(18,13,9,.48) 66%);overflow:hidden;transition:transform .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease)}
+.appsRoute:before{content:"";position:absolute;top:0;left:22px;width:54px;height:1px;background:var(--gold2)}
+.appsRouteMeta{display:block;color:#a88959;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.appsRouteTitle{display:block;margin-top:15px;color:#dfc68e;font-family:Georgia,"Times New Roman",serif;font-size:24px;font-weight:400;line-height:1.05;transition:color .3s var(--ease)}
+.appsRouteArrow{position:absolute;top:20px;right:22px;color:var(--gold2);font-size:18px;line-height:1;transition:transform .3s var(--ease),color .3s var(--ease)}
+.appsRoute:hover{border-color:rgba(228,189,107,.7);background:linear-gradient(135deg,rgba(199,154,76,.13),rgba(18,13,9,.64) 66%);transform:translateY(-3px)}
+.appsRoute:hover .appsRouteTitle,.appsRoute:hover .appsRouteArrow{color:#f0d99f}
+.appsRoute:hover .appsRouteArrow{transform:translateX(4px)}
+.appsRoute:focus-visible{outline:2px solid var(--gold2);outline-offset:4px}
 
 /* TESTIMONIALS */
 .testimonials{padding:130px 0;background:radial-gradient(circle at 50% 0,rgba(199,154,76,.08),transparent 30%),#0d0907;border-top:1px solid rgba(199,154,76,.14);border-bottom:1px solid rgba(199,154,76,.14)}
@@ -303,6 +313,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .testimonialCard:last-child{grid-column:auto}
   .form textarea,.form button{grid-column:auto}
   .app{height:330px}
+  .appsRoutes{grid-template-columns:1fr;gap:10px;margin-top:28px}
+  .appsRoute{padding:19px 52px 19px 20px}
+  .appsRoute:before{left:20px}
+  .appsRouteArrow{top:19px;right:20px}
   .jCard{width:86vw}
   .journeyIntro{width:84vw}
   .labFoot{display:block}
@@ -315,6 +329,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .reveal{opacity:1;transform:none;transition:none}
   .labNextLink,.labNextLink:after,.labNextLink span{transition:none}
   .labNextLink:hover span{transform:none}
+  .appsRoute,.appsRouteTitle,.appsRouteArrow{transition:none}
+  .appsRoute:hover,.appsRoute:hover .appsRouteArrow{transform:none}
   .logoReveal,.logoReveal:after{animation:none!important}
   .logoReveal{opacity:1;transform:none;filter:none}
   .logoReveal:after{display:none}
