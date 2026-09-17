@@ -178,6 +178,15 @@ nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;back
 #filamentCanvas,#coneCanvas{width:100%;height:430px;display:block}
 .labFoot{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px 4px 0;color:#837365;font-size:11px}
 .labFoot strong{color:#d8b46b}
+.labNext{max-width:560px;margin:38px auto 0;padding:0 18px;text-align:center}
+.labNext p{margin:0 0 10px;color:var(--muted);font-size:12px;line-height:1.6}
+.labNextLink{position:relative;display:inline-flex;align-items:center;gap:7px;color:var(--gold2);font-family:Georgia,"Times New Roman",serif;font-size:19px;line-height:1.4;transition:color .25s var(--ease),filter .25s var(--ease)}
+.labNextLink:after{content:"";position:absolute;right:0;bottom:-3px;left:0;height:1px;background:var(--gold);transform:scaleX(.32);transform-origin:left;transition:transform .3s var(--ease)}
+.labNextLink span{transition:transform .25s var(--ease)}
+.labNextLink:hover{color:#f0d28f;filter:brightness(1.06)}
+.labNextLink:hover:after{transform:scaleX(1)}
+.labNextLink:hover span{transform:translateX(3px)}
+.labNextLink:focus-visible{outline:2px solid var(--gold2);outline-offset:6px}
 
 /* WHY */
 .why{padding:130px 0;background:#100b08}
@@ -298,6 +307,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .jCard{width:86vw}
   .journeyIntro{width:84vw}
   .labFoot{display:block}
+  .labNext{margin-top:30px;padding:0 8px}
+  .labNext p{max-width:280px;margin-right:auto;margin-left:auto}
 }
 .cta-band .button{color:var(--ivory)}
 .inner-page .cta-band .button{color:var(--ivory)!important;-webkit-text-fill-color:var(--ivory)!important}
@@ -305,6 +316,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none;transition:none}
+  .labNextLink,.labNextLink:after,.labNextLink span{transition:none}
+  .labNextLink:hover span{transform:none}
   .logoReveal,.logoReveal:after{animation:none!important}
   .logoReveal{opacity:1;transform:none;filter:none}
   .logoReveal:after{display:none}
