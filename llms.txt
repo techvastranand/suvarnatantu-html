@@ -1,0 +1,71 @@
+# Suvarnatantu
+
+> Suvarnatantu is a B2B yarn and metallic zari manufacturing brand operated by Vastranand Private Limited in Surat, India. The website provides information for textile manufacturers, sourcing teams, distributors and export buyers about metallic yarn, zari yarn, technical specifications, applications, manufacturing capabilities, product development, samples and commercial enquiries.
+
+Suvarnatantu focuses on clear product and technical communication for B2B textile sourcing. Important technical topics include yarn construction, denier, TPM, S and Z twist, metallic tone, application suitability, manufacturing, quality control and buyer-led product development.
+
+For the complete set of indexable website pages, use:
+https://suvarnatantu.com/sitemap.xml
+
+## Main Website
+
+- [Homepage](https://suvarnatantu.com/): Overview of Suvarnatantu, manufacturing capabilities, products, applications and business enquiry pathways.
+- [About Suvarnatantu](https://suvarnatantu.com/about-us/): Brand, company and manufacturing background.
+- [Contact](https://suvarnatantu.com/contact/): Business contact and enquiry information.
+
+## Products
+
+- [All Products](https://suvarnatantu.com/products/): Product-family overview.
+- [Metallic Yarn](https://suvarnatantu.com/metallic-yarn/): Metallic yarn product family.
+- [M Type Metallic Yarn](https://suvarnatantu.com/metallic-yarn/m-type/): M Type metallic yarn information.
+- [MX Type Metallic Yarn](https://suvarnatantu.com/metallic-yarn/mx-type/): MX Type metallic yarn information.
+- [ST Type Metallic Yarn](https://suvarnatantu.com/metallic-yarn/st-type/): ST Type metallic yarn information.
+- [MH Type Metallic Yarn](https://suvarnatantu.com/metallic-yarn/mh-type/): MH Type metallic yarn information.
+- [Custom Metallic Yarn](https://suvarnatantu.com/metallic-yarn/custom/): Custom metallic yarn development.
+- [Zari Yarn](https://suvarnatantu.com/zari-yarn/): Zari yarn product-family overview.
+
+## Applications
+
+- [Applications Overview](https://suvarnatantu.com/applications/): Textile application overview.
+- [Weaving](https://suvarnatantu.com/applications/weaving/): Yarn use in weaving.
+- [Saree](https://suvarnatantu.com/applications/saree/): Zari and metallic yarn use in saree production.
+- [Jacquard](https://suvarnatantu.com/applications/jacquard/): Jacquard application information.
+- [Brocade](https://suvarnatantu.com/applications/brocade/): Brocade application information.
+- [Embroidery](https://suvarnatantu.com/applications/embroidery/): Embroidery application information.
+
+## Technical Information
+
+- [Zari Lab](https://suvarnatantu.com/zari-lab/): Technical learning and yarn-development resources.
+- [TPM](https://suvarnatantu.com/zari-lab/tpm/): Twist-per-metre information.
+- [Denier](https://suvarnatantu.com/zari-lab/denier/): Yarn denier information.
+- [Twist](https://suvarnatantu.com/zari-lab/twist/): S and Z twist information.
+- [Yarn Construction](https://suvarnatantu.com/zari-lab/yarn-construction/): Yarn construction guidance.
+- [Technical Specifications](https://suvarnatantu.com/zari-lab/technical-specifications/): Technical specification resources.
+- [Specifications](https://suvarnatantu.com/specifications/): Technical data and specification hub.
+
+## Manufacturing
+
+- [Manufacturing](https://suvarnatantu.com/manufacturing/): Manufacturing overview.
+- [Factory](https://suvarnatantu.com/manufacturing/factory/): Factory information.
+- [Production Process](https://suvarnatantu.com/manufacturing/production-process/): Production workflow.
+- [Infrastructure](https://suvarnatantu.com/manufacturing/infrastructure/): Manufacturing infrastructure.
+- [Quality Control](https://suvarnatantu.com/manufacturing/quality-control/): Quality-control processes.
+- [Laboratory](https://suvarnatantu.com/manufacturing/laboratory/): Testing and laboratory information.
+- [Packaging and Dispatch](https://suvarnatantu.com/manufacturing/packaging-dispatch/): Packing and dispatch process.
+
+## B2B and Export
+
+- [Export](https://suvarnatantu.com/export/): Export-facing information for international buyers.
+- [Industries](https://suvarnatantu.com/industries/): Buyer and industry segments served.
+- [Request a Sample](https://suvarnatantu.com/samples/): Sample enquiry pathway.
+- [Request a Quote](https://suvarnatantu.com/request-quote/): B2B RFQ pathway.
+
+## Resources
+
+- [Blog](https://suvarnatantu.com/blog/): Articles and knowledge resources.
+- [Sitemap](https://suvarnatantu.com/sitemap.xml): Complete indexable URL list.
+
+## Legal
+
+- [Privacy Policy](https://suvarnatantu.com/privacy-policy/): Privacy information.
+- [Terms and Conditions](https://suvarnatantu.com/terms/): Website terms.
