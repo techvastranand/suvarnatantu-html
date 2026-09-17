@@ -121,6 +121,11 @@ nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;back
 .storyCopy h2{font-family:Georgia,serif;font-size:clamp(48px,5vw,82px);font-weight:400;line-height:.98;margin:16px 0 24px;color:var(--gold2)}
 .storyCopy p{font-size:17px;line-height:1.72;color:#b8aa9d;max-width:590px}
 .storyCopy .pull{margin-top:30px;border-left:1px solid var(--gold);padding-left:20px;font-family:Georgia,serif;font-size:26px;line-height:1.35;color:#dcc390}
+.storyAboutCta{display:inline-flex;align-items:center;justify-content:center;gap:7px;box-sizing:border-box;min-height:44px;max-width:100%;margin-top:24px;padding:0 20px;border:1px solid var(--gold);background:transparent;color:var(--gold2);font-size:10px;font-weight:700;letter-spacing:.1em;text-align:center;text-transform:uppercase;transition:transform .28s var(--ease),background .28s var(--ease),border-color .28s var(--ease),color .28s var(--ease)}
+.storyAboutCta span{transition:transform .28s var(--ease)}
+.storyAboutCta:hover{transform:translateY(-2px);border-color:var(--gold2);background:rgba(199,154,76,.09);color:#f0d99f}
+.storyAboutCta:hover span{transform:translateX(4px)}
+.storyAboutCta:focus-visible{outline:2px solid var(--gold2);outline-offset:4px}
 
 /* WHAT WE DO */
 .capabilities{padding:130px 0;background:#0a0806;border-top:1px solid rgba(199,154,76,.13);border-bottom:1px solid rgba(199,154,76,.13)}
@@ -343,6 +348,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .labNextLink:hover span{transform:none}
   .heroAction,.heroAction span{transition:none}
   .heroAction:hover,.heroAction--outline:hover span{transform:none}
+  .storyAboutCta,.storyAboutCta span{transition:none}
+  .storyAboutCta:hover,.storyAboutCta:hover span{transform:none}
   .appsRoute,.appsRouteTitle,.appsRouteArrow{transition:none}
   .appsRoute:hover,.appsRoute:hover .appsRouteArrow{transform:none}
   .logoReveal,.logoReveal:after{animation:none!important}
