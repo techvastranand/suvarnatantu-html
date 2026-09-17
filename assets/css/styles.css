@@ -194,13 +194,11 @@ nav.site-nav{position:fixed;z-index:400;left:0;right:0;top:26px;height:72px;back
 .labFoot{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px 4px 0;color:#837365;font-size:11px}
 .labFoot strong{color:#d8b46b}
 .labNext{display:flex;justify-content:center;margin:26px auto 36px;padding:0 18px}
-.labNextLink{position:relative;display:inline-flex;align-items:center;gap:7px;max-width:100%;color:var(--gold2);font-size:16px;font-weight:500;line-height:1.4;transition:color .25s var(--ease),filter .25s var(--ease)}
-.labNextLink:after{content:"";position:absolute;right:0;bottom:-3px;left:0;height:1px;background:var(--gold);transform:scaleX(.32);transform-origin:left;transition:transform .3s var(--ease)}
-.labNextLink span{transition:transform .25s var(--ease)}
-.labNextLink:hover{color:#f0d28f;filter:brightness(1.06)}
-.labNextLink:hover:after{transform:scaleX(1)}
-.labNextLink:hover span{transform:translateX(3px)}
-.labNextLink:focus-visible{outline:2px solid var(--gold2);outline-offset:6px}
+.labNextLink{display:inline-flex;align-items:center;justify-content:center;gap:7px;box-sizing:border-box;min-height:44px;max-width:100%;padding:0 22px;border:1px solid var(--gold);background:rgba(8,6,4,.35);color:var(--gold2);font-size:10px;font-weight:700;line-height:1;letter-spacing:.1em;text-align:center;text-transform:uppercase;transition:transform .28s var(--ease),background .28s var(--ease),border-color .28s var(--ease),color .28s var(--ease)}
+.labNextLink span{transition:transform .28s var(--ease)}
+.labNextLink:hover{transform:translateY(-2px);border-color:var(--gold2);background:rgba(199,154,76,.09);color:#f0d99f}
+.labNextLink:hover span{transform:translateX(4px)}
+.labNextLink:focus-visible{outline:2px solid var(--gold2);outline-offset:4px}
 
 /* WHY */
 .why{padding:130px 0;background:#100b08}
@@ -344,8 +342,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media(prefers-reduced-motion:reduce){
   *{scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none;transition:none}
-  .labNextLink,.labNextLink:after,.labNextLink span{transition:none}
-  .labNextLink:hover span{transform:none}
+  .labNextLink,.labNextLink span{transition:none}
+  .labNextLink:hover,.labNextLink:hover span{transform:none}
   .heroAction,.heroAction span{transition:none}
   .heroAction:hover,.heroAction--outline:hover span{transform:none}
   .storyAboutCta,.storyAboutCta span{transition:none}
