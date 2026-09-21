@@ -104,5 +104,5 @@ test('layout, navigation, SEO markers and the updated flow cache key remain pres
   assert.match(samplePage, /<link rel="canonical" href="https:\/\/suvarnatantu\.com\/samples\/">/);
   assert.match(quotePage, /id="site-header-mount"/);
   assert.match(samplePage, /id="site-header-mount"/);
-  assert.match(loader, /b2b-flow\.js\?v=20260829-2/);
+  assert.match(loader, /b2b-flow\.js\?v=20260921-zari-handoff/);
 });

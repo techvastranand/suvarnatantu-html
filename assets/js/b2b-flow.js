@@ -72,6 +72,7 @@
       try {
         const payload = normalizedEnquiry(form); payload.submission_uuid = submissionUuid;
         await submitIntake(payload);
+        document.dispatchEvent(new CustomEvent('suvarnatantu:enquiry-submitted', { detail: { form } }));
         if (status) status.textContent = 'Enquiry submitted. Redirecting\u2026';
         window.location.assign(THANK_YOU_PATH);
       } catch (error) {
@@ -124,6 +125,7 @@
     host.parentElement.insertAdjacentElement('afterend', formSection);
     const form = formSection.querySelector('form'); form.querySelector('.consent')?.insertAdjacentHTML('beforeend', ' <a href="/privacy-policy/">Privacy Policy</a>'); Object.entries(stored).forEach(([key, value]) => { const control = form.elements[key]; if (control && value) control.value = value; });
     const wa = form.querySelector('[data-whatsapp]'); const refresh = () => { wa.dataset.url = whatsapp(encodeConfig(form), kind); }; wa.addEventListener('click', () => { const popup = window.open(wa.dataset.url, '_blank', 'noopener,noreferrer'); if (popup) popup.opener = null; }); form.addEventListener('input', refresh); form.addEventListener('change', refresh); refresh(); setupDeliveryForm(form);
+    document.dispatchEvent(new CustomEvent('suvarnatantu:b2b-form-ready', { detail: { form, kind: isQuote ? 'rfq' : 'sample' } }));
   }
   if ((path.startsWith('/colours/') || path.startsWith('/applications/') || path.startsWith('/zari-lab/')) && path !== '/applications' && !document.querySelector('.contextual-b2b-cta')) {
     const cta = document.createElement('section'); cta.className = 'cta-band contextual-b2b-cta';
