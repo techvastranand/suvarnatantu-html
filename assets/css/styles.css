@@ -1968,14 +1968,16 @@ fieldset.zlh-reference-block{border:1px solid rgba(199,154,76,.27)}
   .zlh-final-cta>.wrap{gap:28px}
 }
 
+/* Zari Lab Requirement Brief — browser print/PDF layout */
+@page{size:A4 portrait;margin:12mm}
 @media print{
-  @page{margin:12mm}
-  html,body{width:auto!important;min-width:0!important;background:#fff!important;color:#111!important}
-  body>*:not(main),main>section:not(#requirement-brief),.zlh-section-nav{display:none!important}
-  main,#requirement-brief,#requirement-brief>.wrap{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;background:#fff!important}
+  html,body{width:auto!important;height:auto!important;min-width:0!important;min-height:0!important;overflow:visible!important;background:#fff!important;color:#111!important}
+  body>*:not(main),main>*:not(#requirement-brief){display:none!important}
+  main,#requirement-brief,#requirement-brief>.wrap{display:block!important;position:static!important;width:100%!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;overflow:visible!important;background:#fff!important;transform:none!important}
   .zlh-requirement-brief__intro,.zlh-requirement-brief__actions,.zlh-requirement-brief__empty{display:none!important}
   .zlh-requirement-brief.is-empty .zlh-brief-document{display:none!important}
-  .zlh-brief-document{display:block!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;background:#fff!important;color:#111!important;box-shadow:none!important;font-family:Arial,sans-serif!important;font-size:10pt!important}
+  #requirement-brief,#requirement-brief *{animation:none!important;transition:none!important}
+  .zlh-brief-document{display:block!important;position:static!important;width:100%!important;height:auto!important;min-height:0!important;max-width:none!important;max-height:none!important;margin:0!important;padding:0!important;overflow:visible!important;border:0!important;background:#fff!important;color:#111!important;box-shadow:none!important;font-family:Arial,sans-serif!important;font-size:10pt!important;opacity:1!important;transform:none!important;visibility:visible!important}
   .zlh-brief-document__brand{border-bottom:1.5pt solid #8b6428!important;color:#111!important}
   .zlh-brief-document__brand strong{font-size:15pt!important}
   .zlh-brief-document__brand span,.zlh-brief-document__brand em{color:#555!important;font-size:7pt!important}
@@ -1989,7 +1991,7 @@ fieldset.zlh-reference-block{border:1px solid rgba(199,154,76,.27)}
   .zlh-brief-section dd>span{border-color:#777!important;color:#333!important}
   .zlh-brief-edit,.zlh-brief-source{display:none!important}
   .zlh-brief-files>p{border-left:1.5pt solid #8b6428!important;background:#f3f3f3!important;color:#222!important}
-  .zlh-brief-document__footer{break-inside:avoid;border-top:1.5pt solid #8b6428!important;color:#222!important;page-break-inside:avoid}
+  .zlh-brief-document__footer{break-inside:avoid;border-top:1.5pt solid #8b6428!important;background:#fff!important;color:#222!important;page-break-inside:avoid}
 }
 @media(prefers-reduced-motion:reduce){
   .zari-lab-hub .button,.zari-lab-hub .button-outline,.zari-lab-hub .zlh-inline-link,.zari-lab-hub .zlh-application-card,.zari-lab-hub .zlh-application-card__action,.zari-lab-hub .zlh-tool-card,.zlh-hero__image img,.zlh-configurator__rail li button,.zlh-progress span,.zlh-choice>span,.zlh-swatch-grid button,.zlh-finish-grid button,.zlh-preview-spool,.zlh-preview-spool__body,.zlh-preview-spool__body:after,.zlh-preview-strands,.zlh-preview-strands span,.zlh-twist-selector__options button,.zlh-twist-lines,.zlh-twist-neutral,.zlh-twist-letter,.zlh-twist-guide,.zlh-twist-guide-label,.zlh-tpm-known__options button,.zlh-tpm-lines path,.zlh-tpm-comparison__strand i,.zlh-denier-known__options button,.zlh-denier-main-strand,.zlh-construction-known__options button,.zlh-construction-layer{transition:none}

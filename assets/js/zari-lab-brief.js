@@ -17,6 +17,7 @@
   const conflictList = root.querySelector('[data-brief-conflict-list]');
   const filesSection = root.querySelector('[data-brief-files-section]');
   const filesList = root.querySelector('[data-brief-files]');
+  let printScheduled = false;
 
   const query = eventName => {
     let response = null;
@@ -325,10 +326,23 @@
 
   refreshButton.addEventListener('click', () => render(true));
   printButton.addEventListener('click', () => {
+    if (printScheduled) return;
     render(false);
-    if (!printButton.disabled) window.print();
+    if (printButton.disabled) {
+      feedback.textContent = 'Complete a Zari Lab requirement before generating the PDF.';
+      return;
+    }
+
+    // Let Chrome commit the freshly rendered brief before it creates the print snapshot.
+    printScheduled = true;
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      try {
+        window.print();
+      } finally {
+        printScheduled = false;
+      }
+    }));
   });
-  window.addEventListener('beforeprint', () => render(false));
   ['suvarnatantu:zari-requirement-updated', 'suvarnatantu:zari-reference-updated', 'suvarnatantu:zari-troubleshooting-updated'].forEach(eventName => {
     document.addEventListener(eventName, () => render(false));
   });

@@ -77,10 +77,15 @@ test('Troubleshooting exposes a read-only context query', () => {
 
 test('Native print is used with dedicated professional print styling', () => {
   assert.match(brief, /window\.print\(\)/);
+  assert.match(brief, /requestAnimationFrame\(\(\) => requestAnimationFrame/);
+  assert.doesNotMatch(brief, /addEventListener\('beforeprint',[^\n]*render/);
   assert.doesNotMatch(brief, /jsPDF|html2pdf|PDFKit|canvas|fetch\(/);
   assert.match(styles, /@media print\{/);
-  assert.match(styles, /main>section:not\(#requirement-brief\)[^}]*display:none!important/);
+  assert.match(styles, /@page\{size:A4 portrait;margin:12mm\}/);
+  assert.match(styles, /main>\*:not\(#requirement-brief\)[^}]*display:none!important/);
+  assert.match(styles, /html,body[^}]*overflow:visible!important/);
   assert.match(styles, /\.zlh-requirement-brief__actions[^{]*\{display:none!important\}/);
+  assert.match(styles, /\.zlh-brief-document__footer[^{]*\{[^}]*background:#fff!important/);
   assert.match(styles, /break-inside:avoid!important/);
   assert.match(styles, /page-break-inside:avoid!important/);
   assert.match(page, /Suvarnatantu by Vastranand Pvt\. Ltd\./);
