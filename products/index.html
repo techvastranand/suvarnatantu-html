@@ -7,7 +7,7 @@
   <meta name="description" content="Explore Suvarnatantu metallic yarn, zari yarn, colour directions and custom yarn specifications for textile manufacturers, weaving units and embroidery applications.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://suvarnatantu.com/products/">
-  <link rel="stylesheet" href="/assets/css/styles.css?v=20260829-products-contact-cta-text">
+  <link rel="stylesheet" href="/assets/css/styles.css?v=20260922-product-finder">
 <link rel="icon" type="image/jpeg" href="/assets/images/suvarnatantu-logo-optimized.jpg">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Metallic, Zari &amp; Textile Yarn Products | Suvarnatantu">
@@ -34,6 +34,84 @@
           <a class="button-outline" href="/samples/">Request Samples</a>
         </div>
         <p>Additional product routes include <a href="/products/filament-yarn/">Filament Yarn</a> for <a href="/products/filament-yarn/nylon-filament-yarn/">Nylon Filament Yarn</a>, <a href="/products/filament-yarn/polyester-filament-yarn/">Polyester Filament Yarn</a> and <a href="/products/filament-yarn/specialty-filament-yarn/">Specialty Filament Yarn</a>; <a href="/products/metallic-zari/">Metallic Zari</a> including <a href="/products/metallic-zari/special-finish-metallic-zari/">Special Finish Metallic Zari</a>; <a href="/products/twisted-yarn/">Twisted Yarn</a> for <a href="/products/twisted-yarn/s-twist-yarn/">S-Twist Yarn</a>, <a href="/products/twisted-yarn/z-twist-yarn/">Z-Twist Yarn</a> and <a href="/products/twisted-yarn/custom-tpm-yarn/">Custom TPM Yarn</a>; and <a href="/products/specialty-yarn/">Specialty Yarn</a> for application-specific requirements.</p>
+      </div>
+    </section>
+
+    <section class="content-section product-finder" aria-labelledby="product-finder-title">
+      <div class="wrap product-finder__layout">
+        <header class="product-finder__intro">
+          <div class="eyebrow">Product Finder</div>
+          <h2 id="product-finder-title">Find the Right Yarn for Your Requirement</h2>
+          <p>Start with your application and requirement. We&rsquo;ll guide you towards the relevant product family or technical review path.</p>
+        </header>
+
+        <div class="product-finder__panel">
+          <form class="product-finder__form" data-product-finder novalidate>
+            <div class="product-finder__fields">
+              <label for="product-finder-application">
+                <span><b>01</b> What are you manufacturing?</span>
+                <select id="product-finder-application" name="application" required aria-describedby="product-finder-validation">
+                  <option value="">Select application</option>
+                  <option value="saree">Saree</option>
+                  <option value="jacquard">Jacquard</option>
+                  <option value="brocade">Brocade</option>
+                  <option value="embroidery">Embroidery</option>
+                  <option value="knitting">Knitting</option>
+                  <option value="lace">Lace</option>
+                  <option value="weaving">Weaving</option>
+                  <option value="home-furnishing">Home Furnishing</option>
+                  <option value="decorative-textiles">Decorative Textiles</option>
+                  <option value="other">Other / Custom Application</option>
+                </select>
+              </label>
+
+              <label for="product-finder-requirement">
+                <span><b>02</b> What type of requirement do you have?</span>
+                <select id="product-finder-requirement" name="requirement" required aria-describedby="product-finder-validation">
+                  <option value="">Select requirement</option>
+                  <option value="metallic-yarn">Metallic Yarn</option>
+                  <option value="zari-yarn">Zari Yarn</option>
+                  <option value="filament-yarn">Filament Yarn</option>
+                  <option value="twisted-yarn">Twisted Yarn</option>
+                  <option value="colour-finish">Colour / Finish Requirement</option>
+                  <option value="custom-development">Custom Development</option>
+                  <option value="not-sure">Not Sure</option>
+                </select>
+              </label>
+
+              <label for="product-finder-knowledge">
+                <span><b>03</b> Do you already know your specification?</span>
+                <select id="product-finder-knowledge" name="knowledge" required aria-describedby="product-finder-validation">
+                  <option value="">Select specification knowledge</option>
+                  <option value="yes">Yes, I know the specification</option>
+                  <option value="some">I know some parameters</option>
+                  <option value="no">No, I need technical guidance</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="product-finder__submit">
+              <button class="button" type="submit" aria-controls="product-finder-result">Find My Starting Point</button>
+              <p>Guidance only. Final suitability may require technical review.</p>
+            </div>
+            <p class="product-finder__validation" id="product-finder-validation" data-product-finder-validation role="alert"></p>
+          </form>
+
+          <div class="product-finder__result" id="product-finder-result" data-product-finder-result aria-live="polite" aria-atomic="true" hidden>
+            <span data-product-finder-kicker>Suggested starting point</span>
+            <h3 data-product-finder-heading></h3>
+            <p data-product-finder-copy></p>
+            <div class="product-finder__actions">
+              <a class="button" data-product-finder-primary></a>
+              <a class="button-outline" data-product-finder-secondary></a>
+            </div>
+            <a class="product-finder__context" data-product-finder-context hidden></a>
+          </div>
+
+          <noscript>
+            <p class="product-finder__noscript">Explore the existing <a href="/products/">product families</a>, choose an <a href="/applications/">application</a>, or use <a href="/zari-lab/#build-your-zari">Zari Lab</a> for technical guidance.</p>
+          </noscript>
+        </div>
       </div>
     </section>
 
@@ -107,5 +185,6 @@
   </main>
   <script src="/assets/js/site-shell.js?v=20260909-2" defer></script>
   <script src="/assets/js/site-shell-links.js" defer></script>
+  <script src="/assets/js/product-finder.js?v=20260922-1" defer></script>
 </body>
 </html>
