@@ -2134,3 +2134,31 @@ body.zari-handoff-dialog-open{overflow:hidden}
 @media(max-width:900px){.product-application-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.product-applications__help{align-items:stretch;flex-direction:column}.product-applications__help .page-actions{display:grid;width:100%;grid-template-columns:repeat(2,minmax(0,1fr))}.product-applications__help .button,.product-applications__help .button-outline{text-align:center}}
 @media(max-width:600px){.product-application-grid{grid-template-columns:1fr}.product-application-card{min-height:0}.product-applications__help{padding:22px 19px}.product-applications__help .page-actions{grid-template-columns:1fr}.product-applications__help .button,.product-applications__help .button-outline{width:100%;box-sizing:border-box}}
 @media(prefers-reduced-motion:reduce){.product-application-card{transition:none}.product-application-card:hover{transform:none}}
+
+/* Products — Zari Lab technical guidance */
+.product-zari-guidance{background:#0b0e12}
+.product-zari-guidance__intro{max-width:900px;margin-bottom:34px}
+.product-zari-guidance__intro p{max-width:780px;margin:0;color:#b9aa9c;font-size:15px;line-height:1.7}
+.product-zari-guidance__paths{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.product-zari-path{display:flex;min-width:0;min-height:238px;flex-direction:column;padding:23px;border:1px solid rgba(199,154,76,.25);border-top:2px solid rgba(199,154,76,.72);background:#111720;transition:transform .22s var(--ease),border-color .22s var(--ease),background .22s var(--ease)}
+.product-zari-path:hover{transform:translateY(-3px);border-color:rgba(228,189,107,.68);background:#141b24}
+.product-zari-path__number{color:var(--gold);font-size:9px;font-weight:700;letter-spacing:.14em}
+.product-zari-guidance .product-zari-path h3{margin:17px 0 10px;font-size:25px;line-height:1.12}
+.product-zari-path p{margin:0;color:#b9aa9c;font-size:13px;line-height:1.65}
+.product-zari-path>a{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:auto;padding-top:15px;border-top:1px solid rgba(199,154,76,.19);color:#d8bd7e;font-size:9px;font-weight:700;letter-spacing:.08em;line-height:1.4;text-transform:uppercase}
+.product-zari-path>a span{flex:0 0 auto;font-size:16px}
+.product-zari-guidance__brief{display:grid;grid-template-columns:minmax(260px,.85fr) minmax(0,1.15fr);gap:32px;margin-top:24px;padding:27px;border:1px solid rgba(199,154,76,.3);border-left:3px solid var(--gold);background:#10161d}
+.product-zari-guidance .product-zari-guidance__brief h3{margin:9px 0 8px;font-size:29px;line-height:1.12}
+.product-zari-guidance__brief-copy p{margin:0;color:#b9aa9c;font-size:13px;line-height:1.7}
+.product-zari-guidance__flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0;padding:0;border:1px solid rgba(199,154,76,.2);list-style:none}
+.product-zari-guidance__flow li{min-width:0;padding:18px 14px;border-right:1px solid rgba(199,154,76,.2);color:#c4b5a6;font-size:11px;line-height:1.45}
+.product-zari-guidance__flow li:last-child{border-right:0}
+.product-zari-guidance__flow span{display:block;margin-bottom:15px;color:var(--gold);font-size:9px;font-weight:700;letter-spacing:.12em}
+.product-zari-guidance__flow strong{display:block;color:#d9c39a;font-weight:600}
+.product-zari-guidance__actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.product-zari-guidance__actions .button,.product-zari-guidance__actions .button-outline{display:inline-flex;min-height:45px;align-items:center;justify-content:center;box-sizing:border-box}
+.product-zari-guidance a:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+@media(max-width:1100px){.product-zari-guidance__paths{grid-template-columns:repeat(2,minmax(0,1fr))}.product-zari-path{min-height:220px}}
+@media(max-width:900px){.product-zari-guidance__brief{grid-template-columns:1fr}.product-zari-guidance__flow{grid-template-columns:repeat(2,minmax(0,1fr))}.product-zari-guidance__flow li:nth-child(2){border-right:0}.product-zari-guidance__flow li:nth-child(-n+2){border-bottom:1px solid rgba(199,154,76,.2)}}
+@media(max-width:600px){.product-zari-guidance__paths,.product-zari-guidance__flow{grid-template-columns:1fr}.product-zari-path{min-height:0}.product-zari-guidance__brief{padding:22px 19px}.product-zari-guidance__flow li{border-right:0;border-bottom:1px solid rgba(199,154,76,.2)}.product-zari-guidance__flow li:last-child{border-bottom:0}.product-zari-guidance__actions{display:grid;grid-template-columns:1fr}.product-zari-guidance__actions .button,.product-zari-guidance__actions .button-outline{width:100%}}
+@media(prefers-reduced-motion:reduce){.product-zari-path{transition:none}.product-zari-path:hover{transform:none}}
