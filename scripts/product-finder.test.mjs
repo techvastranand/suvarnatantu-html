@@ -62,16 +62,19 @@ test('Not Sure prioritizes Zari Lab', () => {
 test('Custom Development provides safe technical and commercial routes', () => {
   const guided = finder.recommend({ application: 'embroidery', requirement: 'custom-development', knowledge: 'no' });
   assert.equal(guided.primary.href, '/zari-lab/#build-your-zari');
-  assert.equal(guided.secondary.href, '/request-quote/');
+  assert.equal(guided.secondary.href, '/request-quote/?application=embroidery');
   const known = finder.recommend({ application: 'embroidery', requirement: 'custom-development', knowledge: 'yes' });
-  assert.equal(known.primary.href, '/request-quote/');
+  assert.equal(known.primary.href, '/request-quote/?application=embroidery');
   assert.equal(known.secondary.href, '/samples/');
 });
 
-test('known specification routes directly to product family and RFQ', () => {
+test('known specification routes directly to product family and a validated RFQ context', () => {
   const result = finder.recommend({ application: 'weaving', requirement: 'twisted-yarn', knowledge: 'yes' });
   assert.equal(result.primary.href, '/products/twisted-yarn/');
-  assert.equal(result.secondary.href, '/request-quote/');
+  assert.equal(result.secondary.href, '/request-quote/?family=twisted-yarn');
+  const saree = finder.recommend({ application: 'saree', requirement: 'metallic-yarn', knowledge: 'yes' });
+  assert.equal(saree.secondary.href, '/request-quote/?family=metallic-yarn&application=saree');
+  assert.doesNotMatch(result.secondary.href, /application=weaving/);
 });
 
 test('missing or unsupported selections never produce an invalid result', () => {

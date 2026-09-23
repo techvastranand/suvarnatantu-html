@@ -23,12 +23,30 @@
   const ZARI_LAB = '/zari-lab/#build-your-zari';
   const RFQ = '/request-quote/';
   const SAMPLES = '/samples/';
+  const RFQ_APPLICATIONS = Object.freeze({
+    saree: 'saree', jacquard: 'jacquard', brocade: 'brocade', embroidery: 'embroidery',
+    knitting: 'knitting', lace: 'lace', 'home-furnishing': 'home-furnishing',
+    'decorative-textiles': 'decorative-textiles'
+  });
+  const RFQ_FAMILIES = Object.freeze({
+    'metallic-yarn': 'metallic-yarn', 'zari-yarn': 'zari-yarn',
+    'filament-yarn': 'filament-yarn', 'twisted-yarn': 'twisted-yarn',
+    'colour-finish': 'colours-finishes'
+  });
 
   const link = (label, href) => ({ label, href });
   const applicationLink = application => link(
     application === APPLICATIONS.other ? 'Explore Application Routes' : `View ${application.label} Application`,
     application.href
   );
+  const rfqLink = (selection, label = 'Request a Quote') => {
+    const query = [];
+    const family = RFQ_FAMILIES[selection?.requirement];
+    const application = RFQ_APPLICATIONS[selection?.application];
+    if (family) query.push(`family=${family}`);
+    if (application) query.push(`application=${application}`);
+    return link(label, query.length ? `${RFQ}?${query.join('&')}` : RFQ);
+  };
 
   const recommend = selection => {
     const application = APPLICATIONS[selection?.application];
@@ -53,8 +71,8 @@
         kicker: 'Recommended next step',
         heading: 'Your requirement may need technical review.',
         copy: `Start a custom requirement for your ${application.label} application using the information and references already available.`,
-        primary: link('Start Custom Requirement', needsGuidance ? ZARI_LAB : RFQ),
-        secondary: needsGuidance ? link('Request a Quote', RFQ) : link('Request a Sample', SAMPLES),
+        primary: needsGuidance ? link('Start Custom Requirement', ZARI_LAB) : rfqLink(selection, 'Start Custom Requirement'),
+        secondary: needsGuidance ? rfqLink(selection) : link('Request a Sample', SAMPLES),
         context
       };
     }
@@ -78,12 +96,12 @@
       heading: `Explore ${requirement.label}`,
       copy: `Start with the ${requirement.label} family for your ${application.label} requirement. Final suitability may require technical review.`,
       primary: link(`View ${requirement.label}`, requirement.href),
-      secondary: knowledge === 'yes' ? link('Continue to RFQ', RFQ) : link('Build Requirement in Zari Lab', ZARI_LAB),
+      secondary: knowledge === 'yes' ? rfqLink(selection, 'Continue to RFQ') : link('Build Requirement in Zari Lab', ZARI_LAB),
       context
     };
   };
 
-  window.SuvarnatantuProductFinder = Object.freeze({ APPLICATIONS, REQUIREMENTS, recommend });
+  window.SuvarnatantuProductFinder = Object.freeze({ APPLICATIONS, REQUIREMENTS, RFQ_APPLICATIONS, RFQ_FAMILIES, recommend });
   if (typeof document === 'undefined') return;
 
   const form = document.querySelector('[data-product-finder]');

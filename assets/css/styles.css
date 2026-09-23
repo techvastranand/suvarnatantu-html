@@ -2027,14 +2027,14 @@ fieldset.zlh-reference-block{border:1px solid rgba(199,154,76,.27)}
 body.zari-handoff-dialog-open{overflow:hidden}
 @media(max-width:640px){.zari-handoff-banner{margin-bottom:18px;padding:18px}.zari-handoff-actions{align-items:stretch;flex-direction:column}.zari-handoff-actions button{width:100%}.zari-handoff-summary{grid-template-columns:1fr}.zari-handoff-dialog{padding:12px}.zari-handoff-dialog-card{max-height:calc(100vh - 24px)}}
 
-.sample-context-banner{max-width:1040px;box-sizing:border-box;margin:0 auto 24px;padding:clamp(20px,3vw,30px);border:1px solid rgba(216,180,107,.42);border-left:3px solid var(--gold);border-radius:12px;background:linear-gradient(135deg,#171d25,#171109);box-shadow:0 18px 42px rgba(0,0,0,.18);color:#d9cdbf}
-.sample-context-banner h2{margin:0;color:var(--gold2);font-family:Georgia,"Times New Roman",serif;font-size:clamp(23px,2.6vw,32px);font-weight:400;line-height:1.15}
-.sample-context-banner>p{max-width:720px;margin:9px 0 0;color:#b9aa9c;font-size:14px;line-height:1.65}
-.sample-context-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;margin:17px 0 0;border:1px solid rgba(216,180,107,.14);background:rgba(216,180,107,.14)}
-.sample-context-summary>div{min-width:0;padding:12px 14px;background:#101319}
-.sample-context-summary dt{margin:0 0 5px;color:#a99678;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-.sample-context-summary dd{margin:0;color:#eee3d5;font-size:14px;line-height:1.45;overflow-wrap:anywhere}
-@media(max-width:640px){.sample-context-banner{margin-bottom:18px;padding:18px}.sample-context-summary{grid-template-columns:1fr}}
+.sample-context-banner,.rfq-context-banner{max-width:1040px;box-sizing:border-box;margin:0 auto 24px;padding:clamp(20px,3vw,30px);border:1px solid rgba(216,180,107,.42);border-left:3px solid var(--gold);border-radius:12px;background:linear-gradient(135deg,#171d25,#171109);box-shadow:0 18px 42px rgba(0,0,0,.18);color:#d9cdbf}
+.sample-context-banner h2,.rfq-context-banner h2{margin:0;color:var(--gold2);font-family:Georgia,"Times New Roman",serif;font-size:clamp(23px,2.6vw,32px);font-weight:400;line-height:1.15}
+.sample-context-banner>p,.rfq-context-banner>p{max-width:720px;margin:9px 0 0;color:#b9aa9c;font-size:14px;line-height:1.65}
+.sample-context-summary,.rfq-context-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;margin:17px 0 0;border:1px solid rgba(216,180,107,.14);background:rgba(216,180,107,.14)}
+.sample-context-summary>div,.rfq-context-summary>div{min-width:0;padding:12px 14px;background:#101319}
+.sample-context-summary dt,.rfq-context-summary dt{margin:0 0 5px;color:#a99678;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.sample-context-summary dd,.rfq-context-summary dd{margin:0;color:#eee3d5;font-size:14px;line-height:1.45;overflow-wrap:anywhere}
+@media(max-width:640px){.sample-context-banner,.rfq-context-banner{margin-bottom:18px;padding:18px}.sample-context-summary,.rfq-context-summary{grid-template-columns:1fr}}
 
 /* Products — B2B Product Finder */
 .product-finder{background:linear-gradient(180deg,#0d1117,#0b0907)}

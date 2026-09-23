@@ -68,7 +68,7 @@ test('custom and special-finish routes use verified existing destinations', () =
 test('Zari Lab, Sample and RFQ actions are valid crawlable links', () => {
   assert.match(section, /href="\/zari-lab\/#colour-finish-lab">Open Colour &amp; Finish Lab<\/a>/);
   assert.match(section, /href="\/samples\/">Request a Sample<\/a>/);
-  assert.match(section, /href="\/request-quote\/">Request a Quote<\/a>/);
+  assert.match(section, /href="\/request-quote\/\?family=colours-finishes">Request a Quote<\/a>/);
   assert.doesNotMatch(section, /href=["'](?:#|javascript:|\s*["'])/i);
 });
 
