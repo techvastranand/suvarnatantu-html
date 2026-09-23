@@ -9,7 +9,7 @@ const read = path => readFileSync(join(root, path), 'utf8');
 const page = read('products/index.html');
 const styles = read('assets/css/styles.css');
 const start = page.indexOf('<section class="content-section alt product-catalogue"');
-const end = page.indexOf('<section class="content-section">', start);
+const end = page.indexOf('<section class="content-section metallic-comparison"', start);
 const catalogue = page.slice(start, end);
 
 const routeExists = route => {
@@ -52,10 +52,12 @@ test('Zari, colour, filament, twisted, and specialty links use verified routes',
   }
 });
 
-test('every family has a valid plain Sample request CTA', () => {
-  assert.equal((catalogue.match(/class="button-outline" href="\/samples\/">Request Sample<\/a>/g) || []).length, 6);
+test('every family has a valid contextual Sample request CTA', () => {
+  for (const family of ['metallic-yarn', 'zari-yarn', 'colours-finishes', 'filament-yarn', 'twisted-yarn', 'specialty-yarn']) {
+    assert.match(catalogue, new RegExp(`class="button-outline" href="/samples/\\?family=${family}">Request Sample</a>`));
+  }
   assert.ok(routeExists('/samples/'));
-  assert.doesNotMatch(catalogue, /[?&](?:product|family)=/);
+  assert.doesNotMatch(catalogue, /href="\/samples\/\?(?!family=(?:metallic-yarn|zari-yarn|colours-finishes|filament-yarn|twisted-yarn|specialty-yarn)\b)/);
 });
 
 test('cards contain parameter names without invented numeric specifications', () => {
