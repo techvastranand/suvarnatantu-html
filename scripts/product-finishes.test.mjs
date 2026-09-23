@@ -26,10 +26,10 @@ function routeExists(route) {
   return existsSync(join(root, relative, 'index.html')) || existsSync(join(root, `${relative}.html`));
 }
 
-test('colour and finish discovery follows Technical Guidance and precedes downstream content', () => {
+test('colour and finish discovery follows Applications and precedes Technical Guidance', () => {
   assert.ok(section, 'Missing colour and finish discovery section.');
-  assert.ok(page.indexOf('class="content-section product-zari-guidance"') < page.indexOf('class="content-section product-finishes"'));
-  assert.ok(page.indexOf('class="content-section product-finishes"') < page.indexOf('B2B buying flow'));
+  assert.ok(page.indexOf('class="content-section product-applications"') < page.indexOf('class="content-section product-finishes"'));
+  assert.ok(page.indexOf('class="content-section product-finishes"') < page.indexOf('class="content-section product-zari-guidance"'));
   assert.match(section, /<h2 id="product-finishes-title">Explore Colour &amp; Finish Directions<\/h2>/);
 });
 
@@ -49,7 +49,7 @@ test('finish terminology is verified in Zari Lab without invented individual rou
     assert.match(section, new RegExp(`<dt>${finish}<\\/dt>`));
   }
   assert.doesNotMatch(section, /href="\/(?:colours|finishes)\/(?:bright|soft-metallic|matte)\//);
-  assert.match(section, /href="\/zari-lab\/#colour-finish-lab">Prepare Colour &amp; Finish Requirement/);
+  assert.equal((section.match(/href="\/zari-lab\/#colour-finish-lab"/g) ?? []).length, 1);
 });
 
 test('physical sample disclaimer avoids false screen-colour accuracy', () => {
@@ -67,8 +67,8 @@ test('custom and special-finish routes use verified existing destinations', () =
 
 test('Zari Lab, Sample and RFQ actions are valid crawlable links', () => {
   assert.match(section, /href="\/zari-lab\/#colour-finish-lab">Open Colour &amp; Finish Lab<\/a>/);
-  assert.match(section, /href="\/samples\/">Request a Sample<\/a>/);
-  assert.match(section, /href="\/request-quote\/\?family=colours-finishes">Request a Quote<\/a>/);
+  assert.match(section, /href="\/samples\/">Request a Sample/);
+  assert.match(section, /href="\/request-quote\/\?family=colours-finishes">Request a Quote/);
   assert.doesNotMatch(section, /href=["'](?:#|javascript:|\s*["'])/i);
 });
 
@@ -86,10 +86,10 @@ test('Tasks 1 through 5 remain present with Product Finder JavaScript unchanged'
   assert.match(page, /src="\/assets\/js\/product-finder\.js\?v=20260922-1"/);
 });
 
-test('colour cards use responsive three, two and one-column layouts with visible focus', () => {
+test('colour cards use responsive layouts and keep the compact review flow visible', () => {
   assert.match(styles, /\.product-finish-grid\{[^}]*grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);
   assert.match(styles, /@media\(max-width:900px\)\{\.product-finish-grid\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
-  assert.match(styles, /@media\(max-width:600px\)\{\.product-finish-grid,\.product-finishes__terms,\.product-finishes__flow\{grid-template-columns:1fr\}/);
+  assert.match(styles, /@media\(max-width:600px\)\{\.product-finish-grid,\.product-finishes__terms\{grid-template-columns:1fr\}\.product-finishes__flow\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
   assert.match(styles, /\.product-finishes a:focus-visible\{outline:2px solid var\(--gold2\)/);
   assert.doesNotMatch(styles, /\.product-finish-grid[^}]*overflow-x|\.product-finish-grid[^}]*white-space:nowrap/);
 });

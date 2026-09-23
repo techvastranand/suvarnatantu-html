@@ -17,11 +17,11 @@ const workflows = [
   ['Start Troubleshooting', '/zari-lab/#troubleshooting-lab', 'id="troubleshooting-lab"']
 ];
 
-test('technical guidance follows application discovery and precedes downstream content', () => {
+test('technical guidance follows colour discovery and precedes the final action area', () => {
   assert.ok(section, 'Missing Products Zari Lab guidance section.');
-  assert.ok(page.indexOf('class="content-section product-applications"') < page.indexOf('class="content-section product-zari-guidance"'));
-  assert.ok(page.indexOf('class="content-section product-zari-guidance"') < page.indexOf('B2B buying flow'));
-  assert.match(section, /<h2 id="product-zari-guidance-title">Not Sure Which Yarn or Specification You Need\?<\/h2>/);
+  assert.ok(page.indexOf('class="content-section product-finishes"') < page.indexOf('class="content-section product-zari-guidance"'));
+  assert.ok(page.indexOf('class="content-section product-zari-guidance"') < page.indexOf('class="cta-band"'));
+  assert.match(section, /<h2 id="product-zari-guidance-title">Complete an Unclear Specification<\/h2>/);
 });
 
 test('all four guidance paths use verified Zari Lab workflow anchors', () => {
@@ -48,10 +48,10 @@ test('Requirement Brief is explained as a prepared outcome with accurate print w
   assert.match(zariLab, /No Zari Lab requirement has been prepared yet\./);
 });
 
-test('main Zari Lab, Sample and RFQ actions use existing routes', () => {
+test('local action prioritizes Zari Lab while the final area handles Sample and RFQ', () => {
   assert.match(section, /href="\/zari-lab\/">Open Zari Lab<\/a>/);
-  assert.match(section, /href="\/samples\/">Request a Sample<\/a>/);
-  assert.match(section, /href="\/request-quote\/">Continue to RFQ<\/a>/);
+  assert.doesNotMatch(section, /href="\/(?:samples|request-quote)\//);
+  assert.match(page, /<section class="cta-band">[\s\S]*href="\/request-quote\/">Request Quote[\s\S]*href="\/samples\/">Request Sample/);
   assert.doesNotMatch(section, /href=["'](?:#|javascript:|\s*["'])/i);
 });
 
@@ -68,10 +68,10 @@ test('Tasks 1 through 4 remain present with Product Finder JavaScript unchanged'
   assert.match(page, /src="\/assets\/js\/product-finder\.js\?v=20260922-1"/);
 });
 
-test('guidance uses responsive four, two and one-column layouts with visible focus', () => {
+test('guidance uses responsive card layouts and a compact two-column mobile flow', () => {
   assert.match(styles, /\.product-zari-guidance__paths\{[^}]*grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/);
   assert.match(styles, /@media\(max-width:1100px\)\{\.product-zari-guidance__paths\{grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
-  assert.match(styles, /@media\(max-width:600px\)\{\.product-zari-guidance__paths,\.product-zari-guidance__flow\{grid-template-columns:1fr\}/);
+  assert.match(styles, /@media\(max-width:600px\)\{\.product-zari-guidance__paths\{grid-template-columns:1fr\}/);
   assert.match(styles, /\.product-zari-guidance a:focus-visible\{outline:2px solid var\(--gold2\)/);
   assert.doesNotMatch(styles, /\.product-zari-guidance__paths[^}]*overflow-x|\.product-zari-guidance__paths[^}]*white-space:nowrap/);
 });

@@ -9,7 +9,7 @@ const read = path => readFileSync(join(root, path), 'utf8');
 const page = read('products/index.html');
 const styles = read('assets/css/styles.css');
 const start = page.indexOf('<section class="content-section metallic-comparison"');
-const end = page.indexOf('<section class="content-section">', start);
+const end = page.indexOf('<section class="content-section product-applications"', start);
 const comparison = page.slice(start, end);
 const sources = {
   m: read('metallic-yarn/m-type/index.html'),
@@ -76,14 +76,12 @@ test('comparison avoids rankings, promises, and unsupported performance claims',
   assert.match(comparison, /final construction and specification should be confirmed through technical review/);
 });
 
-test('all product details and assistance CTAs use verified routes', () => {
+test('all product details and contextual sample links use verified routes', () => {
   for (const route of ['/metallic-yarn/m-type/', '/metallic-yarn/mx-type/', '/metallic-yarn/st-type/', '/metallic-yarn/mh-type/']) {
     assert.equal((comparison.match(new RegExp(`href="${route}"`, 'g')) || []).length, 2);
     assert.ok(routeExists(route), route);
   }
-  assert.match(comparison, /href="\/zari-lab\/#build-your-zari">Open Zari Lab/);
-  assert.match(comparison, /href="\/samples\/">Request a Sample/);
-  assert.ok(routeExists('/zari-lab/'));
+  assert.equal((comparison.match(/href="\/samples\/\?family=metallic-yarn&amp;product=/g) || []).length, 4);
   assert.ok(routeExists('/samples/'));
   assert.doesNotMatch(comparison, /href="(?:#|javascript:)/);
 });

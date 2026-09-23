@@ -34,7 +34,7 @@ function routeExists(route) {
 test('application discovery follows the metallic comparison and precedes downstream content', () => {
   assert.ok(section, 'Missing product application section.');
   assert.ok(page.indexOf('class="metallic-comparison"') < page.indexOf('class="content-section product-applications"'));
-  assert.ok(page.indexOf('class="content-section product-applications"') < page.indexOf('B2B buying flow'));
+  assert.ok(page.indexOf('class="content-section product-applications"') < page.indexOf('class="content-section product-finishes"'));
   assert.match(section, /<h2 id="product-applications-title">Explore Yarn by Application<\/h2>/);
 });
 
@@ -63,10 +63,10 @@ test('cards provide crawlable descriptive links without placeholders or determin
   assert.doesNotMatch(section, /<script|<select|<form|data-product-finder/i);
 });
 
-test('assistance block uses the existing Zari Lab and Sample routes', () => {
-  assert.match(section, /Not Sure Which Yarn Fits Your Application\?/);
-  assert.match(section, /href="\/zari-lab\/#build-your-zari">Open Zari Lab<\/a>/);
-  assert.match(section, /href="\/samples\/">Request a Sample<\/a>/);
+test('compact assistance handoff keeps the existing Zari Lab route and contextual samples', () => {
+  assert.match(section, /Know the application, but not the yarn\?/);
+  assert.match(section, /href="\/zari-lab\/#build-your-zari">Prepare it in Zari Lab/);
+  assert.equal(section.match(/href="\/samples\/\?application=/g)?.length, 8);
 });
 
 test('Product Finder, catalogue and metallic comparison remain present', () => {

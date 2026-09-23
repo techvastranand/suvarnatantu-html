@@ -52,9 +52,9 @@ test('Zari, colour, filament, twisted, and specialty links use verified routes',
   }
 });
 
-test('every family has a valid contextual Sample request CTA', () => {
+test('every family has a valid contextual Sample request link', () => {
   for (const family of ['metallic-yarn', 'zari-yarn', 'colours-finishes', 'filament-yarn', 'twisted-yarn', 'specialty-yarn']) {
-    assert.match(catalogue, new RegExp(`class="button-outline" href="/samples/\\?family=${family}">Request Sample</a>`));
+    assert.match(catalogue, new RegExp(`class="text-link" href="/samples/\\?family=${family}">Request Sample`));
   }
   assert.ok(routeExists('/samples/'));
   assert.doesNotMatch(catalogue, /href="\/samples\/\?(?!family=(?:metallic-yarn|zari-yarn|colours-finishes|filament-yarn|twisted-yarn|specialty-yarn)\b)/);

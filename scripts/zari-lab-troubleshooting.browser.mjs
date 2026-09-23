@@ -331,7 +331,7 @@ try {
   assert.equal(await evaluate(`Array.from(document.querySelectorAll('.zlh-brief-section dl>div')).find(row => row.querySelector('dt').textContent === 'TPM').querySelector('dd strong').textContent`), '4100');
 
   // Native Print / Save as PDF action and Chromium print layout.
-  assert.equal(await evaluate(`(() => { window.__briefPrintCalled = false; window.print = () => { window.__briefPrintCalled = true; }; document.querySelector('[data-print-brief]').click(); return window.__briefPrintCalled; })()`), true);
+  assert.equal(await evaluate(`new Promise(resolve => { window.__briefPrintCalled = false; window.print = () => { window.__briefPrintCalled = true; }; document.querySelector('[data-print-brief]').click(); requestAnimationFrame(() => requestAnimationFrame(() => resolve(window.__briefPrintCalled))); })`), true);
   await command('Emulation.setEmulatedMedia', { media: 'print' });
   const printLayout = await evaluate(`(() => ({
     headerHidden: getComputedStyle(document.querySelector('#site-header-mount')).display === 'none',
