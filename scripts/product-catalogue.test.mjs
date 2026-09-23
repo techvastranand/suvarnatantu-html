@@ -17,12 +17,15 @@ const routeExists = route => {
   return existsSync(join(root, clean, 'index.html')) || existsSync(join(root, `${clean}.html`));
 };
 
-test('all six verified product families are rendered as crawlable HTML cards', () => {
-  const families = ['metallic-yarn', 'zari-yarn', 'colours-finishes', 'filament-yarn', 'twisted-yarn', 'specialty-yarn'];
-  assert.equal((catalogue.match(/<article class="product-family-card"/g) || []).length, 6);
+test('the three retained product families are rendered as crawlable HTML cards', () => {
+  const families = ['metallic-yarn', 'zari-yarn', 'colours-finishes'];
+  assert.equal((catalogue.match(/<article class="product-family-card"/g) || []).length, 3);
   for (const family of families) assert.match(catalogue, new RegExp(`data-product-family="${family}"`));
-  for (const heading of ['Metallic Yarn', 'Zari Yarn', 'Colours &amp; Finishes', 'Filament Yarn', 'Twisted Yarn', 'Specialty Yarn']) {
+  for (const heading of ['Metallic Yarn', 'Zari Yarn', 'Colours &amp; Finishes']) {
     assert.match(catalogue, new RegExp(`<h3><a[^>]+>${heading}</a></h3>`));
+  }
+  for (const family of ['filament-yarn', 'twisted-yarn', 'specialty-yarn']) {
+    assert.doesNotMatch(catalogue, new RegExp(`data-product-family="${family}"`));
   }
 });
 
@@ -36,15 +39,11 @@ test('Metallic Yarn retains every verified construction route', () => {
   ]) assert.match(catalogue, new RegExp(`href="${route}">${label}</a>`));
 });
 
-test('Zari, colour, filament, twisted, and specialty links use verified routes', () => {
+test('Zari and colour links use verified routes', () => {
   const routes = [
     '/zari-yarn/weaving-zari/', '/zari-yarn/embroidery-zari/', '/zari-yarn/imitation-zari/',
     '/zari-yarn/polyester-zari/', '/zari-yarn/coloured-zari/', '/colours/gold/', '/colours/silver/',
-    '/colours/copper/', '/colours/rose-gold/', '/colours/antique/', '/colours/custom/',
-    '/products/filament-yarn/polyester-filament-yarn/', '/products/filament-yarn/nylon-filament-yarn/',
-    '/products/filament-yarn/specialty-filament-yarn/', '/products/twisted-yarn/s-twist-yarn/',
-    '/products/twisted-yarn/z-twist-yarn/', '/products/twisted-yarn/custom-tpm-yarn/',
-    '/products/specialty-yarn/'
+    '/colours/copper/', '/colours/rose-gold/', '/colours/antique/', '/colours/custom/'
   ];
   for (const route of routes) {
     assert.ok(catalogue.includes(`href="${route}"`), route);
@@ -53,15 +52,15 @@ test('Zari, colour, filament, twisted, and specialty links use verified routes',
 });
 
 test('every family has a valid contextual Sample request link', () => {
-  for (const family of ['metallic-yarn', 'zari-yarn', 'colours-finishes', 'filament-yarn', 'twisted-yarn', 'specialty-yarn']) {
+  for (const family of ['metallic-yarn', 'zari-yarn', 'colours-finishes']) {
     assert.match(catalogue, new RegExp(`class="text-link" href="/samples/\\?family=${family}">Request Sample`));
   }
   assert.ok(routeExists('/samples/'));
-  assert.doesNotMatch(catalogue, /href="\/samples\/\?(?!family=(?:metallic-yarn|zari-yarn|colours-finishes|filament-yarn|twisted-yarn|specialty-yarn)\b)/);
+  assert.doesNotMatch(catalogue, /href="\/samples\/\?(?!family=(?:metallic-yarn|zari-yarn|colours-finishes)\b)/);
 });
 
 test('cards contain parameter names without invented numeric specifications', () => {
-  for (const label of ['Construction', 'Denier', 'TPM', 'Colour', 'Finish', 'Application', 'Twist direction', 'Reference sample', 'Technical review']) {
+  for (const label of ['Construction', 'Denier', 'TPM', 'Colour', 'Finish', 'Application']) {
     assert.ok(catalogue.includes(`<li>${label}</li>`), label);
   }
   assert.doesNotMatch(catalogue, /\b\d+(?:\.\d+)?\s*(?:denier|tpm|mm|micron|%|°c)\b/i);
@@ -71,7 +70,7 @@ test('cards contain parameter names without invented numeric specifications', ()
 test('catalogue remains useful without JavaScript and Product Finder stays present', () => {
   assert.ok(start > page.indexOf('data-product-finder'));
   assert.match(page, /product-finder\.js\?v=20260922-1/);
-  assert.ok((catalogue.match(/<a [^>]*href="\//g) || []).length >= 30);
+  assert.ok((catalogue.match(/<a [^>]*href="\//g) || []).length >= 20);
   assert.doesNotMatch(catalogue, /href="(?:#|javascript:)/);
 });
 

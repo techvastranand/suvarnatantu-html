@@ -36,7 +36,7 @@ test('Products page has unique IDs and no placeholder links', () => {
 });
 
 test('verified catalogue, comparison, application and colour routes remain present', () => {
-  assert.equal((page.match(/data-product-family="/g) || []).length, 6);
+  assert.equal((page.match(/data-product-family="/g) || []).length, 3);
   for (const type of ['m-type', 'mx-type', 'st-type', 'mh-type']) {
     assert.match(page, new RegExp(`href="/metallic-yarn/${type}/"`));
   }
@@ -49,7 +49,7 @@ test('verified catalogue, comparison, application and colour routes remain prese
 });
 
 test('context-aware Sample and RFQ links survive the CTA hierarchy cleanup', () => {
-  assert.equal((page.match(/href="\/samples\/\?family=/g) || []).length, 10);
+  assert.equal((page.match(/href="\/samples\/\?family=/g) || []).length, 7);
   assert.equal((page.match(/href="\/samples\/\?application=/g) || []).length, 8);
   assert.equal((page.match(/href="\/samples\/\?colour=/g) || []).length, 6);
   assert.equal((page.match(/href="\/samples\/\?finish=/g) || []).length, 5);

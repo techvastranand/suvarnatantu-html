@@ -30,8 +30,8 @@ test('query values are allowlisted for existing editable form fields', () => {
   assert.match(script, /Finish: \$\{finish\}/);
 });
 
-test('all supported product-family and metallic-type links use stable context values', () => {
-  for (const family of ['metallic-yarn', 'zari-yarn', 'colours-finishes', 'filament-yarn', 'twisted-yarn', 'specialty-yarn']) {
+test('remaining product-family cards and metallic-type links use stable context values', () => {
+  for (const family of ['metallic-yarn', 'zari-yarn', 'colours-finishes']) {
     assert.match(productsPage, new RegExp(`href="/samples/\\?family=${family}"`));
   }
   for (const product of ['m-type', 'mx-type', 'st-type', 'mh-type']) {
