@@ -2231,3 +2231,7 @@ body.zari-handoff-dialog-open{overflow:hidden}
 @media(max-width:900px){.product-finish-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){.product-finish-grid,.product-finishes__terms{grid-template-columns:1fr}.product-finishes__flow{grid-template-columns:repeat(2,minmax(0,1fr))}.product-finish-card{min-height:0;padding:18px}.product-finishes__technical,.product-finishes__custom{padding:19px}.product-finishes__terms div,.product-finishes__terms div:nth-child(3){border-right:0;border-bottom:1px solid rgba(199,154,76,.2)}.product-finishes__terms div:last-child{border-bottom:0}.product-finishes__flow li:nth-child(odd){border-right:1px solid rgba(199,154,76,.2)}.product-finishes__flow li:nth-child(even){border-right:0}.product-finishes__flow li:nth-child(-n+4){border-bottom:1px solid rgba(199,154,76,.2)}.product-finishes__flow li:last-child{border-bottom:0}.product-finishes__actions{display:flex}.product-finishes__actions .button{flex:1}.product-finishes__actions .text-link{padding:0 5px}}
 @media(prefers-reduced-motion:reduce){.product-finish-card{transition:none}.product-finish-card:hover{transform:none}}
+
+/* Metallic Yarn route cards reuse the Zari family structure within this section only. */
+.metallic-routes .inner-section-header{max-width:850px}
+.metallic-routes a:focus-visible{outline:2px solid var(--gold2);outline-offset:4px}
