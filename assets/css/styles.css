@@ -387,20 +387,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .site-footer a,.site-footer p{margin:0 0 9px;color:#b7a99b;font-size:13px;line-height:1.68;letter-spacing:normal;text-transform:none}
 .site-footer a{transition:color .25s var(--ease)}
 .site-footer a:hover{color:var(--gold2)}
-.footerApps{margin:20px 0}
-.footerAppsLabel{display:block;margin-bottom:9px;color:var(--gold2);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-.footerAppBadges{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;max-width:380px}
-.site-footer .footerAppBadge{display:flex;align-items:center;gap:10px;min-width:0;min-height:56px;margin:0;padding:8px 10px;border:1px solid rgba(199,154,76,.38);border-radius:6px;background:linear-gradient(135deg,rgba(199,154,76,.08),rgba(8,6,4,.64));color:var(--gold2);transition:transform .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease),color .25s var(--ease)}
-.footerAppBadgeIcon{flex:0 0 22px;width:22px;height:22px;color:var(--gold)}
-.footerAppBadgeCopy{display:block;min-width:0}
-.footerAppBadgeEyebrow{display:block;color:#b7a99b;font-size:8px;line-height:1.2;letter-spacing:.04em;white-space:nowrap}
-.footerAppBadgeTitle{display:block;margin-top:2px;color:var(--ivory);font-family:Georgia,"Times New Roman",serif;font-size:16px;font-weight:400;line-height:1.05;white-space:nowrap}
-.site-footer .footerAppBadge:hover{border-color:rgba(230,191,111,.82);background:linear-gradient(135deg,rgba(199,154,76,.17),rgba(8,6,4,.74));color:#f2ca82;transform:translateY(-2px)}
-.site-footer .footerAppBadge:hover .footerAppBadgeIcon{color:#f2ca82}
-.site-footer .footerAppBadge:hover .footerAppBadgeTitle{color:#fff5e3}
-.site-footer .footerAppBadge:focus-visible{outline:2px solid var(--gold2);outline-offset:3px;border-color:var(--gold2)}
-.footerSecondary{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-top:30px;padding-top:24px;border-top:1px solid rgba(199,154,76,.18)}
-.footerSecondary .footerApps{margin:0}
+.footerSecondary{display:flex;justify-content:flex-end;align-items:flex-end;gap:32px;margin-top:30px;padding-top:24px;border-top:1px solid rgba(199,154,76,.18)}
 .footerCorporate{display:grid;justify-items:end;gap:3px;min-width:250px;text-align:right}
 .footerCorporateLabel{color:var(--gold);font-size:9px;font-weight:700;line-height:1.3;letter-spacing:.14em;text-transform:uppercase}
 .footerCorporateName{color:var(--ivory);font-size:14px;font-weight:500;line-height:1.45}
@@ -413,8 +400,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media(max-width:1050px){.site-footer .footer-grid{grid-template-columns:minmax(240px,1.35fr) repeat(2,minmax(140px,1fr));gap:34px 28px}}
 @media(max-width:720px){.footerSecondary{align-items:flex-start;flex-direction:column;gap:24px}.footerCorporate{justify-items:start;min-width:0;text-align:left}}
 @media(max-width:640px){.site-footer{padding:48px 0 28px}.site-footer .wrap{width:min(100% - 28px,1240px)}.site-footer .footer-grid{grid-template-columns:1fr;gap:26px}.footerSecondary{margin-top:28px;padding-top:22px}.site-footer .legal{margin-top:22px;font-size:10px}}
-@media(max-width:380px){.footerAppBadges{grid-template-columns:1fr;max-width:185px}}
-@media(prefers-reduced-motion:reduce){.site-footer .footerAppBadge{transition:none}.site-footer .footerAppBadge:hover{transform:none}}
 
 /* Compact shared header navigation */
 .site-nav .navin{width:min(1440px,calc(100% - 48px));gap:20px}
