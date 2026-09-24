@@ -39,7 +39,7 @@
       const legalLinks = siteFooter.querySelector('.footer-grid > div:last-child');
       if (legalLinks) { const heading = legalLinks.querySelector('h3'); if (heading) heading.textContent = 'Contact & Legal'; legalLinks.insertAdjacentHTML('beforeend', '<a href="/about-us/">About Us</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms & Conditions</a>'); }
       const copyright = siteFooter.querySelector('.legal');
-      if (copyright) copyright.textContent = '© 2026 Suvarnatantu · Operated by Vastranand Private Limited. All rights reserved.';
+      if (copyright) copyright.innerHTML = '© 2026 Suvarnatantu · Operated by Vastranand Private Limited. All rights reserved. <a href="/sitemap.xml">Sitemap</a> &middot; <a href="/robots.txt">Robots</a> &middot; <a href="/llms.txt">LLMs</a>';
       siteFooter.dataset.legalMounted = 'true';
     }
     if (!document.querySelector('script[data-site-navigation]')) { const script = document.createElement('script'); script.src = '/assets/js/navigation.js'; script.defer = true; script.dataset.siteNavigation = 'true'; document.head.append(script); }
