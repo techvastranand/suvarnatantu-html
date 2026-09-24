@@ -652,6 +652,32 @@ nav.site-nav{top:22px}
 @media(max-width:520px){.zari-family-card__body{padding:21px}.zari-comparison__row{grid-template-columns:1fr}.zari-family-card__actions{grid-template-columns:1fr}.zari-hub .inner-cta .button,.zari-hub .inner-cta .button-outline{width:100%;box-sizing:border-box;text-align:center}}
 @media(prefers-reduced-motion:reduce){.zari-family-card,.zari-family-card__visual img,.zari-family-card__visual svg,.zari-family-card__explore span{transition:none}.zari-family-card:hover,.zari-family-card:hover .zari-family-card__visual img{transform:none}}
 
+/* Colours — image-led category cards */
+.colours-hub .colour-category-header{max-width:850px;margin-bottom:36px}
+.colour-category-grid{display:grid;grid-auto-rows:1fr;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.colour-category-card{display:flex;min-width:0;height:100%;flex-direction:column;overflow:hidden;border:1px solid rgba(199,154,76,.3);background:rgba(8,7,6,.72);color:inherit}
+.colour-category-card__visual{position:relative;aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid rgba(199,154,76,.22);background:#100c09}
+.colour-category-card__visual:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 68%,rgba(8,7,6,.28))}
+.colour-category-card__visual img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.84) contrast(1.04);transition:transform .42s var(--ease),filter .42s var(--ease)}
+.colour-category-card:hover .colour-category-card__visual img{transform:scale(1.035);filter:saturate(.94) contrast(1.04)}
+.colour-category-card__body{display:flex;min-width:0;flex:1;flex-direction:column;padding:25px}
+.colour-category-card__label{color:var(--gold);font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.colours-hub .colour-category-card h3{margin:13px 0 12px;color:var(--gold2);font-family:Georgia,"Times New Roman",serif;font-size:clamp(30px,3vw,42px);font-weight:400;line-height:1}
+.colour-category-card__body p{margin:0;color:#d1c1b1;font-size:15px;line-height:1.7}
+.colour-category-card__route{display:inline-flex;align-items:center;gap:8px;width:max-content;max-width:100%;margin-top:auto;padding-top:22px;color:var(--gold2);font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+.colour-category-card__route>span{transition:transform .2s var(--ease)}
+.colour-category-card:hover .colour-category-card__route>span{transform:translateX(4px)}
+.colours-hub main a:focus-visible{outline:2px solid var(--gold2);outline-offset:4px}
+.colour-category-cta{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:40px;margin-top:48px;padding-top:32px;border-top:1px solid rgba(199,154,76,.28)}
+.colours-hub .colour-category-cta h3{margin:10px 0 9px;color:var(--gold2);font-family:Georgia,"Times New Roman",serif;font-size:clamp(28px,3vw,40px);font-weight:400;line-height:1.08}
+.colour-category-cta p{max-width:680px;margin:0;color:#b9aa9c;line-height:1.7}
+.colour-category-cta .page-actions{margin:0;justify-content:flex-end}
+@media(min-width:1120px){.colour-category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px){.colour-category-cta{grid-template-columns:1fr;align-items:start;gap:24px}.colour-category-cta .page-actions{justify-content:flex-start}}
+@media(max-width:760px){.colour-category-grid{grid-template-columns:1fr}.colours-hub .colour-category-header{margin-bottom:26px}.colour-category-cta{margin-top:38px}}
+@media(max-width:520px){.colour-category-card__body{padding:21px}.colour-category-cta .page-actions{display:grid;width:100%}.colour-category-cta .button,.colour-category-cta .button-outline{width:100%;box-sizing:border-box;text-align:center}}
+@media(prefers-reduced-motion:reduce){.colour-category-card__visual img,.colour-category-card__route>span{transition:none}.colour-category-card:hover .colour-category-card__visual img,.colour-category-card:hover .colour-category-card__route>span{transform:none}}
+
 /* Manufacturing proof pages */
 .manufacturing-proof main a:focus-visible,.manufacturing-proof [tabindex]:focus-visible{outline:2px solid var(--gold2);outline-offset:4px}
 .manufacturing-proof .page-hero{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(199,154,76,.05) 1px,transparent 1px),linear-gradient(rgba(199,154,76,.04) 1px,transparent 1px),radial-gradient(circle at 83% 24%,rgba(199,154,76,.16),transparent 25%),linear-gradient(135deg,#101822,#090c10 62%,#181108);background-size:56px 56px,56px 56px,auto,auto}

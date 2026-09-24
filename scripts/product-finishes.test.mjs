@@ -36,7 +36,7 @@ test('colour and finish discovery follows Applications and precedes Technical Gu
 test('all six routed directions match the existing Colours hub and local pages', () => {
   assert.equal((section.match(/class="product-finish-card"/g) ?? []).length, colours.length);
   for (const [name, route] of colours) {
-    assert.ok(colourHub.includes(`<strong>${name}</strong>`), `${name} is absent from the Colours hub.`);
+    assert.ok(colourHub.includes(`<h3>${name}</h3>`), `${name} is absent from the Colours hub.`);
     assert.ok(colourHub.includes(`href="${route}"`), `${route} is absent from the Colours hub.`);
     assert.ok(section.includes(`href="${route}"`), `${route} is absent from the Products discovery section.`);
     assert.ok(routeExists(route), `${route} has no local page.`);
