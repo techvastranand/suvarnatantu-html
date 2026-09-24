@@ -951,6 +951,7 @@ a.testing-card:hover{border-color:var(--gold2);background:rgba(199,154,76,.08)}
 
 /* Zari Lab landing-page foundation */
 .zari-lab-hub #build-your-zari,.zari-lab-hub #technical-lab,.zari-lab-hub #colour-finish-lab,.zari-lab-hub #twist-lab,.zari-lab-hub #tpm-explorer,.zari-lab-hub #denier-explorer,.zari-lab-hub #construction-explorer,.zari-lab-hub #troubleshooting-lab,.zari-lab-hub #reference-review,.zari-lab-hub #requirement-brief{scroll-margin-top:128px}
+#buyer-specification-checklist{scroll-margin-top:128px}
 .zari-lab-hub .content-section{padding:66px 0}
 .zari-lab-hub .zlh-section-copy{max-width:800px;margin-bottom:30px}
 .zari-lab-hub .zlh-section-copy h2{margin-bottom:16px}
