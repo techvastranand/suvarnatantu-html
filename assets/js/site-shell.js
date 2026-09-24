@@ -22,8 +22,8 @@
       }, { rootMargin, threshold: 0.01 });
       return observer;
     };
-    const standardObserver = createObserver('1200px 0px');
-    const blogCardObserver = createObserver('2000px 0px');
+    const standardObserver = createObserver('600px 0px');
+    const blogCardObserver = createObserver('1200px 0px');
     document.querySelectorAll('img[loading="lazy"]').forEach(img => {
       const observer = img.hasAttribute('data-blog-card-image') ? blogCardObserver : standardObserver;
       observer.observe(img);
