@@ -387,7 +387,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .site-footer a,.site-footer p{margin:0 0 9px;color:#b7a99b;font-size:13px;line-height:1.68;letter-spacing:normal;text-transform:none}
 .site-footer a{transition:color .25s var(--ease)}
 .site-footer a:hover{color:var(--gold2)}
-.footerSecondary{display:flex;justify-content:flex-end;align-items:flex-end;gap:32px;margin-top:30px;padding-top:24px;border-top:1px solid rgba(199,154,76,.18)}
+.footerTechnicalResources{display:grid;gap:10px;margin-top:30px;padding-top:24px;border-top:1px solid rgba(199,154,76,.18)}
+.footerTechnicalResourcesLabel{color:var(--gold);font-size:9px;font-weight:700;line-height:1.3;letter-spacing:.14em;text-transform:uppercase}
+.footerTechnicalResourcesLinks{display:flex;flex-wrap:wrap;gap:0 9px;color:#8e7d6d;font-size:11px;line-height:1.5}
+.site-footer .footerTechnicalResourcesLinks a{display:inline;margin:0;color:#8e7d6d;font-size:inherit;line-height:inherit;letter-spacing:.05em;text-transform:none}
+.footerSecondary{display:flex;justify-content:flex-end;align-items:flex-end;gap:32px;margin-top:24px;padding-top:0}
 .footerCorporate{display:grid;justify-items:end;gap:3px;min-width:250px;text-align:right}
 .footerCorporateLabel{color:var(--gold);font-size:9px;font-weight:700;line-height:1.3;letter-spacing:.14em;text-transform:uppercase}
 .footerCorporateName{color:var(--ivory);font-size:14px;font-weight:500;line-height:1.45}
