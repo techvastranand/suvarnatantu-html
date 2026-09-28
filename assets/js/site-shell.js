@@ -3,6 +3,7 @@
   const footer = `<footer class="site-footer"><div class="wrap"><div class="footer-grid"><div><h2>Suvarnatantu</h2><p>Yarn &amp; Metallic Zari Manufacturing<br>by Vastranand Pvt. Ltd.</p><p>Plot No. 998, Road No. 87, Sachin GIDC, Near Sutex Bank, Surat, Gujarat - 394230, India</p><p><a href="tel:+918154000962">+91 81540 00962</a><br><a href="mailto:suvarnatantu@gmail.com">suvarnatantu@gmail.com</a></p></div><div><h3>Products</h3><a href="/metallic-yarn/">Metallic Yarn</a><a href="/zari-yarn/">Zari Yarn</a><a href="/colours/">Colours</a><a href="/products/">All Products</a></div><div><h3>Applications</h3><a href="/applications/">Applications</a><a href="/applications/saree/">Saree</a><a href="/applications/jacquard/">Jacquard</a><a href="/applications/embroidery/">Embroidery</a></div><div><h3>Company</h3><a href="/industries/">Industries</a><a href="/manufacturing/">Manufacturing</a><a href="/specifications/">Specifications</a><a href="/export/">Export</a><a href="/blog/">Blog</a></div><div><h3>Enquiries</h3><a href="/request-quote/">Request Quote</a><a href="/samples/">Request Samples</a><a href="/contact/">Contact</a></div></div><p class="legal">&copy; 2026 Suvarnatantu &middot; THREADS OF TRUST, WOVEN TOGETHER</p></div></footer>`;
   const footerTechnicalResources = `<div class="footerTechnicalResources"><span class="footerTechnicalResourcesLabel">Technical Resources</span><div class="footerTechnicalResourcesLinks"><a href="/sitemap.xml">Sitemap</a><span aria-hidden="true">&middot;</span><a href="/robots.txt">Robots</a><span aria-hidden="true">&middot;</span><a href="/llms.txt">LLMs</a></div></div>`;
   const footerSecondary = `<div class="footerSecondary"><div class="footerCorporate"><span class="footerCorporateLabel">Operated by</span><strong class="footerCorporateName">Vastranand Private Limited</strong><span class="footerCorporateMeta">CIN: U18109GJ2022PTC135289<br>GSTIN: 24AAICV9714F1Z6</span></div></div>`;
+  const footerLower = `<div class="footerLower">${footerTechnicalResources}${footerSecondary}</div>`;
   const startLazyImageWarmup = () => {
     if (!('IntersectionObserver' in window)) return;
     const createObserver = rootMargin => {
@@ -36,7 +37,7 @@
     if (!document.body.dataset.footerMounted) { if (oldFooter) oldFooter.outerHTML = footer; else document.body.insertAdjacentHTML('beforeend', footer); document.body.dataset.footerMounted = 'true'; }
     const siteFooter = document.querySelector('.site-footer');
     if (siteFooter && !siteFooter.dataset.legalMounted) {
-      siteFooter.querySelector('.footer-grid')?.insertAdjacentHTML('afterend', footerTechnicalResources + footerSecondary);
+      siteFooter.querySelector('.footer-grid')?.insertAdjacentHTML('afterend', footerLower);
       const legalLinks = siteFooter.querySelector('.footer-grid > div:last-child');
       if (legalLinks) { const heading = legalLinks.querySelector('h3'); if (heading) heading.textContent = 'Contact & Legal'; legalLinks.insertAdjacentHTML('beforeend', '<a href="/about-us/">About Us</a><a href="/privacy-policy/">Privacy Policy</a><a href="/terms/">Terms & Conditions</a>'); }
       const copyright = siteFooter.querySelector('.legal');
