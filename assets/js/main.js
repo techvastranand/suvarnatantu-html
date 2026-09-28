@@ -3,12 +3,12 @@ const body = document.body;
 const pre = document.getElementById('preloader');
 const dismissPreloader = () => { if (pre) pre.classList.add('hide'); };
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
-  setTimeout(dismissPreloader, 650);
+  setTimeout(dismissPreloader, 150);
 } else {
-  document.addEventListener('DOMContentLoaded', () => setTimeout(dismissPreloader, 650), {once:true});
-  window.addEventListener('load', () => setTimeout(dismissPreloader, 650), {once:true});
+  document.addEventListener('DOMContentLoaded', () => setTimeout(dismissPreloader, 150), {once:true});
+  window.addEventListener('load', () => setTimeout(dismissPreloader, 150), {once:true});
 }
-setTimeout(dismissPreloader, 1600);
+setTimeout(dismissPreloader, 500);
 
 /* custom cursor */
 const cur=document.querySelector('.cursor'), dot=document.querySelector('.cursor-dot');

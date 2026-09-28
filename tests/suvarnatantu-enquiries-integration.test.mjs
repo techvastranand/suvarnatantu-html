@@ -74,6 +74,13 @@ test('double submission is prevented and a submitting state is shown', () => {
   assert.match(flow, /type="submit"[^>]+disabled/);
 });
 
+test('quote and sample phone fields enforce a practical international format', () => {
+  assert.match(flow, /phone\.pattern = '\(\?=\.\*\[0-9\]\).*\{7,20\}'/);
+  assert.match(flow, /phone\.minLength = 7/);
+  assert.match(flow, /phone\.maxLength = 20/);
+  assert.match(flow, /Enter a valid phone number using 7 to 20 digits and common phone symbols\./);
+});
+
 test('quote and sample forms retain the existing product configurator prefill', () => {
   assert.match(flow, /sessionStorage\.setItem\('suvarnatantuB2BConfig'/);
   assert.match(flow, /sessionStorage\.getItem\('suvarnatantuB2BConfig'/);

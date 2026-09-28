@@ -33,6 +33,6 @@ Then visit `http://localhost:8000`.
 
 ## Notes
 
-The enquiry form is a front-end concept and must be connected to an approved production CRM, API, email workflow, or backend before launch. Public-facing technical, export, certification, capacity, and contact claims should be verified by Suvarnatantu before production use.
+The business, sample, and RFQ forms submit to the public Suvarnatantu intake API at `https://vastranand.com/v1/public/suvarnatantu-enquiries`. The persistent store, notifications, and business/admin access are operated outside this static repository; no backend credentials belong in frontend code. Public-facing technical, export, certification, capacity, and contact claims should be verified by Suvarnatantu before production use.
 
 This repository is private and intended for authorized company development only.
