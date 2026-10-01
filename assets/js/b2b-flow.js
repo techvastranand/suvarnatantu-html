@@ -5,7 +5,10 @@
   const INTAKE_API = 'https://vastranand.com/v1/public/suvarnatantu-enquiries';
   const INTAKE_TIMEOUT_MS = 10000;
   const THANK_YOU_PATH = '/enquiry-thank-you/';
-  const FAILURE_MESSAGE = 'We couldn\u2019t submit your enquiry. Please try again or contact us on WhatsApp.';
+  const FAILURE_MESSAGE = 'We couldn\u2019t submit your enquiry right now. Please try again or contact us on WhatsApp.';
+  const isAcceptedIntake = body => body?.data?.accepted === true
+    && typeof body.data.reference === 'string'
+    && /^ST[QSB]-\d{6,}$/.test(body.data.reference);
   const newSubmissionUuid = () => {
     if (window.crypto?.randomUUID) return window.crypto.randomUUID();
     const bytes = new Uint8Array(16); window.crypto.getRandomValues(bytes); bytes[6] = (bytes[6] & 15) | 64; bytes[8] = (bytes[8] & 63) | 128;
@@ -38,8 +41,12 @@
     const controller = new AbortController(); const timeout = setTimeout(() => controller.abort(), INTAKE_TIMEOUT_MS);
     try {
       const response = await fetch(INTAKE_API, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal });
-      if (!response.ok) { const body = await response.json().catch(() => ({})); const error = new Error(body.detail || 'The enquiry service could not accept this request.'); error.definite = true; throw error; }
-      return await response.json();
+      const body = await response.json().catch(() => null);
+      if (!response.ok || !isAcceptedIntake(body)) {
+        const detail = typeof body?.detail === 'string' ? body.detail : 'The enquiry service could not confirm that this request was saved.';
+        const error = new Error(detail); error.definite = true; throw error;
+      }
+      return body.data;
     } finally { clearTimeout(timeout); }
   };
   const submitIntake = async payload => {
