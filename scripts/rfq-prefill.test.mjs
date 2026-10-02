@@ -76,7 +76,7 @@ test('existing API payload includes reused RFQ fields without a contract change'
   assert.match(flow, /payload: fields/);
   assert.match(flow, /product: fields\.product/);
   assert.match(flow, /category: fields\.productType/);
-  assert.match(flow, /https:\/\/vastranand\.com\/v1\/public\/suvarnatantu-enquiries/);
+  assert.match(flow, /https:\/\/api\.vastranand\.com\/v1\/public\/suvarnatantu-enquiries/);
 });
 
 test('Task 7 Sample logic remains independent and unchanged in intent', () => {

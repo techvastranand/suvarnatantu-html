@@ -64,7 +64,7 @@ test('mapping is allowlisted and review-required values cannot enter quantity', 
 });
 
 test('existing submission API contract stays intact and exposes lifecycle events only', () => {
-  assert.match(flow, /https:\/\/vastranand\.com\/v1\/public\/suvarnatantu-enquiries/);
+  assert.match(flow, /https:\/\/api\.vastranand\.com\/v1\/public\/suvarnatantu-enquiries/);
   assert.match(flow, /body:\s*JSON\.stringify\(payload\)/);
   assert.match(flow, /suvarnatantu:b2b-form-ready/);
   assert.match(flow, /suvarnatantu:enquiry-submitted/);

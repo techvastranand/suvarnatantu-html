@@ -80,7 +80,7 @@ test('existing submission contract includes prefilled controls without API chang
   assert.match(flow, /payload: fields/);
   assert.match(flow, /product: fields\.product/);
   assert.match(flow, /category: fields\.productType/);
-  assert.match(flow, /https:\/\/vastranand\.com\/v1\/public\/suvarnatantu-enquiries/);
+  assert.match(flow, /https:\/\/api\.vastranand\.com\/v1\/public\/suvarnatantu-enquiries/);
   assert.doesNotMatch(script, /fetch\(|XMLHttpRequest|indexedDB/);
 });
 
