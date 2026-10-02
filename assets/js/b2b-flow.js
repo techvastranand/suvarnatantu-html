@@ -2,7 +2,7 @@
   const products = window.SuvarnatantuProducts || {};
   const path = location.pathname.replace(/\/$/, '');
   const intakeFields = (source, enquiryType) => `<input type='hidden' name='source_url' value='${source}'><input type='hidden' name='enquiry_type' value='${enquiryType}'><input type='hidden' name='brand' value='Suvarnatantu'><input type='hidden' name='website' value='https://suvarnatantu.com/'><input class='honeypot' type='text' name='honeypot' tabindex='-1' autocomplete='off' aria-hidden='true'>`;
-  const INTAKE_API = 'https://vastranand.com/v1/public/suvarnatantu-enquiries';
+  const INTAKE_API = 'https://api.vastranand.com/v1/public/suvarnatantu-enquiries';
   const INTAKE_TIMEOUT_MS = 10000;
   const THANK_YOU_PATH = '/enquiry-thank-you/';
   const FAILURE_MESSAGE = 'We couldn\u2019t submit your enquiry right now. Please try again or contact us on WhatsApp.';
