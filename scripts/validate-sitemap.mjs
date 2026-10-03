@@ -8,8 +8,9 @@ if(!sitemap.length)throw Error('Sitemap contains no URLs.');
 
 const urls=sitemap.map(({url})=>url);
 if(new Set(urls).size!==urls.length)throw Error('Sitemap contains duplicate URLs.');
+if(!urls.includes(`${site}/blog/`))throw Error('Sitemap is missing the canonical Blog listing.');
+if(urls.some(url=>url.startsWith(`${site}/blog/`)&&url!==`${site}/blog/`))throw Error('Sitemap must not contain runtime article, archive, category, or query-string Blog URLs.');
 
-let staticCount=0,blogCount=0;
 for(const {url,lastmod} of sitemap){
   let parsed;
   try{parsed=new URL(url);}catch{throw Error(`Invalid sitemap URL: ${url}`);}
@@ -17,8 +18,6 @@ for(const {url,lastmod} of sitemap){
   if(/\.html(?:\/|$)/i.test(parsed.pathname))throw Error(`Public .html URL found in sitemap: ${url}`);
   if(parsed.pathname==='/404/'||parsed.pathname.includes('enquiry-thank-you'))throw Error(`Private or utility URL found in sitemap: ${url}`);
   if(!/^\d{4}-\d{2}-\d{2}$/.test(lastmod)||normalizeDate(`${lastmod}T00:00:00Z`)!==lastmod)throw Error(`Invalid sitemap lastmod for ${url}: ${lastmod}`);
-  if(url.startsWith(`${site}/blog/`)){blogCount++;continue;}
-  staticCount++;
   const source=sourceForUrl(root,url);
   if(!source)throw Error(`No source HTML found for static sitemap URL: ${url}`);
   const html=await readFile(resolve(root,source),'utf8');
@@ -28,4 +27,4 @@ for(const {url,lastmod} of sitemap){
   if(lastmod!==expected)throw Error(`Stale static lastmod for ${url}: expected ${expected}, found ${lastmod}`);
 }
 
-console.log(`Validated ${sitemap.length} sitemap URLs: ${staticCount} static Git dates and ${blogCount} preserved Ghost-managed dates.`);
+console.log(`Validated ${sitemap.length} canonical sitemap URLs with static Git dates.`);

@@ -7,16 +7,6 @@ on:
     branches:
       - main
   workflow_dispatch:
-    inputs:
-      force_rebuild:
-        description: Rebuild and deploy even when Ghost content is unchanged
-        required: false
-        default: true
-        type: boolean
-  repository_dispatch:
-    types: [ghost_publish]
-  schedule:
-    - cron: '0 * * * *'
 
 concurrency:
   group: production-hosting-deploy
@@ -24,6 +14,7 @@ concurrency:
 
 permissions:
   contents: read
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -35,34 +26,16 @@ jobs:
         with:
           node-version: 20
           cache: npm
-      - name: Install build dependencies
+      - name: Install dependencies
         run: npm ci
-      - name: Test Blog build logic
+      - name: Test public-site behavior
         run: npm test
-      - name: Check Ghost content state
-        id: ghost_state
-        env:
-          GHOST_CONTENT_API_URL: ${{ secrets.GHOST_CONTENT_API_URL }}
-          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
-          # repository_dispatch is the immediate Ghost-webhook route; schedule remains a best-effort fallback.
-          GHOST_FORCE_REBUILD: ${{ github.event_name == 'push' || github.event_name == 'repository_dispatch' || github.event.inputs.force_rebuild == 'true' }}
-        run: node scripts/check-ghost-content.mjs
-      - name: No Ghost changes
-        if: ${{ steps.ghost_state.outputs.changed != 'true' }}
-        run: echo "No Ghost content changes detected."
-      - name: Build Knowledge Centre from Ghost
-        if: ${{ steps.ghost_state.outputs.changed == 'true' }}
-        env:
-          GHOST_CONTENT_API_URL: ${{ secrets.GHOST_CONTENT_API_URL }}
-          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
-        run: node scripts/build-blog.mjs
-      - name: Validate generated Knowledge Centre
-        if: ${{ steps.ghost_state.outputs.changed == 'true' }}
-        env:
-          GHOST_CONTENT_API_KEY: ${{ secrets.GHOST_CONTENT_API_KEY }}
-        run: node scripts/validate-blog-output.mjs
+      - name: Validate JavaScript
+        run: npm run check:js
       - name: Refresh sitemap lastmod dates
         run: npm run update:sitemap
+      - name: Validate API-backed Blog
+        run: npm run validate:blog
       - name: Validate shared header
         run: npm run validate:header-shell
       - name: Validate SEO
@@ -70,7 +43,6 @@ jobs:
       - name: Validate sitemap
         run: npm run validate:sitemap
       - uses: FirebaseExtended/action-hosting-deploy@v0
-        if: ${{ github.event_name == 'push' || steps.ghost_state.outputs.changed == 'true' }}
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SUVARNATANTU_VASTRANAND }}

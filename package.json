@@ -1,16 +1,18 @@
 {
   "private": true,
+  "type": "module",
   "scripts": {
-    "build:blog": "node scripts/build-blog.mjs",
-    "build:blog:demo": "node scripts/build-blog.mjs --demo",
     "test": "node --test scripts/*.test.mjs tests/*.test.mjs",
-    "test:ghost-state": "node --test scripts/check-ghost-content.test.mjs",
+    "check:js": "node --check assets/js/suvarnatantu-blog-api.js && node --check assets/js/suvarnatantu-blog-list.js && node --check assets/js/suvarnatantu-blog-detail.js && node --check assets/js/suvarnatantu-blog-sanitize.js && node --check scripts/blog-browser-qa.mjs && node --check scripts/validate-blog-runtime.mjs && node --check scripts/validate-header-shell.mjs && node --check scripts/validate-seo.mjs && node --check scripts/validate-sitemap.mjs",
+    "qa:blog": "node scripts/blog-browser-qa.mjs",
     "update:sitemap": "node scripts/update-sitemap-lastmod.mjs",
+    "validate:blog": "node scripts/validate-blog-runtime.mjs",
     "validate:header-shell": "node scripts/validate-header-shell.mjs",
     "validate:seo": "node scripts/validate-seo.mjs",
     "validate:sitemap": "node scripts/validate-sitemap.mjs"
   },
-  "dependencies": {
-    "sharp": "0.35.4"
+  "devDependencies": {
+    "linkedom": "0.18.13",
+    "playwright-core": "1.63.0"
   }
 }
