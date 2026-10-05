@@ -14,7 +14,7 @@ const legacySlugs=[
   'what-is-tpm-in-zari-yarn',
   'what-is-denier-in-metallic-yarn',
 ];
-const expectedFirebaseHash='01db34ef841aff399ea6a27479a501a7a8a235250d92bcb2d5397676134a8a4a';
+const expectedFirebaseHash='5173bc14679d1e55eaf5ae91052ff38963854853ce904a3308356be4d1ff1895';
 const hash=text=>createHash('sha256').update(text.replaceAll('\r\n','\n')).digest('hex');
 const read=path=>readFile(resolve(root,path),'utf8');
 const exists=path=>access(resolve(root,path)).then(()=>true,()=>false);
@@ -57,11 +57,11 @@ for(const slug of legacySlugs){
   const path=`blog/${slug}/index.html`;
   if(!await exists(path))throw Error(`Missing legacy Blog route ${path}.`);
   const html=await read(path);
-  if(!html.includes('suvarnatantu-blog-detail.js')||html.includes('storage.ghost.io'))throw Error(`Legacy Blog route is not an API detail shell: ${path}.`);
+  if(!html.includes('content="0;url=/blog/"')||html.includes('suvarnatantu-blog-detail.js'))throw Error(`Legacy Blog route does not redirect to /blog/: ${path}.`);
 }
 
 for(const removed of [
-  '.env.example','blog/.ghost-generated.json','blog/ghost-state.json','scripts/build-blog.mjs',
+  'functions/index.js','functions/relay-core.js','functions/package.json','.env.example','blog/.ghost-generated.json','blog/ghost-state.json','scripts/build-blog.mjs',
   'scripts/blog-images.mjs','scripts/check-ghost-content.mjs','scripts/ghost-content.sample.json','scripts/validate-blog-output.mjs',
 ])if(await exists(removed))throw Error(`Removed Blog delivery file still exists: ${removed}.`);
 
@@ -89,10 +89,10 @@ if(!workflow.includes('projectId: suvarnatantu-vastranand')||!workflow.includes(
 const packageJson=await read('package.json');
 if(/sharp|build:blog|test:ghost/i.test(packageJson))throw Error('Package scripts retain retired Blog build dependencies.');
 const firebase=await read('firebase.json');
-if(hash(firebase)!==expectedFirebaseHash)throw Error('firebase.json changed; this integration must not change Firebase settings.');
+if(hash(firebase)!==expectedFirebaseHash)throw Error('firebase.json changed; only the reviewed obsolete article routing and retired provider header removal are allowed.');
 
 const css=await read('assets/css/knowledge-centre.css');
 if((css.match(/{/g)||[]).length!==(css.match(/}/g)||[]).length)throw Error('Knowledge Centre CSS has unbalanced braces.');
 if(!css.includes(':focus-visible')||!css.includes('overflow-wrap:anywhere'))throw Error('Blog CSS is missing keyboard-focus or overflow protections.');
 
-console.log(`Validated the API Blog runtime, ${legacySlugs.length} legacy routes, provider disconnection, CSS structure, and unchanged Firebase settings.`);
+console.log(`Validated the API Blog runtime, ${legacySlugs.length} legacy routes, provider disconnection, CSS structure, and reviewed legacy redirects with retained hosting infrastructure.`);

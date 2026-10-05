@@ -143,6 +143,7 @@ async function requestJson(url, { fetchImpl = globalThis.fetch, timeoutMs = DEFA
       method: "GET",
       headers: { Accept: "application/json" },
       credentials: "omit",
+      cache: "no-store",
       mode: "cors",
       signal: controller.signal,
     });

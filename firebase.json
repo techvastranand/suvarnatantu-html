@@ -27,12 +27,6 @@
         ]
       },
       {
-        "source": "/blog/ghost-state.json",
-        "headers": [
-          { "key": "Cache-Control", "value": "no-store, max-age=0" }
-        ]
-      },
-      {
         "source": "**/*.@(webp|jpg|jpeg|png|svg|ico)",
         "headers": [
           { "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }
@@ -46,6 +40,15 @@
       }
     ],
     "redirects": [
+      {"regex": "^/(?:blog/)?how-to-send-yarn-sample-reference/?$", "destination": "/blog/", "type": 301},
+      {"regex": "^/(?:blog/)?b2b-yarn-specification-checklist/?$", "destination": "/blog/", "type": 301},
+      {"regex": "^/(?:blog/)?metallic-yarn-trends-textile-manufacturing/?$", "destination": "/blog/", "type": 301},
+      {"regex": "^/(?:blog/)?how-to-choose-metallic-yarn-supplier-india/?$", "destination": "/blog/", "type": 301},
+      {"regex": "^/(?:blog/)?how-metallic-yarn-is-made/?$", "destination": "/blog/", "type": 301},
+      {"regex": "^/(?:blog/)?best-zari-yarn-for-saree-weaving/?$", "destination": "/blog/", "type": 301},
+      {"regex": "^/(?:blog/)?what-is-metallic-yarn/?$", "destination": "/blog/", "type": 301},
+      {"regex": "^/(?:blog/)?what-is-tpm-in-zari-yarn/?$", "destination": "/blog/", "type": 301},
+      {"regex": "^/(?:blog/)?what-is-denier-in-metallic-yarn/?$", "destination": "/blog/", "type": 301},
       { "regex": "^/products\\.html/?$", "destination": "/products/", "type": 301 },
       { "regex": "^/blog\\.html/?$", "destination": "/blog/", "type": 301 },
       { "regex": "^/exports/metallic-yarn-exporter-india(?:\\.html)?/?$", "destination": "/export/metallic-yarn-exporter-india/", "type": 301 },

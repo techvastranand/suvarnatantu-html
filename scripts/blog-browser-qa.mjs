@@ -162,7 +162,15 @@ checks.push([await inspect('/blog/post/?slug=Bad%20Slug&fixture=valid',viewports
 checks.push([await inspect('/blog/post/?fixture=valid',viewports[1],'missing'),'missing slug']);
 checks.push([await inspect('/blog/post/?slug=practical-metallic-yarn-guide&fixture=image',viewports[0],'ready'),'image fallback']);
 checks.push([await inspect('/blog/post/?slug=practical-metallic-yarn-guide&fixture=long',viewports[3],'ready'),'long detail']);
-checks.push([await inspect('/blog/what-is-metallic-yarn/?fixture=valid',viewports[2],'ready'),'legacy detail']);
+{
+  const page=await browser.newPage({viewport:{width:viewports[2][0],height:viewports[2][1]}});
+  const requests=[];
+  page.on('request',request=>requests.push(request.url()));
+  await page.goto(`${origin}/blog/what-is-metallic-yarn/`);
+  await page.waitForURL(`${origin}/blog/`);
+  assert.equal(requests.some(url=>/ghost\.io|ghost\/api\/content/i.test(url)),false);
+  await page.close();
+}
 for(const [result,label] of checks){
   if(label==='detail valid'){assert.equal(result.hasArticleHeading,true);assert.equal(result.sanitized,true);}
   if(label==='image fallback')assert.equal(result.fallback,true);

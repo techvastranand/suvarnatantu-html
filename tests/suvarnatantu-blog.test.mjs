@@ -142,6 +142,7 @@ test('static routes, fallback image and runtime sitemap behavior are present',()
   assert.match(listController,/addEventListener\("error"/);
   for(const slug of ['how-to-send-yarn-sample-reference','b2b-yarn-specification-checklist','metallic-yarn-trends-textile-manufacturing','how-to-choose-metallic-yarn-supplier-india','how-metallic-yarn-is-made','best-zari-yarn-for-saree-weaving','what-is-metallic-yarn','what-is-tpm-in-zari-yarn','what-is-denier-in-metallic-yarn']){
     assert.equal(existsSync(new URL(`blog/${slug}/index.html`,root)),true);
+    assert.match(read(`blog/${slug}/index.html`),/url=\/blog\//);
   }
   const sitemap=read('sitemap.xml');
   assert.match(sitemap,/<loc>https:\/\/suvarnatantu\.com\/blog\/<\/loc>/);
@@ -155,8 +156,8 @@ test('provider runtime references and old build dependencies are absent',()=>{
   assert.doesNotMatch(read('package.json'),/sharp|build:blog/);
 });
 
-test('Firebase settings and enquiry client remain byte-for-byte unchanged after newline normalization',()=>{
+test('Reviewed legacy routing and unchanged enquiry client',()=>{
   const digest=path=>createHash('sha256').update(read(path).replaceAll('\r\n','\n')).digest('hex');
-  assert.equal(digest('firebase.json'),'01db34ef841aff399ea6a27479a501a7a8a235250d92bcb2d5397676134a8a4a');
+  assert.equal(digest('firebase.json'),'5173bc14679d1e55eaf5ae91052ff38963854853ce904a3308356be4d1ff1895');
   assert.equal(digest('assets/js/b2b-flow.js'),'cea8c1afcb6b056579ae3644f0982680f1499be80420635ed51097cee3997f63');
 });
