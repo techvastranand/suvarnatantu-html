@@ -58,6 +58,16 @@ test('valid published list records are mapped from the public envelope',async()=
   assert.equal(calls[0].options.headers.Accept,'application/json');
 });
 
+test('legacy first-party featured-image URLs use the engage API host',()=>{
+  const featured_media={
+    ...fixture().featured_media,
+    url:'https://api.vastranand.com/v1/suvarnatantu/blogs/practical-metallic-yarn-guide/featured-image',
+  };
+  const result=validatePost(fixture({featured_media}));
+  assert.equal(result.kind,'published');
+  assert.equal(result.post.featuredMedia.url,'https://api-engage.vastranand.com/v1/suvarnatantu/blogs/practical-metallic-yarn-guide/featured-image');
+});
+
 test('draft, archived and unknown statuses are defensively hidden',()=>{
   for(const status of ['draft','archived','review']){
     const parsed=parseBlogPage(page([fixture({status})]));
@@ -110,7 +120,7 @@ test('missing and invalid slugs are rejected and legacy slugs resolve',()=>{
 
 test('local fixture API overrides cannot affect the production hostname',()=>{
   assert.equal(runtimeApiRoot({hostname:'localhost'},'http://127.0.0.1:8099/api'),'http://127.0.0.1:8099/api');
-  assert.equal(runtimeApiRoot({hostname:'suvarnatantu.com'},'http://127.0.0.1:8099/api'),'https://api.vastranand.com/v1/suvarnatantu/blogs');
+  assert.equal(runtimeApiRoot({hostname:'suvarnatantu.com'},'http://127.0.0.1:8099/api'),'https://api-engage.vastranand.com/v1/suvarnatantu/blogs');
 });
 
 test('article HTML sanitizer removes active content, handlers and unsafe URLs',()=>{
@@ -156,8 +166,8 @@ test('provider runtime references and old build dependencies are absent',()=>{
   assert.doesNotMatch(read('package.json'),/sharp|build:blog/);
 });
 
-test('Reviewed legacy routing and unchanged enquiry client',()=>{
+test('Reviewed legacy routing and approved enquiry API host',()=>{
   const digest=path=>createHash('sha256').update(read(path).replaceAll('\r\n','\n')).digest('hex');
   assert.equal(digest('firebase.json'),'5173bc14679d1e55eaf5ae91052ff38963854853ce904a3308356be4d1ff1895');
-  assert.equal(digest('assets/js/b2b-flow.js'),'cea8c1afcb6b056579ae3644f0982680f1499be80420635ed51097cee3997f63');
+  assert.equal(digest('assets/js/b2b-flow.js'),'ee8187b3ff7b14d7e7835203f6f999ea8cf8babc082ef9e829f6b8dece909eb2');
 });

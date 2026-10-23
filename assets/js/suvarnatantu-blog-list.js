@@ -1,4 +1,4 @@
-import { BlogApiError, detailUrl, fetchBlogPage, readingTime } from "./suvarnatantu-blog-api.js";
+import { BlogApiError, detailUrl, fetchBlogPage, readingTime } from "./suvarnatantu-blog-api.js?v=20261023-engage-api";
 
 const root = document.querySelector("[data-blog-list]");
 const FALLBACK_IMAGE = "/assets/images/blog/gold-metallic-yarn-texture.jpg";

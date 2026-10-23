@@ -22,7 +22,7 @@ const siteSourceFiles = directory => readdirSync(directory, { withFileTypes: tru
 });
 
 test('Business, Quote and Sample submissions use only the public intake API', () => {
-  assert.match(flow, /https:\/\/api\.vastranand\.com\/v1\/public\/suvarnatantu-enquiries/);
+  assert.match(flow, /https:\/\/api-engage\.vastranand\.com\/v1\/public\/suvarnatantu-enquiries/);
   assert.equal((flow.match(/fetch\(INTAKE_API/g) || []).length, 1);
   assert.match(flow, /includes\('Homepage'\) \? 'business'/);
   assert.match(flow, /includes\('Quote'\) \? 'quote' : 'sample'/);
@@ -49,7 +49,7 @@ test('Business, Quote and Sample send the verified endpoint, method, type and so
     await harness.submit();
     assert.equal(harness.requests.length, 1);
     const request = harness.requests[0];
-    assert.equal(request.url, 'https://api.vastranand.com/v1/public/suvarnatantu-enquiries');
+    assert.equal(request.url, 'https://api-engage.vastranand.com/v1/public/suvarnatantu-enquiries');
     assert.equal(request.options.method, 'POST');
     assert.equal(request.options.headers['Content-Type'], 'application/json');
     const payload = JSON.parse(request.options.body);
@@ -282,7 +282,7 @@ test('layout, navigation, SEO markers and the updated flow cache key remain pres
   assert.match(samplePage, /<link rel="canonical" href="https:\/\/suvarnatantu\.com\/samples\/">/);
   assert.match(quotePage, /id="site-header-mount"/);
   assert.match(samplePage, /id="site-header-mount"/);
-  assert.match(loader, /b2b-flow\.js\?v=20261002-production-api/);
-  assert.match(quotePage, /b2b-flow\.js\?v=20261002-production-api/);
-  assert.match(samplePage, /b2b-flow\.js\?v=20261002-production-api/);
+  assert.match(loader, /b2b-flow\.js\?v=20261023-engage-api/);
+  assert.match(quotePage, /b2b-flow\.js\?v=20261023-engage-api/);
+  assert.match(samplePage, /b2b-flow\.js\?v=20261023-engage-api/);
 });

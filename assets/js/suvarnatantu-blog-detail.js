@@ -1,4 +1,4 @@
-import { BlogApiError, fetchBlogDetail, readingTime, resolveBlogSlug } from "./suvarnatantu-blog-api.js";
+import { BlogApiError, fetchBlogDetail, readingTime, resolveBlogSlug } from "./suvarnatantu-blog-api.js?v=20261023-engage-api";
 import { sanitizeArticleHtml } from "./suvarnatantu-blog-sanitize.js";
 
 const root = document.querySelector("[data-blog-detail]");

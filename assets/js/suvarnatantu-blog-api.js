@@ -1,4 +1,6 @@
-const DEFAULT_API_ROOT = "https://api.vastranand.com/v1/suvarnatantu/blogs";
+const API_ORIGIN = "https://api-engage.vastranand.com";
+const LEGACY_API_ORIGIN = "https://api.vastranand.com";
+const DEFAULT_API_ROOT = "https://api-engage.vastranand.com/v1/suvarnatantu/blogs";
 const DEFAULT_TIMEOUT_MS = 8000;
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/avif"]);
@@ -21,7 +23,11 @@ export function safeHttpUrl(value) {
   if (typeof value !== "string" || value.length > 2048) return null;
   try {
     const url = new URL(value);
-    return url.protocol === "https:" || url.protocol === "http:" ? url.href : null;
+    if (url.protocol !== "https:" && url.protocol !== "http:") return null;
+    if (url.origin === LEGACY_API_ORIGIN && url.pathname.startsWith("/v1/suvarnatantu/blogs/")) {
+      return `${API_ORIGIN}${url.pathname}${url.search}${url.hash}`;
+    }
+    return url.href;
   } catch {
     return null;
   }

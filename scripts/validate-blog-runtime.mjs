@@ -33,7 +33,7 @@ async function filesBelow(path){
 
 const api=await read('assets/js/suvarnatantu-blog-api.js');
 for(const requirement of [
-  'https://api.vastranand.com/v1/suvarnatantu/blogs',
+  'https://api-engage.vastranand.com/v1/suvarnatantu/blogs',
   'credentials: "omit"',
   'AbortController',
   'DEFAULT_TIMEOUT_MS',
