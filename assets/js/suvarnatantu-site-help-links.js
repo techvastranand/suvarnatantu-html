@@ -1,6 +1,6 @@
 // Adds FAQ and live policy links to the shared header/footer, only once the API confirms
 // there is published content behind them. Nothing is added while loading or on failure.
-import { STATIC_POLICY_PAGES, fetchFaqs, fetchPolicies, policyPath } from "./suvarnatantu-site-help-api.js";
+import { STATIC_POLICY_PAGES, fetchFaqs, fetchPolicies, policyPath, policyTitle } from "./suvarnatantu-site-help-api.js";
 
 function link(href, label) {
   const anchor = document.createElement("a");
@@ -32,6 +32,6 @@ fetchPolicies().then(policies => {
   const column = footerColumn();
   for (const policy of policies) {
     if (Object.hasOwn(STATIC_POLICY_PAGES, policy.handle)) continue;
-    addOnce(column, policyPath(policy.handle), policy.title);
+    addOnce(column, policyPath(policy.handle), policyTitle(policy));
   }
 }).catch(() => {});

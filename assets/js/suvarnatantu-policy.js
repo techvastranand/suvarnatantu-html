@@ -1,4 +1,4 @@
-import { STATIC_POLICY_PAGES, fetchPolicies, fetchPolicy, formatDate, policyPath, resolvePolicyHandle } from "./suvarnatantu-site-help-api.js";
+import { STATIC_POLICY_PAGES, fetchPolicies, fetchPolicy, formatDate, policyPath, policyTitle, resolvePolicyHandle } from "./suvarnatantu-site-help-api.js";
 import { sanitizeArticleHtml } from "./suvarnatantu-blog-sanitize.js";
 
 const SITE_ORIGIN = "https://suvarnatantu.com";
@@ -36,7 +36,7 @@ async function loadIndex() {
   try {
     for (const policy of await fetchPolicies()) {
       if (Object.hasOwn(STATIC_POLICY_PAGES, policy.handle)) continue;
-      entries.push({ href: policyPath(policy.handle), title: policy.title, updated: formatDate(policy.updatedAt) });
+      entries.push({ href: policyPath(policy.handle), title: policyTitle(policy), updated: formatDate(policy.updatedAt) });
     }
     note.hidden = entries.length > 2;
   } catch {

@@ -127,6 +127,19 @@ export const STATIC_POLICY_PAGES = { "privacy-policy": "/privacy-policy/", "term
 // Policies with their own static page at /policies/<handle>/ (one folder each in this repo).
 export const POLICY_PAGES = new Set(["refund-policy", "shipping-policy", "contact-information", "legal-notice", "sample-policy", "payment-terms", "privacy-policy", "terms-of-service"]);
 
+// The admin keeps fixed titles for its standard policies ("Refund policy"); links use the
+// names on each policy's own page.
+const POLICY_TITLES = {
+  "refund-policy": "Returns & Quality Claims Policy",
+  "shipping-policy": "Shipping & Export Policy",
+  "contact-information": "Contact Information",
+  "legal-notice": "Legal Notice",
+};
+
+export function policyTitle(policy) {
+  return POLICY_TITLES[policy.handle] || policy.title;
+}
+
 export function policyPath(handle) {
   return POLICY_PAGES.has(handle) ? `/policies/${handle}/` : `/policies/view/?handle=${encodeURIComponent(handle)}`;
 }
