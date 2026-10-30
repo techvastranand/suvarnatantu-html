@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test scripts/*.test.mjs tests/*.test.mjs",
-    "check:js": "node --check assets/js/suvarnatantu-blog-api.js && node --check assets/js/suvarnatantu-blog-list.js && node --check assets/js/suvarnatantu-blog-detail.js && node --check assets/js/suvarnatantu-blog-sanitize.js && node --check scripts/blog-browser-qa.mjs && node --check scripts/validate-blog-runtime.mjs && node --check scripts/validate-header-shell.mjs && node --check scripts/validate-seo.mjs && node --check scripts/validate-sitemap.mjs",
+    "check:js": "node --check assets/js/suvarnatantu-blog-api.js && node --check assets/js/suvarnatantu-blog-list.js && node --check assets/js/suvarnatantu-blog-detail.js && node --check assets/js/suvarnatantu-blog-sanitize.js && node --check assets/js/suvarnatantu-site-help-api.js && node --check assets/js/suvarnatantu-site-help-links.js && node --check assets/js/suvarnatantu-faq.js && node --check assets/js/suvarnatantu-policy.js && node --check scripts/blog-browser-qa.mjs && node --check scripts/validate-blog-runtime.mjs && node --check scripts/validate-header-shell.mjs && node --check scripts/validate-seo.mjs && node --check scripts/validate-sitemap.mjs",
     "qa:blog": "node scripts/blog-browser-qa.mjs",
     "update:sitemap": "node scripts/update-sitemap-lastmod.mjs",
     "validate:blog": "node scripts/validate-blog-runtime.mjs",

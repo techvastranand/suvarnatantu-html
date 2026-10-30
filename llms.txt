@@ -63,9 +63,11 @@ https://suvarnatantu.com/sitemap.xml
 ## Resources
 
 - [Blog](https://suvarnatantu.com/blog/): Articles and knowledge resources.
+- [FAQ](https://suvarnatantu.com/faq/): Answers to common questions about products, specifications, samples, ordering and export.
 - [Sitemap](https://suvarnatantu.com/sitemap.xml): Complete indexable URL list.
 
 ## Legal
 
 - [Privacy Policy](https://suvarnatantu.com/privacy-policy/): Privacy information.
 - [Terms and Conditions](https://suvarnatantu.com/terms/): Website terms.
+- [Policies](https://suvarnatantu.com/policies/): All published business policies, including samples, payment, shipping and quality claims.
