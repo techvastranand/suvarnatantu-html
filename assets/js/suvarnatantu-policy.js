@@ -89,8 +89,10 @@ async function loadDetail() {
     }
     setState("ready");
   } catch (error) {
-    setRobots("noindex,follow");
-    setState(error?.kind === "not-found" || error?.kind === "invalid-handle" ? "not-found" : "unavailable");
+    const missing = error?.kind === "not-found" || error?.kind === "invalid-handle";
+    // Only a missing policy is kept out of search; an outage or timeout leaves robots alone.
+    if (missing) setRobots("noindex,follow");
+    setState(missing ? "not-found" : "unavailable");
   }
 }
 

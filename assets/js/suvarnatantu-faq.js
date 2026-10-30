@@ -133,14 +133,19 @@ async function load() {
         .map(question => ({ ...question, safeHtml: sanitizeArticleHtml(question.answerHtml) }))
         .filter(question => plainText(question.safeHtml)),
     })).filter(category => category.questions.length);
-    if (!categories.length) throw new Error("empty");
+    if (!categories.length) {
+      // A confirmed empty FAQ is kept out of search.
+      noindex();
+      setState("fallback");
+      return;
+    }
     render(categories);
     writeSchema(categories);
     applySearch();
     setState("ready");
     openFromHash();
   } catch {
-    noindex();
+    // An outage or timeout shows the same message but leaves robots alone.
     setState("fallback");
   }
 }
