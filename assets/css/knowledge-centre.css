@@ -64,3 +64,4 @@ body.knowledge-centre .site-footer .wrap{display:block;width:min(1240px,calc(100
 .knowledge-centre a:focus-visible,.knowledge-centre button:focus-visible{outline:3px solid #efd28e;outline-offset:4px}
 @media(max-width:600px){.knowledge-centre .kc-skeleton{min-height:300px}.knowledge-centre .kc-pagination{flex-wrap:wrap}.knowledge-centre .kc-page-count{order:-1;width:100%;text-align:center}.knowledge-centre .kc-detail-state{padding:132px 0 54px}.knowledge-centre .kc-detail-meta{align-items:flex-start;flex-direction:column}.knowledge-centre .kc-detail-actions{align-items:stretch}}
 @media(prefers-reduced-motion:reduce){.knowledge-centre .kc-skeleton,.knowledge-centre .kc-detail-skeleton{animation:none}}
+.knowledge-centre .kc-detail-runtime{min-height:100vh}

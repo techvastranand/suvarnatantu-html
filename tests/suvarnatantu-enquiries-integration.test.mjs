@@ -282,7 +282,7 @@ test('layout, navigation, SEO markers and the updated flow cache key remain pres
   assert.match(samplePage, /<link rel="canonical" href="https:\/\/suvarnatantu\.com\/samples\/">/);
   assert.match(quotePage, /id="site-header-mount"/);
   assert.match(samplePage, /id="site-header-mount"/);
-  assert.match(loader, /b2b-flow\.js\?v=20261023-engage-api/);
-  assert.match(quotePage, /b2b-flow\.js\?v=20261023-engage-api/);
-  assert.match(samplePage, /b2b-flow\.js\?v=20261023-engage-api/);
+  assert.match(loader, /b2b-flow\.js\?v=20261030-cls/);
+  assert.match(quotePage, /b2b-flow\.js\?v=20261030-cls/);
+  assert.match(samplePage, /b2b-flow\.js\?v=20261030-cls/);
 });

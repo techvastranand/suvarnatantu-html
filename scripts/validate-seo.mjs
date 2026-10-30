@@ -1,5 +1,6 @@
 import {access,readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
+import {checkSite} from './seo-rules.mjs';
 
 const root=resolve(import.meta.dirname,'..'),site='https://suvarnatantu.com';
 const redirects=JSON.parse(await readFile(resolve(root,'firebase.json'),'utf8')).hosting.redirects.map(rule=>rule.regex);
@@ -43,4 +44,7 @@ if(detail.includes('rel="canonical" href='))throw Error('The runtime detail shel
 
 for(const path of ['zari-lab/tpm/index.html','specifications/yarn-tpm-guide.html','zari-lab/denier/index.html','specifications/yarn-denier-guide.html'])if(!await access(resolve(root,path)).then(()=>true,()=>false))throw Error(`Missing technical SEO page: ${path}`);
 
-console.log(`Validated ${urls.length} sitemap URLs and API-backed Blog listing/detail SEO fallbacks.`);
+const seo=await checkSite(root);
+if(seo.errors.length)throw Error(`Technical SEO rules failed:\n${seo.errors.join('\n')}`);
+
+console.log(`Validated ${urls.length} sitemap URLs and API-backed Blog listing/detail SEO fallbacks, plus titles, descriptions, canonicals, headings, social tags, JSON-LD, images, internal links and redirects on ${seo.checked} pages.`);

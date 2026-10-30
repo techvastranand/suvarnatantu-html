@@ -14,7 +14,7 @@ const legacySlugs=[
   'what-is-tpm-in-zari-yarn',
   'what-is-denier-in-metallic-yarn',
 ];
-const expectedFirebaseHash='5173bc14679d1e55eaf5ae91052ff38963854853ce904a3308356be4d1ff1895';
+const expectedFirebaseHash='91082e75ed91236a4a077dc9ade0a16f6537e55f6a9551ef89829aa091a3a6b0';
 const hash=text=>createHash('sha256').update(text.replaceAll('\r\n','\n')).digest('hex');
 const read=path=>readFile(resolve(root,path),'utf8');
 const exists=path=>access(resolve(root,path)).then(()=>true,()=>false);
