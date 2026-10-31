@@ -9,11 +9,30 @@
       "**/node_modules/**",
       "README.md",
       "README.txt",
-      "deploy.sh"
+      "deploy.sh",
+      "package.json",
+      "package-lock.json",
+      "playwright.config.mjs",
+      "scripts/**",
+      "tests/**",
+      "test-results/**",
+      "playwright-report/**",
+      "*.md",
+      "seo-master-map.csv"
     ],
     "cleanUrls": true,
     "trailingSlash": true,
     "headers": [
+      {
+        "source": "**",
+        "headers": [
+          { "key": "X-Content-Type-Options", "value": "nosniff" },
+          { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+          { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+          { "key": "Strict-Transport-Security", "value": "max-age=31536000" },
+          { "key": "Content-Security-Policy-Report-Only", "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api-engage.vastranand.com; frame-src 'none'; frame-ancestors 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; manifest-src 'self'; worker-src 'self' blob:" }
+        ]
+      },
       {
         "source": "!/assets/**",
         "headers": [

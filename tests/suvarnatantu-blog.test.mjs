@@ -168,6 +168,6 @@ test('provider runtime references and old build dependencies are absent',()=>{
 
 test('Reviewed legacy routing and approved enquiry API host',()=>{
   const digest=path=>createHash('sha256').update(read(path).replaceAll('\r\n','\n')).digest('hex');
-  assert.equal(digest('firebase.json'),'91082e75ed91236a4a077dc9ade0a16f6537e55f6a9551ef89829aa091a3a6b0');
+  assert.equal(digest('firebase.json'),'706a6fa7a1cb0650e29fb2addecdbb8cb6214cfa26bacfdc47d4e4b5011a5ae2');
   assert.equal(digest('assets/js/b2b-flow.js'),'011870ae6fa69c9b73671d58077d5065d591a8cee100c7f98df70e8a1e66ebb7');
 });
