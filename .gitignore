@@ -25,3 +25,7 @@ firebase-service-account*.json
 # Archives and local task instructions
 *.zip
 CODEX_TASK.md
+
+# Playwright output
+test-results/
+playwright-report/

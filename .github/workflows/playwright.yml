@@ -1,0 +1,53 @@
+name: Playwright site checks
+
+# Reports only. This workflow is deliberately separate from the Firebase deploy workflow and
+# is never a dependency of it: content/autopilot deploys keep going even if a browser check
+# fails (flaky network, Engage API briefly down). Read failures here and fix forward.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Optional live URL to check read-only (e.g. https://suvarnatantu.com). Empty = local static server."
+        required: false
+        default: ""
+
+concurrency:
+  group: playwright-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CI: "true"
+      BASE_URL: ${{ github.event.inputs.base_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+      # An empty BASE_URL falls back to the local static server (see playwright.config.mjs).
+      - name: Run Playwright suite
+        run: npx playwright test
+      - name: Upload report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14
