@@ -61,7 +61,7 @@ function renderCard(post) {
   read.className = "kc-listing-card__read";
   read.href = detailUrl(post.slug);
   read.textContent = "Read article";
-  read.setAttribute("aria-label", `Read ${post.title}`);
+  read.setAttribute("aria-label", `Read article: ${post.title}`);
   footer.append(meta, read);
   body.append(footer);
   article.append(imageLink, body);
